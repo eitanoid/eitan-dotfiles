@@ -1,0 +1,26 @@
+[general]
+import = [
+    "~/.config/alacritty/themes/themes/blood_moon.toml"
+]
+
+
+[font]
+normal = { family = "Hack", style = "Regular" }
+bold = { family = "Hack", style = "Bold" }
+italic = { family = "Hack", style = "Italic" }
+
+
+
+[window]
+decorations = "buttonless"
+dynamic_padding = false
+opacity = 1
+title = "The Wired"
+dimensions = {columns = 100, lines = 30}
+
+[cursor]
+style = {shape = "Beam", blinking = "never"}
+
+[env]
+LANG = "en_US.UTF-8"
+LC_ALL = "en_US.UTF-8"
