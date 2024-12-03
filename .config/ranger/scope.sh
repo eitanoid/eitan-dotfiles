@@ -74,6 +74,13 @@ handle_extension() {
         #    exiftool "${FILE_PATH}" && exit 5
         #    exit 1;;
 
+        #MARKDOWN
+        md)
+            glow -- -style=dark "${FILE_PATH}" && exit 5
+            exit 1;;
+            
+
+        
         ## BitTorrent
         torrent)
             transmission-show -- "${FILE_PATH}" && exit 5

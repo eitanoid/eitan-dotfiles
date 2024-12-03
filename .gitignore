@@ -1,2 +1,5 @@
 .md
 !README.md
+
+#do not commit git modules
+.config/zsh/plugins/*
