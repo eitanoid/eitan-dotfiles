@@ -13,3 +13,5 @@ cp $HERE/.config/starship.toml $HOME/.config
 cp $HERE/.config/alacritty $HOME/.config -r
 
 cp $HERE/.config/ranger $HOME/.config -r
+
+cp $HERE/.config/nvim $HOME/.config -r

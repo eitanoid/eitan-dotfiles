@@ -9,3 +9,5 @@ git clone https://github.com/zsh-users/zsh-autosuggestions $HERE/zsh/plugins/zsh
 git clone https://github.com/jeffreytse/zsh-vi-mode.git $HERE/zsh/plugins/zsh-vi-mode
 
 git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $HERE/zsh/plugins/fast-syntax-highlighting
+
+git clone https://github.com/zsh-users/zsh-history-substring-search $HERE/zsh/plugins/zsh-history-substring-search

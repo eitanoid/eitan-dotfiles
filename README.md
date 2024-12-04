@@ -10,6 +10,8 @@ Ranger is installed with [ueberzugg](https://github.com/jstkdng/ueberzugpp) to p
 
 Nvim is installed with [kickstart](https://github.com/nvim-lua/kickstart.nvim)
 
+
+
 ## Alacritty 
 
 Alacritty is used as the default terminal emulator.
@@ -28,3 +30,28 @@ The Prompt is managed using [starship](starship.rc)
 
 ## Fonts
 The [Hack](https://github.com/source-foundry/Hack) typeface is installed and used as default monospaced font.
+
+
+
+# Keybinds
+
+## General
+
+|Action |   Bind  |
+|:------|:----------|
+|Open Terminal (Alacritty)      |  `SUPER+T`         |
+|       |           |
+|       |           |
+
+
+
+
+## NVim
+
+|Bind   | Action    |
+|:------|:----------|
+|Toggle Relative-Numbers | `CTRL+\``         |
+|       |           |
+|       |           |
+
+
