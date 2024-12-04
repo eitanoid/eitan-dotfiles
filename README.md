@@ -50,7 +50,7 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 
 |Bind   | Action    |
 |:------|:----------|
-|Toggle Relative-Numbers | `CTRL+ \` `         |
+|Toggle Relative-Numbers | ``CTRL+ ` ``         |
 |       |           |
 |       |           |
 
