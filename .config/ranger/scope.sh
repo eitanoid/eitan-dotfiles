@@ -63,8 +63,11 @@ handle_extension() {
             ## Avoid password prompt by providing empty password
             7z l -p -- "${FILE_PATH}" && exit 5
             exit 1;;
-
-        ## PDF
+        tar|gz)
+            tar -tf "${FILE_PATH}" | tree --fromfile && exit 5
+            exit 1;;
+       
+       ## PDF
         #pdf)
         #    ## Preview as text conversion
         #    pdftotext -l 10 -nopgbrk -q -- "${FILE_PATH}" - | \
@@ -73,11 +76,6 @@ handle_extension() {
         #      fmt -w "${PV_WIDTH}" && exit 5
         #    exiftool "${FILE_PATH}" && exit 5
         #    exit 1;;
-
-        #MARKDOWN
-        md)
-            glow -- -style=dark "${FILE_PATH}" && exit 5
-            exit 1;;
             
 
         
@@ -94,7 +92,7 @@ handle_extension() {
             pandoc -s -t markdown -- "${FILE_PATH}" && exit 5
             exit 1;;
 
-        ## XLSX
+            ## Preview as csv conversion
         xlsx)
             ## Preview as csv conversion
             ## Uses: https://github.com/dilshod/xlsx2csv

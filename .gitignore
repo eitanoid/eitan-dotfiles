@@ -1,5 +1,8 @@
 .md
 !README.md
 
+
+backup
+
 #do not commit git modules
 .config/zsh/plugins/*

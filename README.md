@@ -1,5 +1,7 @@
 # Programs
 
+The dotfiles/ directory is located in $HOME/git/dotfiles.
+
 ## Ranger
 
 Ranger is installed with [ueberzugg](https://github.com/jstkdng/ueberzugpp) to preview images.

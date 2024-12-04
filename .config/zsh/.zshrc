@@ -20,16 +20,16 @@ setopt HIST_FIND_NO_DUPS
 export LANG=en_US.UTF-8
 #Theme
 
+
+
+autoload -Uz compinit
+compinit
+
 #Plugins
 source $ZSHF/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source $ZSHF/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZSHF/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source $ZSHF/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-
-#Source other files
-#plug "$HOME/.config/zsh/aliases.zsh"
-#plug "$HOME/.config/zsh/exports.zsh"
-#plug "$HOME/.config/zsh/functions.zsh"
 
 
 #editor

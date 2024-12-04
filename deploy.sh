@@ -5,7 +5,8 @@ HERE=$HOME/git/dotfiles
 #cp .config/alacritty $HOME/.config/alacritty
 #cp .config/ranger $HOME/.config/ranger
 
-sudo cp $HERE/.config/zsh $HOME/.config -r
+#copy zsh directory and keep .zshrc in $HOME
+sudo cp $HERE/.config/zsh $HOME/.config -r && ln -s -T ~/.config/zsh/.zshrc ~/.zshrc
 
 cp $HERE/.config/starship.toml $HOME/.config
 
