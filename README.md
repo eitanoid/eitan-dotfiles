@@ -4,7 +4,11 @@ The dotfiles/ directory is located in `$HOME/git/dotfiles`.
 
 ## Ranger
 
-Ranger is installed with [ueberzugg](https://github.com/jstkdng/ueberzugpp) to preview images.
+Ranger is installed with:
+
+[ueberzugg](https://github.com/jstkdng/ueberzugpp) for image preview.
+
+`.md` files are previewed with [glow](https://github.com/charmbracelet/glow)
 
 ## Nvim
 
