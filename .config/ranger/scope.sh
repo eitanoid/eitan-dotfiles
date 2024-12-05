@@ -88,6 +88,10 @@ handle_extension() {
             glow -s dark -w ${PV_WIDTH} ${FILE_PATH} && exit 5
             exit 1;;
         
+        csv)
+            rainbowcsv ${FILE_PATH} | sed 's/,/ ,/g' | column -t -s, && exit 5
+            exit 1;;
+            
         ## BitTorrent
         torrent)
             transmission-show -- "${FILE_PATH}" && exit 5

@@ -42,7 +42,7 @@ source $ZSHF/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source $ZSHF/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source $ZSHF/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-source <(fzf --zsh)
+#source <(fzf --zsh)
 
 #zsh history-substring-search
 export HISTORY_SUBSTRING_SEARCH_PREFIXED=true
@@ -50,7 +50,8 @@ bindkey -M vicmd '<k>' history-substring-search-up
 bindkey -M vicmd '<j>' history-substring-search-down
 
 #alias
-
+alias bat='batcat'
+alias cat='bat'
 alias cd='z'
 
 #Inactivty Screen Saver

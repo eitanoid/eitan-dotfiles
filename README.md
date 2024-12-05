@@ -59,4 +59,15 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 |       |           |
 |       |           |
 
+# Packages:
+
+- [bat](https://github.com/sharkdp/bat)
+- [rainbowcsv](https://pypi.org/project/rainbowcsv/)
+- [fzf](https://github.com/junegunn/fzf)
+- [zoxide](https://github.com/ajeetdsouza/zoxide)
+-
+-
+-
+-
+-
 
