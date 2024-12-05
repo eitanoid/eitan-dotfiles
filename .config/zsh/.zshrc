@@ -44,7 +44,7 @@ bindkey -M vicmd '<k>' history-substring-search-up
 bindkey -M vicmd '<j>' history-substring-search-down
 
 #Inactivty Screen Saver
-TMOUT=300 #5 mins
+TMOUT=1000 #~20 mins
 trap 'echo ;bash $SCEEN_SAVER/pipes.sh' ALRM
 
 #editor
