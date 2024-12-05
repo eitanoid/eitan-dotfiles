@@ -8,7 +8,10 @@ export PATH=$PATH:$HOME/ueberzugpp/build
 
 #ZSH variables
 export ZSH=$HOME/.config/zsh/.zshrc
-ZSHF=$HOME/.config/zsh 
+ZSHF=$HOME/.config/zsh
+
+#Location of Screen Saver
+SCEEN_SAVER=$HOME/git/pipes.sh
 
 #History
 HISTFILE=${HOME}/.zsh_history
@@ -40,8 +43,9 @@ export HISTORY_SUBSTRING_SEARCH_PREFIXED=true
 bindkey -M vicmd '<k>' history-substring-search-up
 bindkey -M vicmd '<j>' history-substring-search-down
 
-
-
+#Inactivty Screen Saver
+TMOUT=300 #5 mins
+trap 'echo ;bash $SCEEN_SAVER/pipes.sh' ALRM
 
 #editor
 export EDITOR=nvim

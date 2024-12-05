@@ -15,7 +15,6 @@ Ranger is installed with:
 Nvim is installed with [kickstart](https://github.com/nvim-lua/kickstart.nvim)
 
 
-
 ## Alacritty 
 
 Alacritty is used as the default terminal emulator.
@@ -30,7 +29,9 @@ Zshell is installed with manually managed plugins:
 - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 - [zsh-autocomplete](https://github.com/marlonrichert/zsh-autocomplete)
 
-The Prompt is managed using [starship](starship.rc)
+The Prompt is managed using [starship](starship.rc).
+
+The [pipes.sh](https://github.com/pipeseroni/pipes.sh) is set as the inactivity terminal screen saver (default after 300 seconds).
 
 ## Fonts
 The [Hack](https://github.com/source-foundry/Hack) typeface is installed and used as default monospaced font.
