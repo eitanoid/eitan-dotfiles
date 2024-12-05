@@ -10,6 +10,10 @@ export PATH=$PATH:$HOME/ueberzugpp/build
 export ZSH=$HOME/.config/zsh/.zshrc
 ZSHF=$HOME/.config/zsh
 
+#editor
+export EDITOR=nvim
+export VISUAL=nvim
+
 #Location of Screen Saver
 SCEEN_SAVER=$HOME/git/pipes.sh
 
@@ -38,24 +42,26 @@ source $ZSHF/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source $ZSHF/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source $ZSHF/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
+source <(fzf --zsh)
+
 #zsh history-substring-search
 export HISTORY_SUBSTRING_SEARCH_PREFIXED=true
 bindkey -M vicmd '<k>' history-substring-search-up
 bindkey -M vicmd '<j>' history-substring-search-down
 
+#alias
+
+alias cd='z'
+
 #Inactivty Screen Saver
 TMOUT=1000 #~20 mins
 trap 'echo ;bash $SCEEN_SAVER/pipes.sh' ALRM
-
-#editor
-export EDITOR=nvim
-export VISUAL=nvim
-
 #cursor set again in alacritty
 #echo -ne "\e[6 q"
 
 
 eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
 
 
 
