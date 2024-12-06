@@ -197,3 +197,10 @@ EXEC 00;36
 .opus 00;36
 .spx 00;36
 .xspf 00;36
+
+# Programming extensions
+
+.go 00;32
+.py 00;32
+.lua 00;32
+.tex 00;32
