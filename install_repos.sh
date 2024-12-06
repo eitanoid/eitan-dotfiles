@@ -26,5 +26,7 @@ pip install python-bidi
 
 #dracula theme
 
-curl -O https://raw.githubusercontent.com/dracula/ranger/master/dracula.py $HERE/ranger/colorschemes
+wget -O $HERE/ranger/colorschemes/dracula.py https://raw.githubusercontent.com/dracula/ranger/master/dracula.py
 
+#LS colors / system default colors theme
+wget -O config/ranger/colorschemes/ls_colors.py https://raw.githubusercontent.com/Nelyah/dotfiles/refs/heads/main/.config/ranger/colorschemes/ls_colors.py

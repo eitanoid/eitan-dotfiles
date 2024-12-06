@@ -10,6 +10,8 @@
 
 ## Settings
 
+- Color theme is ls_colors which follows the $LS_COLORS environment variable set my `.dircolors`
+
 ## Imports
 
 - `pip install python-bidi` to display hebrew text
