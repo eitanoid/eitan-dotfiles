@@ -1,10 +1,9 @@
 #Exports
 export PATH="$HOME/.local/bin":$PATH
-#Export Go
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
-#Export ueberzugpp for image preview in ranger
 export PATH=$PATH:$HOME/git/ueberzugpp/build 
+export PATH=$PATH:$HOME/git/yazi/target/release 
 
 #ZSH variables
 export ZSH=$HOME/.config/zsh/.zshrc
@@ -60,9 +59,20 @@ trap 'echo ;bash $SCEEN_SAVER/pipes.sh' ALRM
 #cursor set again in alacritty
 #echo -ne "\e[6 q"
 
+#.bashrc script for adding colors to ls and grep
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
-
-
+eval "$(dircolors ~/.dircolors)"
 

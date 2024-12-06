@@ -12,6 +12,8 @@ cp $HERE/config/starship.toml $HOME/.config
 
 cp $HERE/config/alacritty $HOME/.config -r
 
+cp $HERE/.dircolors $HOME
+
 mkdir -p $HOME/.config/ranger/plugins
 cp $HERE/config/ranger $HOME/.config -r
 
