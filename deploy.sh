@@ -12,6 +12,7 @@ cp $HERE/.config/starship.toml $HOME/.config
 
 cp $HERE/.config/alacritty $HOME/.config -r
 
+mkdir -p $HOME/.config/ranger/plugins
 cp $HERE/.config/ranger $HOME/.config -r
 
 cp $HERE/.config/nvim $HOME/.config -r

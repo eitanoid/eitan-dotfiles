@@ -4,7 +4,7 @@ export PATH="$HOME/.local/bin":$PATH
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 #Export ueberzugpp for image preview in ranger
-export PATH=$PATH:$HOME/ueberzugpp/build 
+export PATH=$PATH:$HOME/git/ueberzugpp/build 
 
 #ZSH variables
 export ZSH=$HOME/.config/zsh/.zshrc

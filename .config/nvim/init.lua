@@ -252,7 +252,20 @@ require("lazy").setup({
 	--
 	-- Use `opts = {}` to force a plugin to be loaded.
 	--
-
+	{ -- colorizer
+		"NvChad/nvim-colorizer.lua",
+		event = "BufReadPre",
+		opts = { -- set to setup table
+			user_default_options = { names = false },
+      -- stylua: ignore
+        buftypes = {
+          '*',
+          '!prompt',
+          '!opoup',
+          '!lazy',
+      },
+		},
+	},
 	-- Here is a more advanced example where we pass configuration
 	-- options to `gitsigns.nvim`. This is equivalent to the following Lua:
 	--    require('gitsigns').setup({ ... })

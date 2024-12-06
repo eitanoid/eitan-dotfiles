@@ -71,3 +71,12 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 -
 -
 
+# Todo:
+
+- Configure and customise Nvim
+- Move distros to Fedora
+- Set up Wayland, Nvidia drivers on Fedora
+- Look into hyprland
+- Set up wine for stuff like paint.net
+- Set up recording with OBS or ffmpeg 
+

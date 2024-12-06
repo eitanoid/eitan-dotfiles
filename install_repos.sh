@@ -16,3 +16,7 @@ git clone https://github.com/zsh-users/zsh-history-substring-search $HERE/zsh/pl
 
 wget -O $HERE/bat/syntaxes/rainbow_csv.sublime-syntax https://raw.githubusercontent.com/mechatroner/sublime_rainbow_csv/master/rainbow_csv.sublime-syntax
 
+
+# ranger plugins
+
+git clone https://github.com/alexanderjeurissen/ranger_devicons $HERE/ranger/plugins/ranger_devicons

@@ -89,6 +89,7 @@ handle_extension() {
             exit 1;;
         
         csv)
+            #figure out with bat rather than using another module rainbowcsv
             rainbowcsv ${FILE_PATH} | sed 's/,/ ,/g' | column -t -s, && exit 5
             exit 1;;
             
