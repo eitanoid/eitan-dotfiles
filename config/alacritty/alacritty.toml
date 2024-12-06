@@ -3,6 +3,9 @@ import = [
     "~/.config/alacritty/blood_moon.toml"
 ]
 
+[colors.primary]
+
+background = "#242829"
 
 [window]
 decorations = "Buttonless"

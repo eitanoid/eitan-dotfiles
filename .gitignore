@@ -5,5 +5,5 @@
 backup
 
 #do not commit git modules
-.config/zsh/plugins/*
-.config/ranger/plugins/*
+config/zsh/plugins/*
+config/ranger/plugins/*

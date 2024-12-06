@@ -10,6 +10,8 @@ Ranger is installed with:
 
 `.md` files are previewed with [glow](https://github.com/charmbracelet/glow)
 
+dev icons in preview with [dev-icons](https://github.com/alexanderjeurissen/ranger_devicons)
+
 ## Nvim
 
 Nvim is installed with [kickstart](https://github.com/nvim-lua/kickstart.nvim)

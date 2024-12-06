@@ -20,9 +20,10 @@ $character"""
 style = "purple"
 
 [character]
-success_symbol = "[ඞ](green)"
-error_symbol = "[ඞ](red)"
-vimcmd_symbol = "[ඞ](yellow)"
+success_symbol = "[ඞ](green bold)"
+error_symbol = "[ඞ](red bold)"
+vimcmd_symbol = "[ඞ](yellow bold)"
+
 
 [git_branch]
 format = "[$branch]($style)"

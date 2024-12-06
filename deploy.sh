@@ -6,13 +6,13 @@ HERE=$HOME/git/dotfiles
 #cp .config/ranger $HOME/.config/ranger
 
 #copy zsh directory and keep .zshrc in $HOME
-sudo cp $HERE/.config/zsh $HOME/.config -r && ln -s -T ~/.config/zsh/.zshrc ~/.zshrc
+sudo cp $HERE/config/zsh $HOME/.config -r && ln -s -T ~/.config/zsh/.zshrc ~/.zshrc
 
-cp $HERE/.config/starship.toml $HOME/.config
+cp $HERE/config/starship.toml $HOME/.config
 
-cp $HERE/.config/alacritty $HOME/.config -r
+cp $HERE/config/alacritty $HOME/.config -r
 
 mkdir -p $HOME/.config/ranger/plugins
-cp $HERE/.config/ranger $HOME/.config -r
+cp $HERE/config/ranger $HOME/.config -r
 
-cp $HERE/.config/nvim $HOME/.config -r
+cp $HERE/config/nvim $HOME/.config -r
