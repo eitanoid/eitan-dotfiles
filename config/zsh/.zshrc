@@ -13,6 +13,9 @@ ZSHF=$HOME/.config/zsh
 export EDITOR=nvim
 export VISUAL=nvim
 
+#Ranger preview syntax highlighting style
+export HIGHLIGHT_STYLE=rootwater
+
 #Location of Screen Saver
 SCEEN_SAVER=$HOME/git/pipes.sh
 

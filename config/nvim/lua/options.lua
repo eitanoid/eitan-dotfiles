@@ -4,9 +4,14 @@
 vim.opt.number = true
 vim.opt.relativenumber = false
 
+-- tiny diagnostic display only
+vim.diagnostic.config({ virtual_text = false })
+
+-- winbar displays directory
+vim.opt.winbar = "%=%m %f"
+
 -- redundant because mode is in status line
 vim.opt.showmode = false
-
 -- cursor options
 vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 
@@ -20,7 +25,7 @@ vim.opt.shiftwidth = 4 -- use tabstop option
 vim.opt.expandtab = false
 
 -- text options
-vim.opt.wrap = false
+vim.opt.wrap = true
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
@@ -59,13 +64,12 @@ vim.opt.splitbelow = true
 --  and `:help 'listchars'`
 vim.opt.list = true
 vim.opt.listchars = {
-	tab = ">-",
+	tab = "> ",
 	trail = ".",
 	extends = "»",
 	precedes = "«",
 	nbsp = "°",
 }
-
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = "split"
 
@@ -74,22 +78,3 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
-
--- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
--- fix cursor breaking when leaving nvim
-vim.api.nvim_create_autocmd("VimLeave", {
-	pattern = "*",
-	command = "set guicursor=a:ver25",
-})
-
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
-vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-})

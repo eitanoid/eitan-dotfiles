@@ -65,17 +65,17 @@ require("lazy").setup({
 		},
 	},
 
-{ -- directory navigation
-'nvim-tree/nvim-tree.lua',
-priority = 900, -- we want this loaded pretty much immediately
-dependencies = {
-  'nvim-tree/nvim-web-devicons',
-},
-opts = require('plugins.nvim-tree'),
-keys = {
-  { '<leader>ee', '<Cmd>NvimTreeToggle<CR>', { mode = 'n', desc = 'Toggle file tr[ee]' } },
-},
-},
+	{ -- directory navigation
+		"nvim-tree/nvim-tree.lua",
+		priority = 900, -- we want this loaded pretty much immediately
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+		},
+		opts = require("plugins.nvim-tree"),
+		keys = {
+			{ "<leader>ee", "<Cmd>NvimTreeToggle<CR>", { mode = "n", desc = "Toggle file tr[ee]" } },
+		},
+	},
 
 	{ -- colorizer
 		"NvChad/nvim-colorizer.lua",
@@ -271,6 +271,16 @@ keys = {
 		end,
 	},
 
+	{ "HiPhish/rainbow-delimiters.nvim" }, -- rainbow brackets and other delimiters
+
+	{
+		"rachartier/tiny-inline-diagnostic.nvim",
+		event = "VeryLazy", -- Or `LspAttach`
+		priority = 1000, -- needs to be loaded in first
+		config = function()
+			require("plugins.tiny-inline-diagnostic").setup()
+		end,
+	},
 	-- LSP Plugins
 	{
 		-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
