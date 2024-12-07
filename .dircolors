@@ -132,6 +132,7 @@ EXEC 00;36
 .esd 00;35
 # image formats
 .jpg 00;34
+.JPG 00;34
 .jpeg 00;34
 .mjpg 00;34
 .mjpeg 00;34
@@ -207,3 +208,8 @@ EXEC 00;36
 .py 00;32
 .lua 00;32
 .tex 00;32
+.html 00;32
+.js 00;32
+.htmx 00;32
+
+

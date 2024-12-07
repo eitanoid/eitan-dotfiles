@@ -85,7 +85,8 @@ handle_extension() {
         #    exit 1;;
             
         md)
-            glow -s dark -w ${PV_WIDTH} ${FILE_PATH} && exit 5
+            # wrap text  -w ${PV_WIDTH}
+            glow -s dark ${FILE_PATH} && exit 5
             exit 1;;
         
         csv)

@@ -43,22 +43,28 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 
 ## General
 
-|Action |   Bind  |
-|:------|:----------|
-|Open Terminal (Alacritty)      |  `SUPER+T`         |
-|       |           |
-|       |           |
+ | Action                    | Bind        |
+ | :------                   | :---------- |
+ | Open Terminal (Alacritty) | `SUPER+T`   |
+ |                           |             |
+ |                           |             |
 
+## Zshell
 
-
+ | Action                  | Mode        | Bind                 |
+ | :------                 | :---------- | :-----------         |
+ | Enter Normal Mode       | Insert      | `Esc`                |
+ | Enter Insert Mode       | Normal      | `i`,`a`,`o`          |
+ | Search Histroy Prefixed | Insert      | `CTRL+Q`, `CTRL+P`   |
+ | Search Histtory Prefiex | Normal      | `SHIFT+J`, `SHIFT+K` |
 
 ## NVim
 
-|Bind   | Action    |
-|:------|:----------|
-|Toggle Relative-Numbers | ``CTRL+` ``         |
-|       |           |
-|       |           |
+ | Bind                    | Action      |
+ | :------                 | :---------- |
+ | Toggle Relative-Numbers | ``CTRL+` `` |
+ |                         |             |
+ |                         |             |
 
 # Packages:
 
@@ -76,6 +82,7 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 
 - Configure and customise Nvim
 - Title screen for nvim
+- Tabular in nvim
 - Move distros to Fedora
 - Set up Wayland, Nvidia drivers on Fedora
 - Look into hyprland
