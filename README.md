@@ -17,6 +17,8 @@ dev icons in preview with [dev-icons](https://github.com/alexanderjeurissen/rang
 Nvim is installed with [kickstart](https://github.com/nvim-lua/kickstart.nvim)
 
 
+
+
 ## Alacritty 
 
 Alacritty is used as the default terminal emulator.
@@ -60,12 +62,14 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 
 ## NVim
 
- | Bind                    | Action      |
- | :------                 | :---------- |
- | Toggle Relative-Numbers | ``CTRL+` `` |
- |                         |             |
- |                         |             |
+ | Action                   | Mode        | Bind        |
+ | :------                  | :---------- | :-          |
+ | Toggle Relative-Numbers  | Normal      | ``CTRL+` `` |
+ | Jump to matching bracket | Normal      | `%`         |
+ | Enter minimap settings    | Normal      | `SPACE>+M`  |
+ | Open Debug Menu          | Normal      | `SPACE+Q`   |
 
+    
 # Packages:
 
 - [bat](https://github.com/sharkdp/bat)

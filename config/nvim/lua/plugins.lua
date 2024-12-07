@@ -65,6 +65,8 @@ require("lazy").setup({
 		},
 	},
 
+	require("plugins.neominimap"),
+
 	{ -- directory navigation
 		"nvim-tree/nvim-tree.lua",
 		priority = 900, -- we want this loaded pretty much immediately
@@ -72,9 +74,7 @@ require("lazy").setup({
 			"nvim-tree/nvim-web-devicons",
 		},
 		opts = require("plugins.nvim-tree"),
-		keys = {
-			{ "<leader>ee", "<Cmd>NvimTreeToggle<CR>", { mode = "n", desc = "Toggle file tr[ee]" } },
-		},
+		keys = {},
 	},
 
 	{ -- colorizer
@@ -151,13 +151,15 @@ require("lazy").setup({
 
 			-- Document existing key chains
 			spec = {
-				{ "<leader>c", group = "[C]ode", mode = { "n", "x" } },
-				{ "<leader>d", group = "[D]ocument" },
-				{ "<leader>r", group = "[R]ename" },
-				{ "<leader>s", group = "[S]earch" },
-				{ "<leader>w", group = "[W]orkspace" },
-				{ "<leader>t", group = "[T]oggle" },
-				{ "<leader>h", group = "Git [H]unk", mode = { "n", "v" } },
+				{ "<leader>c", group = "Code", mode = { "n", "x" } },
+				{ "<leader>d", group = "Document" },
+				{ "<leader>r", group = "Rename" },
+				{ "<leader>s", group = "Search" },
+				{ "<leader>w", group = "Workspace" },
+				{ "<leader>t", group = "Toggle" },
+				{ "<leader>h", group = "Git Hunk", mode = { "n", "v" } },
+				{ "<leader>e", group = "Edit" },
+				{ "<leader>m", group = "MiniMap" },
 			},
 		},
 	},
@@ -235,16 +237,16 @@ require("lazy").setup({
 
 			-- See `:help telescope.builtin`
 			local builtin = require("telescope.builtin")
-			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
-			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
-			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-			vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
-			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
-			vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Search Help" })
+			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Search Keymaps" })
+			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Search Files" })
+			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "Search Select Telescope" })
+			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "Search current Word" })
+			vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Search by Grep" })
+			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Search Diagnostics" })
+			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "Search Resume" })
+			vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = 'Search Recent Files ("." for repeat)' })
+			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "Find existing buffers" })
 
 			-- Slightly advanced example of overriding default behavior and theme
 			vim.keymap.set("n", "<leader>/", function()
@@ -253,7 +255,7 @@ require("lazy").setup({
 					winblend = 10,
 					previewer = false,
 				}))
-			end, { desc = "[/] Fuzzily search in current buffer" })
+			end, { desc = "/ Fuzzily search in current buffer" })
 
 			-- It's also possible to pass additional configuration options.
 			--  See `:help telescope.builtin.live_grep()` for information about particular keys
@@ -262,12 +264,12 @@ require("lazy").setup({
 					grep_open_files = true,
 					prompt_title = "Live Grep in Open Files",
 				})
-			end, { desc = "[S]earch [/] in Open Files" })
+			end, { desc = "Search / in Open Files" })
 
 			-- Shortcut for searching your Neovim configuration files
 			vim.keymap.set("n", "<leader>sn", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
-			end, { desc = "[S]earch [N]eovim files" })
+			end, { desc = "Search Neovim files" })
 		end,
 	},
 
@@ -465,9 +467,9 @@ require("lazy").setup({
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
 				-- clangd = {},
-				-- gopls = {},
-				-- pyright = {},
-				-- rust_analyzer = {},
+				gopls = {},
+
+				rust_analyzer = {},
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 				--
 				-- Some languages (like typescript) have entire language plugins that can be useful:

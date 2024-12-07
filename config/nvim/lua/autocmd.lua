@@ -1,8 +1,7 @@
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
--- NVImTree autoclose
-
+-- NVImTree autoclose -- doesnt work
 vim.api.nvim_create_autocmd("QuitPre", {
 	callback = function()
 		local invalid_win = {}
