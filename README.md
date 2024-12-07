@@ -89,3 +89,4 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 - Set up wine for stuff like paint.net
 - Set up recording with OBS or ffmpeg 
 - Neofetch
+- Ranger preview syntax highlighting

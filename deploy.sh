@@ -1,5 +1,6 @@
-HERE=$HOME/git/dotfiles
+#!bin/bash
 
+HERE=$HOME/git/dotfiles
 
 
 
