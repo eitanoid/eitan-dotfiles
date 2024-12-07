@@ -26,7 +26,6 @@ The color theme is [Blood Moon](https://github.com/dguo/blood-moon)
 
 Zshell is installed with manually managed plugins:
 
-- [zsh-vi mode](https://github.com/jeffreytse/zsh-vi-mode) 
 - [fast-syntax-highlighting](https://github.com/zdharma-continuum/fast-syntax-highlighting)
 - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 - [zsh-autocomplete](https://github.com/marlonrichert/zsh-autocomplete)
@@ -76,9 +75,10 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 # Todo:
 
 - Configure and customise Nvim
+- Title screen for nvim
 - Move distros to Fedora
 - Set up Wayland, Nvidia drivers on Fedora
 - Look into hyprland
 - Set up wine for stuff like paint.net
 - Set up recording with OBS or ffmpeg 
-
+- Neofetch

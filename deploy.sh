@@ -1,20 +1,24 @@
 HERE=$HOME/git/dotfiles
 
-#cp .zshrc $HOME
-#cp .config/nvim $HOME/.config/nvim
-#cp .config/alacritty $HOME/.config/alacritty
-#cp .config/ranger $HOME/.config/ranger
+
+
 
 #copy zsh directory and keep .zshrc in $HOME
-sudo cp $HERE/config/zsh $HOME/.config -r && ln -s -T ~/.config/zsh/.zshrc ~/.zshrc
+sudo rsync -rav $HERE/config/zsh $HOME/.config
+sudo ln -s -T ~/.config/zsh/.zshrc ~/.zshrc
 
-cp $HERE/config/starship.toml $HOME/.config
+##Starship Prompt
+rsync -rav $HERE/config/starship.toml $HOME/.config
 
-cp $HERE/config/alacritty $HOME/.config -r
+## Alacritty
+rsync -rav $HERE/config/alacritty $HOME/.config
 
-cp $HERE/.dircolors $HOME
+## Colors
+rsync -rav $HERE/.dircolors $HOME
 
+##Ranger 
 mkdir -p $HOME/.config/ranger/plugins
-cp $HERE/config/ranger $HOME/.config -r
+rsync -rav $HERE/config/ranger $HOME/.config 
 
-cp $HERE/config/nvim $HOME/.config -r
+##Nvim
+rsync -rav $HERE/config/nvim $HOME/.config 

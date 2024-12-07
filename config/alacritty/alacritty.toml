@@ -1,6 +1,7 @@
 [general]
+
 import = [
-    "~/.config/alacritty/blood_moon.toml"
+    "~/.config/alacritty/themes/themes/blood_moon.toml"
 ]
 
 [colors.primary]

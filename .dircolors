@@ -80,6 +80,9 @@ EXEC 00;36
 .pdf 00;33
 .djvu 00;33
 
+# .gitignore
+.gitignore 1;33
+
  # archives or compressed (bright red)
 .tar 00;35
 .tgz 00;35
