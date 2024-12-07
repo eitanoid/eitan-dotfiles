@@ -51,20 +51,23 @@ Kickstart Guide:
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 
+
+--]]
+
+-- set <space> as leader key
+-- NOTE: must happen before plugins are required otherwise wrong leader will be used.
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 vim.g.have_nerd_font = true
-
--- [[ Setting options ]]
--- See `:help vim.opt`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
-
--- Make line numbers default
 
 require("options")
 
 require("keymaps")
 
 require("plugins")
+
+require("autocmd")
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

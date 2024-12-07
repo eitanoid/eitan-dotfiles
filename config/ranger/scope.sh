@@ -330,12 +330,12 @@ handle_mime() {
                 local highlight_format='ansi'
             fi
             #env HIGHLIGHT_OPTIONS="${HIGHLIGHT_OPTIONS}" highlight \
-            #  --out-format="${highlight_format}" \
+            # --out-format="${highlight_format}" \
             #  --force -- "${FILE_PATH}" && exit 5
-            #env COLORTERM=8bit bat --color=always --style="plain" \
+            #env COLORTERM=8bit bat --color=always --style="plain" --theme=ansi \
             #    -- "${FILE_PATH}" && exit 5
             pygmentize -f "${pygmentize_format}" -O "style=${PYGMENTIZE_STYLE}"\
-                -- "${FILE_PATH}" && exit 5
+               -- "${FILE_PATH}" && exit 5
             exit 2;;
 
         ## DjVu

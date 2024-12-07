@@ -24,37 +24,34 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require("lazy").setup({
 	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
-
-	-- NOTE: Plugins can also be added by using a table,
-	-- with the first argument being the link and the following
-	-- keys can be used to configure plugin behavior/loading/etc.
-	--
 	-- Use `opts = {}` to force a plugin to be loaded.
 	--
-	{ -- colorizer
-		"NvChad/nvim-colorizer.lua",
-		event = "BufReadPre",
-		opts = { -- set to setup table
-			user_default_options = { names = false },
-      -- stylua: ignore
-        buftypes = {
-          '*',
-          '!prompt',
-          '!opoup',
-          '!lazy',
-      },
+
+	-- Here I use Tom's plugins
+	{ -- A fully customizable start screen
+		"goolord/alpha-nvim",
+		event = "BufEnter",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"nvim-lua/plenary.nvim",
 		},
+		config = function()
+			require("alpha").setup(require("alpha.themes.theta").config)
+		end,
 	},
-
-	-- Tabular plugin (Vim plugin for aligning text with delimiters)
-	{ "godlygeek/tabular" },
-
-	-- Here is a more advanced example where we pass configuration
-	-- options to `gitsigns.nvim`. This is equivalent to the following Lua:
-	--    require('gitsigns').setup({ ... })
+	-- Git related plugins
+	{ "tpope/vim-fugitive", event = "SafeState" },
+	{ "tpope/vim-rhubarb", event = "SafeState" },
+	-- Detect tabstop and shiftwidth automatically
+	{ "tpope/vim-sleuth", event = "BufEnter" },
 	--
-	-- See `:help gitsigns` to understand what the configuration keys do
+	{ -- proper merge editor
+		--- @see documentation at https://github.com/sindrets/diffview.nvim
+		"sindrets/diffview.nvim",
+		event = "SafeState",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
+	--
 	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
 		opts = {
@@ -68,20 +65,48 @@ require("lazy").setup({
 		},
 	},
 
-	-- NOTE: Plugins can also be configured to run Lua code when they are loaded.
+{ -- directory navigation
+'nvim-tree/nvim-tree.lua',
+priority = 900, -- we want this loaded pretty much immediately
+dependencies = {
+  'nvim-tree/nvim-web-devicons',
+},
+opts = require('plugins.nvim-tree'),
+keys = {
+  { '<leader>ee', '<Cmd>NvimTreeToggle<CR>', { mode = 'n', desc = 'Toggle file tr[ee]' } },
+},
+},
+
+	{ -- colorizer
+		"NvChad/nvim-colorizer.lua",
+		event = "BufReadPre",
+		opts = { -- set to setup table
+			user_default_options = { names = false },
+			buftypes = {
+				"*",
+				"!prompt",
+				"!opoup",
+				"!lazy",
+			},
+		},
+	},
+
+	{ -- nicer looking Markdown
+		"MeanderingProgrammer/render-markdown.nvim",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons",
+		},
+	},
+
+	-- Tabular plugin (Vim plugin for aligning text with delimiters)
+	{ "godlygeek/tabular" },
+
+	-- Here is a more advanced example where we pass configuration
+	-- options to `gitsigns.nvim`. This is equivalent to the following Lua:
+	--    require('gitsigns').setup({ ... })
 	--
-	-- This is often very useful to both group configuration, as well as handle
-	-- lazy loading plugins that don't need to be loaded immediately at startup.
-	--
-	-- For example, in the following configuration, we use:
-	--  event = 'VimEnter'
-	--
-	-- which loads which-key before all the UI elements are loaded. Events can be
-	-- normal autocommands events (`:help autocmd-events`).
-	--
-	-- Then, because we use the `config` key, the configuration only runs
-	-- after the plugin has been loaded:
-	--  config = function() ... end
+	-- See `:help gitsigns` to understand what the configuration keys do
 
 	{ -- Useful plugin to show you pending keybinds.
 		"folke/which-key.nvim",
@@ -164,9 +189,6 @@ require("lazy").setup({
 				end,
 			},
 			{ "nvim-telescope/telescope-ui-select.nvim" },
-
-			-- Useful for getting pretty icons, but requires a Nerd Font.
-			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
 		},
 		config = function()
 			-- Telescope is a fuzzy finder that comes with a lot of different things that
