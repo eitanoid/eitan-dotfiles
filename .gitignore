@@ -9,3 +9,5 @@ config/zsh/plugins/*
 config/ranger/plugins/*
 config/alacritty/themes
 
+#do not commit lain
+lain-bear.png

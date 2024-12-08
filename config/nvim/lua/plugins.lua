@@ -28,17 +28,18 @@ require("lazy").setup({
 	--
 
 	-- Here I use Tom's plugins
-	{ -- A fully customizable start screen
+
+	{
 		"goolord/alpha-nvim",
-		event = "BufEnter",
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-			"nvim-lua/plenary.nvim",
-		},
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
-			require("alpha").setup(require("alpha.themes.theta").config)
+			local theme = require("alpha.themes.dashboard")
+			-- available: devicons, mini, default is mini
+			-- if provider not loaded and enabled is true, it will try to use another provider
+			require("alpha").setup(theme.config)
 		end,
 	},
+
 	-- Git related plugins
 	{ "tpope/vim-fugitive", event = "SafeState" },
 	{ "tpope/vim-rhubarb", event = "SafeState" },

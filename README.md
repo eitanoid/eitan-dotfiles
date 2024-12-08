@@ -62,12 +62,13 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 
 ## NVim
 
- | Action                   | Mode        | Bind        |
- | :------                  | :---------- | :-          |
- | Toggle Relative-Numbers  | Normal      | ``CTRL+` `` |
- | Jump to matching bracket | Normal      | `%`         |
- | Enter minimap settings    | Normal      | `SPACE>+M`  |
- | Open Debug Menu          | Normal      | `SPACE+Q`   |
+  | Action                   | Mode        | Bind        |
+  | :------                  | :---------- | :-          |
+  | Toggle Relative-Numbers  | Normal      | ``CTRL+` `` |
+  | Jump to matching bracket | Normal      | `%`         |
+  | Enter minimap settings   | Normal      | `SPACE>+M`  |
+  | Open Debug Menu          | Normal      | `SPACE+Q`   |
+  | Open Keybind Menu        | Normal      | `SPACE`     |
 
     
 # Packages:
@@ -86,7 +87,6 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 
 - Configure and customise Nvim
 - Title screen for nvim
-- Tabular in nvim
 - Move distros to Fedora
 - Set up Wayland, Nvidia drivers on Fedora
 - Look into hyprland
