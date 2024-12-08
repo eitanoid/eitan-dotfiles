@@ -1,12 +1,10 @@
 [general]
 
 import = [
-    "~/.config/alacritty/themes/themes/blood_moon.toml"
+    "~/.config/alacritty/main.toml"
 ]
 
 [colors.primary]
-
-background = "#242829"
 
 [window]
 decorations = "Buttonless"

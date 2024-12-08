@@ -28,15 +28,17 @@ require("lazy").setup({
 	--
 
 	-- Here I use Tom's plugins
-
-	{
-		"goolord/alpha-nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
+	--
+	{ -- another title screen -- possibly better and more documented than alpha
+		"startup-nvim/startup.nvim",
+		-- event = "VimEnter",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope-file-browser.nvim",
+		},
 		config = function()
-			local theme = require("alpha.themes.dashboard")
-			-- available: devicons, mini, default is mini
-			-- if provider not loaded and enabled is true, it will try to use another provider
-			require("alpha").setup(theme.config)
+			require("startup").setup(require("plugins.startup"))
 		end,
 	},
 
@@ -66,8 +68,11 @@ require("lazy").setup({
 		},
 	},
 
+	-- Editor Customisation
 	require("plugins.neominimap"),
-
+	-- lualine
+	{ "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
+	--
 	{ -- directory navigation
 		"nvim-tree/nvim-tree.lua",
 		priority = 900, -- we want this loaded pretty much immediately
@@ -102,14 +107,12 @@ require("lazy").setup({
 
 	-- Tabular plugin (Vim plugin for aligning text with delimiters)
 	{ "godlygeek/tabular" },
-
-	-- Here is a more advanced example where we pass configuration
-	-- options to `gitsigns.nvim`. This is equivalent to the following Lua:
-	--    require('gitsigns').setup({ ... })
 	--
-	-- See `:help gitsigns` to understand what the configuration keys do
-
-	{ -- Useful plugin to show you pending keybinds.
+	--	k
+	-- Comment plugin
+	{ "numToStr/Comment.nvim", opts = {} },
+	-- Useful plugin to show you pending keybinds.
+	{
 		"folke/which-key.nvim",
 		event = "VimEnter", -- Sets the loading event to 'VimEnter'
 		opts = {
@@ -164,14 +167,7 @@ require("lazy").setup({
 			},
 		},
 	},
-
-	-- NOTE: Plugins can specify dependencies.
 	--
-	-- The dependencies are proper plugin specifications as well - anything
-	-- you do for a plugin at the top level, you can do for a dependency.
-	--
-	-- Use the `dependencies` key to specify the dependencies of a particular plugin
-
 	{ -- Fuzzy Finder (files, lsp, etc)
 		"nvim-telescope/telescope.nvim",
 		event = "VimEnter",
@@ -275,6 +271,8 @@ require("lazy").setup({
 	},
 
 	{ "HiPhish/rainbow-delimiters.nvim" }, -- rainbow brackets and other delimiters
+
+	{ "windwp/nvim-autopairs", event = "InsertEnter", config = true },
 
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
@@ -698,7 +696,6 @@ require("lazy").setup({
 			-- Like many other themes, this one has different styles, and you could load
 			-- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
 			vim.cmd.colorscheme("tokyonight-moon")
-
 			-- You can configure highlights by doing something like:
 			vim.cmd.hi("Comment gui=none")
 		end,
@@ -836,3 +833,4 @@ require("lazy").setup({
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
+-- vim: set ts=2 sw=2 noet

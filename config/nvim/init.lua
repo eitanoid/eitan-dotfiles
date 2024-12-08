@@ -21,7 +21,6 @@
 =====================================================================
 
 Kickstart Guide:
-
   TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
 
     If you don't know what this means, type the following:
@@ -68,7 +67,7 @@ require("keymaps")
 require("plugins")
 
 require("autocmd")
-
+-- this shouldn't be here
 require("alpha-config")
 
 -- The line beneath this is called `modeline`. See `:help modeline`

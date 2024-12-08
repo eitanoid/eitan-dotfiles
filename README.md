@@ -94,3 +94,5 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 - Set up recording with OBS or ffmpeg 
 - Neofetch
 - Ranger preview syntax highlighting
+- Zshell "which-key" menu just like neovim's which-key plugin
+- Look into Tmux
