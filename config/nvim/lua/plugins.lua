@@ -15,20 +15,16 @@ vim.opt.rtp:prepend(lazypath)
 --
 --  To check the current status of your plugins, run
 --    :Lazy
---
 --  You can press `?` in this menu for help. Use `:q` to close the window
---
 --  To update plugins you can run
 --    :Lazy update
 --
+--
+--
+--
 -- NOTE: Here is where you install your plugins.
 require("lazy").setup({
-	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-	-- Use `opts = {}` to force a plugin to be loaded.
-	--
 
-	-- Here I use Tom's plugins
-	--
 	{ -- another title screen -- possibly better and more documented than alpha
 		"startup-nvim/startup.nvim",
 		-- event = "VimEnter",
@@ -45,8 +41,6 @@ require("lazy").setup({
 	-- Git related plugins
 	{ "tpope/vim-fugitive", event = "SafeState" },
 	{ "tpope/vim-rhubarb", event = "SafeState" },
-	-- Detect tabstop and shiftwidth automatically
-	{ "tpope/vim-sleuth", event = "BufEnter" },
 	--
 	{ -- proper merge editor
 		--- @see documentation at https://github.com/sindrets/diffview.nvim
@@ -67,6 +61,8 @@ require("lazy").setup({
 			},
 		},
 	},
+	-- Detect tabstop and shiftwidth automatically
+	{ "tpope/vim-sleuth", event = "BufEnter" },
 
 	-- Editor Customisation
 	require("plugins.neominimap"),
@@ -165,6 +161,7 @@ require("lazy").setup({
 				{ "<leader>h", group = "Git Hunk", mode = { "n", "v" } },
 				{ "<leader>e", group = "Edit" },
 				{ "<leader>m", group = "MiniMap" },
+				{ "<leader>q", group = "Diagnostics" },
 			},
 		},
 	},
@@ -283,6 +280,45 @@ require("lazy").setup({
 			require("plugins.tiny-inline-diagnostic").setup()
 		end,
 	},
+
+	{
+		"folke/trouble.nvim",
+		opts = {}, -- for default options, refer to the configuration section for custom setup.
+		cmd = "Trouble",
+		keys = {
+			{
+				"<leader>qx",
+				"<cmd>Trouble diagnostics toggle<cr>",
+				desc = "Diagnostics (Trouble)",
+			},
+			{
+				"<leader>qX",
+				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+				desc = "Buffer Diagnostics (Trouble)",
+			},
+			{
+				"<leader>qs",
+				"<cmd>Trouble symbols toggle focus=false<cr>",
+				desc = "Symbols (Trouble)",
+			},
+			{
+				"<leader>ql",
+				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+				desc = "LSP Definitions / references / ... (Trouble)",
+			},
+			{
+				"<leader>qL",
+				"<cmd>Trouble loclist toggle<cr>",
+				desc = "Location List (Trouble)",
+			},
+			{
+				"<leader>qQ",
+				"<cmd>Trouble qflist toggle<cr>",
+				desc = "Quickfix List (Trouble)",
+			},
+		},
+	},
+
 	-- LSP Plugins
 	{
 		-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
@@ -747,6 +783,45 @@ require("lazy").setup({
 			--  Check out: https://github.com/echasnovski/mini.nvim
 		end,
 	},
+
+	{ -- fold plugin
+		"kevinhwang91/nvim-ufo",
+		dependencies = { "kevinhwang91/promise-async" },
+		event = "BufRead",
+		keys = {
+			{
+				"zR",
+				function()
+					require("ufo").openAllFolds()
+				end,
+			},
+			{
+				"zM",
+				function()
+					require("ufo").closeAllFolds()
+				end,
+			},
+			{
+				"K",
+				function()
+					local winid = require("ufo").peekFoldedLinesUnderCursor()
+					if not winid then
+						vim.lsp.buf.hover()
+					end
+				end,
+			},
+		},
+		config = function()
+			vim.o.foldcolumn = "1"
+			vim.o.foldlevel = 99
+			vim.o.foldlevelstart = 99
+			vim.o.foldenable = true
+			require("ufo").setup({
+				close_fold_kinds = { "imports" },
+			})
+		end,
+	},
+
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",

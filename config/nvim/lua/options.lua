@@ -27,6 +27,9 @@ vim.opt.expandtab = false
 -- text options
 vim.opt.wrap = true
 
+-- fold
+vim.opt.foldmethod = "manual"
+vim.opt.foldcolumn = "1"
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -64,7 +67,7 @@ vim.opt.splitbelow = true
 --  and `:help 'listchars'`
 vim.opt.list = true
 vim.opt.listchars = {
-	tab = "> ",
+	tab = "│ ",
 	trail = ".",
 	extends = "»",
 	precedes = "«",

@@ -16,8 +16,34 @@ dev icons in preview with [dev-icons](https://github.com/alexanderjeurissen/rang
 
 Nvim is installed with [kickstart](https://github.com/nvim-lua/kickstart.nvim)
 
+### Plugins
 
+   | Plugin                                                                              | Purpose                                  |
+   | :-                                                                                  | :-                                       |
+   | [Startup-Nvim](https://github.com/startup-nvim/startup.nvim)                        | Startup menu / greeter                   |
+   | [Lualine](https://github.com/nvim-lualine/lualine.nvim)                             |                                          |
+   | [Nvim-Tree](https://github.com/nvim-tree/nvim-tree.lua)                             | File explorer                            |
+   | [Render-Markdown](https://github.com/MeanderingProgrammer/render-markdown.nvim)     | Render markdown files in editor          |
+   | [Tabular](https://github.com/godlygeek/tabular)                                     | Table by delimiters                      |
+   | [Comment](https://github.com/numToStr/Comment.nvim)                                 | Comment macro                            |
+   | [Rainbow-Delimiters](https://github.com/HiPhish/rainbow-delimiters.nvim)            | Matching delimiters are colored the same |
+   | [Auto-Pair](https://github.com/windwp/nvim-autopairs)                               | Automatically pair delimiters            |
+   | [Tiny-Inline_diagnostic](https://github.com/rachartier/tiny-inline-diagnostic.nvim) | Prettier diagnostic messages             |
+   | [Trouble](https://github.com/folke/trouble.nvim)                                    | Quickfix list navigation                 |
+   | [Conform](https://github.com/stevearc/conform.nvim)                                 | Code formatting                          |
+   | [Todo-Comments](https://github.com/folke/todo-comments.nvim)                        | Highlight TODO in comments               |
+   | [Nvim-Ufo](https://github.com/kevinhwang91/nvim-ufo)                                | Fold manager                             |
+   | [Neominimap](https://github.com/plugins.neominimap)                                 | Code Minimap                             |
+   | [Nvim-Colorizer](https://github.com/NvChad/nvim-colorizer.lua)                      | Color Text Inline                        |
 
+### Git
+
+   | Plugin                                         | Purpose      |
+   | :-                                             | :-           |
+   | [Fugitive](https://github.comtpope/vim-fugitive)       |              |
+   | [Rhubarb](https://github.com/tpope/vim-rhubarb)        |              |
+   | [Diffview](https://github.com/sindrets/diffview.nvim)  | Merge Editor |
+   | [Gitsigns](https://github.com/lewis6991/gitsigns.nvim) |              |
 
 ## Alacritty 
 
@@ -46,10 +72,8 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 ## General
 
  | Action                    | Bind        |
- | :------                   | :---------- |
+ | :------------------------ | :---------- |
  | Open Terminal (Alacritty) | `SUPER+T`   |
- |                           |             |
- |                           |             |
 
 ## Zshell
 
@@ -62,13 +86,13 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 
 ## NVim
 
-  | Action                   | Mode        | Bind        |
-  | :------                  | :---------- | :-          |
-  | Toggle Relative-Numbers  | Normal      | ``CTRL+` `` |
-  | Jump to matching bracket | Normal      | `%`         |
-  | Enter minimap settings   | Normal      | `SPACE>+M`  |
-  | Open Debug Menu          | Normal      | `SPACE+Q`   |
-  | Open Keybind Menu        | Normal      | `SPACE`     |
+  | Action                  | Mode        | Bind        |
+  | :---------------------- | :---------- | :---------- |
+  | Toggle Relative-Numbers | Normal      | ``CTRL+` `` |
+  | Open Minimap Menu       | Normal      | `SPACE>+M`  |
+  | Open Debug Menu         | Normal      | `SPACE+Q`   |
+  | Open Keybind Menu       | Normal      | `SPACE`     |
+  | Open Fold Menu          | Normal      | `Z`         |
 
     
 # Packages:
@@ -87,6 +111,7 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 
 - Configure and customise Nvim
 - Title screen for nvim
+- VimTeX
 - Move distros to Fedora
 - Set up Wayland, Nvidia drivers on Fedora
 - Look into hyprland
@@ -95,4 +120,4 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 - Neofetch
 - Ranger preview syntax highlighting
 - Zshell "which-key" menu just like neovim's which-key plugin
-- Look into Tmux
+-  Look into Tmux
