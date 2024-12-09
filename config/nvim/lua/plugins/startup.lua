@@ -11,7 +11,7 @@ local settings = {
 		content = function() -- read assii art from text file
 			local lines = {}
 			local home = os.getenv("HOME")
-			local file = io.open(home .. "/.config/nvim/lua/plugins/coplands4.txt", "r") -- text file here
+			local file = io.open(home .. "/.config/nvim/lua/plugins/coplands.txt", "r") -- text file here
 			if not file then
 				return { "Couldn't find ascii art path" }
 			end
@@ -34,7 +34,7 @@ local settings = {
 		fold_section = false,
 		title = "Quote",
 		margin = 1,
-		content = { "No matter where you go, everyone's connected" },
+		content = { "No matter where you go, everyone's connected." },
 		highlight = "StartupHeader2",
 		default_color = "",
 		oldfiles_amount = 0,
@@ -47,9 +47,9 @@ local settings = {
 		title = "Select An Option:",
 		margin = 2,
 		content = {
-			{ " New File", "lua require'startup'.new_file()", "i" },
+			{ " New Fie", "ene", "i" },
 			{ " Recent Files", "Telescope oldfiles", "r" },
-			{ " File Browser", "Telescope file_browser", "f" },
+			{ " File Browser", "NvimTreeToggle ", "f" },
 			{ "󰈞 Find File", "Telescope find_files", "e" },
 			{ " Colorschemes", "Telescope colorscheme", "c" },
 			{ " Exit Vim", "q", "q" },
@@ -117,20 +117,20 @@ local settings = {
 	options = {
 		after = function()
 			require("startup.utils").oldfiles_mappings()
-			vim.cmd("highlight Normal guibg = #242829") -- cursed way of doing colors because I dont undestand how they work
+			-- vim.cmd("highlight Normal guibg = #242829") -- cursed way of doing colors because I dont undestand how they work
 			vim.cmd("highlight StartupHeader1 guifg = #5fd6fa")
-			vim.cmd("highlight StartupHeader2 guifg = #ff0000")
-			vim.cmd("highlight link StartupBody String")
+			vim.cmd("highlight StartupHeader2 guifg = #999999")
+			vim.cmd("highlight StartupBody guifg = #5fd6fa")
 			vim.cmd("highlight StartupBody2 guifg = #ffffff")
 			vim.cmd("highlight StartupFooter guifg = #ffffff")
 			vim.cmd("highlight StartupFooter2 guifg = #ffffff")
-			vim.cmd("highlight StartupClock guifg = #ffffff")
+			vim.cmd("highlight StartupClock guifg = #999999")
 		end,
 		mapping_keys = true,
 		cursor_column = 0.5,
 		empty_lines_between_mappings = true,
 		disable_statuslines = true,
-		paddings = { 1, 1, 1, 1, 1, 1, 1 },
+		paddings = { 1, 2, 2, 1, 1, 2, 2 },
 	},
 	colors = {
 		background = "#242829", -- "#1f2227",

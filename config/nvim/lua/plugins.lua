@@ -87,7 +87,7 @@ require("lazy").setup({
 		"NvChad/nvim-colorizer.lua",
 		event = "BufReadPre",
 		opts = { -- set to setup table
-			user_default_options = { names = false },
+			user_default_options = { names = true },
 			buftypes = {
 				"*",
 				"!prompt",
@@ -108,9 +108,10 @@ require("lazy").setup({
 	-- Tabular plugin (Vim plugin for aligning text with delimiters)
 	{ "godlygeek/tabular" },
 	--
-	--	k
+	--
 	-- Comment plugin
 	{ "numToStr/Comment.nvim", opts = {} },
+	--
 	-- Useful plugin to show you pending keybinds.
 	{
 		"folke/which-key.nvim",
