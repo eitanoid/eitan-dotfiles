@@ -32,6 +32,9 @@ vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left wind
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+-- Buffer Keymaps
+vim.keymap.set("n", "<C-Tab>", ":bnext<CR>", { desc = "Next Buffer (Tab)" })
+vim.keymap.set("n", "<C-S-Tab>", ":bprevious<CR>", { desc = "Previous Buffer (Tab)" })
 
 -- My keymaps
 vim.keymap.set("n", "<C-`>", function()
@@ -42,8 +45,7 @@ end, { noremap = true, desc = "toggle relative numbers" })
 vim.keymap.set("n", "<leader>ff", "<Cmd>NvimTreeToggle<CR>", { desc = "Toggle file tr[ee]" })
 
 -- Edit keymaps for binds I might forget
-vim.keymap.set("n", "<leader>eb", "%", { desc = "Move to Matching Delimiter - %" })
-
--- Buffer Keymaps
-vim.keymap.set("n", "<C-Tab>", ":bnext<CR>", { desc = "Next Buffer (Tab)" })
-vim.keymap.set("n", "<C-S-Tab>", ":bprevious<CR>", { desc = "Previous Buffer (Tab)" })
+vim.keymap.set("n", "<leader>e%", "%", { desc = "Move to Matching Delimiter - %" })
+vim.keymap.set("n", "<leader>eyi", "yi", { desc = "Yank Text Inside Next Delimiter" })
+vim.keymap.set("n", "<leader>e>", ">", { desc = "Indent Forwards" })
+vim.keymap.set("n", "<leader>e<", "<", { desc = "Indent Backwards" })
