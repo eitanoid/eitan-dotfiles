@@ -15,7 +15,7 @@ return {
 	},
 	view = {
 		width = function()
-			return math.floor(0.175 * vim.o.columns)
+			return math.floor(0.125 * vim.o.columns)
 		end,
 		preserve_window_proportions = true,
 	},

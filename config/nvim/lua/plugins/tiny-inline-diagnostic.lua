@@ -32,7 +32,7 @@ function M.setup()
 			multiple_diag_under_cursor = true,
 
 			-- Enable diagnostic message on all lines.
-			multilines = true,
+			multilines = false,
 
 			-- Show all diagnostics on the cursor line.
 			show_all_diags_on_cursorline = false,
