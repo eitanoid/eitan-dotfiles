@@ -38,12 +38,12 @@ Nvim is installed with [kickstart](https://github.com/nvim-lua/kickstart.nvim)
 
 ### Git
 
-  | Plugin                                                 | Purpose      |
-  | :----------------------------------------------------- | :----------- |
-  | [Fugitive](https://github.comtpope/vim-fugitive)       |              |
-  | [Rhubarb](https://github.com/tpope/vim-rhubarb)        |              |
-  | [Diffview](https://github.com/sindrets/diffview.nvim)  | Merge Editor |
-  | [Gitsigns](https://github.com/lewis6991/gitsigns.nvim) |              |
+| Plugin                                                 | Purpose      |
+| :----------------------------------------------------- | :----------- |
+| [Fugitive](https://github.comtpope/vim-fugitive)       |              |
+| [Rhubarb](https://github.com/tpope/vim-rhubarb)        |              |
+| [Diffview](https://github.com/sindrets/diffview.nvim)  | Merge Editor |
+| [Gitsigns](https://github.com/lewis6991/gitsigns.nvim) |              |
 
 ## Alacritty 
 
@@ -99,22 +99,26 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 | Delete in Surrounding         | Normal      | `[cont]ci[surrounding]`, `[cont]ca[surrounding]` |
 | Copy in Surrounding           | Normal      | `[cont]yi[surrounding]`, `[cont]ya[surrounding]` |
 | Select Word                   | Normal      | `[cont]viw`, `[cont]vaw`                         |
+| Select Inside of Envrionment  | Normal      | `vie`, `vae`                                               |
 
 ## LaTex
 
 The TeX distribution chosen is: [TeX Live](https://tug.org/texlive/)
 Integreted to Nvim with [VimTeX](https://github.com/lervag/vimtex)
-Some useful [keybinds](https://ejmastnak.com/tutorials/vim-latex/vimtex/)
+Helpful [article](https://ejmastnak.com/tutorials/vim-latex/vimtex/)
 
-  | Action                         | Example                      | Mode   | Bind  |
-  | :-                             | :-                           | :-     | :-    |
-  | Change Surrounding Environment | {enumerate} -> {itemize}     | Normal | `cse` |
-  | Delete Surrounding Environment |                              | Normal | `dse` |
-  | Delete Surrounding Command     | \sqrt\[b\]{a} -> a )           | Normal | `dsc` |
-  | Change Surrounding Command     | \textit{a} -> \textbf{a}     | Normal | `csc` |
-  | Toggle Surrounding Delimiters  | (a+b) -> \left(a + b \right) | Normal | `tsd` |
-  | Toggle Surrounding Fraction    | a/b -> \frac{a}{b}           | Normal | `tsf` |
-  | Navigate Matching Content       |                              | Normal | `%`   |
+ | Action                         | Example                      | Mode   | Bind  |
+ | :-                             | :-                           | :-     | :-    |
+ | Change Surrounding Environment | {enumerate} -> {itemize}     | Normal | `cse` |
+ | Delete Surrounding Environment |                              | Normal | `dse` |
+ | Delete Surrounding Command     | \sqrt\[b\]{a} -> a )         | Normal | `dsc` |
+ | Change Surrounding Command     | \textit{a} -> \textbf{a}     | Normal | `csc` |
+ | Toggle Surrounding Delimiters  | (a+b) -> \left(a + b \right) | Normal | `tsd` |
+ | Toggle Surrounding Fraction    | a/b -> \frac{a}{b}           | Normal | `tsf` |
+ | Navigate Matching Content      |                              | Normal | `%`   |
+ | Close Environment              | \begin{env} +-> \end{env}    | Insert | `]]`  |
+
+For more default-keybinds: `:h vimtex-default-mappings`
 
 # Packages:
 
