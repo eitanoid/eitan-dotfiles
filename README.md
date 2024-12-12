@@ -86,20 +86,21 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 
 ## NVim
 
-| Action                        | Mode        | Bind                                             |
-| :----------------------       | :---------- | :----------                                      |
-| Toggle Relative-Numbers       | Normal      | ``CTRL+` ``                                      |
-| Open Minimap Menu             | Normal      | `SPACE>+M`                                       |
-| Open Debug Menu               | Normal      | `SPACE+Q`                                        |
-| Open Keybind Menu             | Normal      | `SPACE`                                          |
-| Open Fold Menu                | Normal      | `Z`                                              |
-| Replace Surrounding           | Normal      | `[cont]sr[replace_symbol][replace_with]`         |
-| Delete Surrounding            | Normal      | `[cont]sd[surrounding_symbol]`                   |
-| Add Surrounding (to selected) | Normal      | `[cont]sa[symbol_to_add]`                        |
-| Delete in Surrounding         | Normal      | `[cont]ci[surrounding]`, `[cont]ca[surrounding]` |
-| Copy in Surrounding           | Normal      | `[cont]yi[surrounding]`, `[cont]ya[surrounding]` |
-| Select Word                   | Normal      | `[cont]viw`, `[cont]vaw`                         |
-| Select Inside of Envrionment  | Normal      | `vie`, `vae`                                               |
+ | Action                        | Mode        | Bind                                                   |
+ | :----------------------       | :---------- | :----------                                            |
+ | Toggle Relative-Numbers       | Normal      | ``CTRL+` ``                                            |
+ | Open Minimap Menu             | Normal      | `SPACE>+M`                                             |
+ | Open Debug Menu               | Normal      | `SPACE+Q`                                              |
+ | Open Keybind Menu             | Normal      | `SPACE`                                                |
+ | Open Fold Menu                | Normal      | `Z`                                                    |
+ | Replace Surrounding           | Normal      | `[cont]sr[replace_symbol][replace_with]`               |
+ | Delete Surrounding            | Normal      | `[cont]sd"` where `"` is any surrounding.              |
+ | Add Surrounding (to selected) | Normal      | `[cont]sa"` where `"` is any surrounding.              |
+ | Delete in Surrounding         | Normal      | `[cont]ci"`, `[cont]ca"` where `"` is any surrounding. |
+ | Copy in Surrounding           | Normal      | `[cont]yi"`, `[cont]ya"`where `"` is any surrounding.  |
+ | Select Inside Surrounding     | Normal      | `vi"`, `va"` where `"` is any surrounding.             |
+ | Select Word                   | Normal      | `[cont]viw`, `[cont]vaw`                               |
+ | Select Inside of Envrionment  | Normal      | `vie`, `vae`                                           |
 
 ## LaTex
 

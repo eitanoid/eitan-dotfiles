@@ -66,6 +66,7 @@ require("lazy").setup({
 
 	-- Editor Customisation
 	require("plugins.neominimap"),
+
 	-- lualine
 	{ "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
 	--
@@ -120,62 +121,8 @@ require("lazy").setup({
 	{ "numToStr/Comment.nvim", opts = {} },
 	--
 	-- Useful plugin to show you pending keybinds.
-	{
-		"folke/which-key.nvim",
-		event = "VimEnter", -- Sets the loading event to 'VimEnter'
-		opts = {
-			icons = {
-				-- set icon mappings to true if you have a Nerd Font
-				mappings = vim.g.have_nerd_font,
-				-- If you are using a Nerd Font: set icons.keys to an empty table which will use the
-				-- default which-key.nvim defined Nerd Font icons, otherwise define a string table
-				keys = vim.g.have_nerd_font and {} or {
-					Up = "<Up> ",
-					Down = "<Down> ",
-					Left = "<Left> ",
-					Right = "<Right> ",
-					C = "<C-…> ",
-					M = "<M-…> ",
-					D = "<D-…> ",
-					S = "<S-…> ",
-					CR = "<CR> ",
-					Esc = "<Esc> ",
-					ScrollWheelDown = "<ScrollWheelDown> ",
-					ScrollWheelUp = "<ScrollWheelUp> ",
-					NL = "<NL> ",
-					BS = "<BS> ",
-					Space = "<Space> ",
-					Tab = "<Tab> ",
-					F1 = "<F1>",
-					F2 = "<F2>",
-					F3 = "<F3>",
-					F4 = "<F4>",
-					F5 = "<F5>",
-					F6 = "<F6>",
-					F7 = "<F7>",
-					F8 = "<F8>",
-					F9 = "<F9>",
-					F10 = "<F10>",
-					F11 = "<F11>",
-					F12 = "<F12>",
-				},
-			},
+	require("plugins.which-key"),
 
-			-- Document existing key chains
-			spec = {
-				{ "<leader>c", group = "Code", mode = { "n", "x" } },
-				{ "<leader>d", group = "Document" },
-				{ "<leader>r", group = "Rename" },
-				{ "<leader>s", group = "Search" },
-				{ "<leader>w", group = "Workspace" },
-				{ "<leader>t", group = "Toggle" },
-				{ "<leader>h", group = "Git Hunk", mode = { "n", "v" } },
-				{ "<leader>e", group = "Edit" },
-				{ "<leader>m", group = "MiniMap" },
-				{ "<leader>q", group = "Diagnostics" },
-			},
-		},
-	},
 	--
 	{ -- Fuzzy Finder (files, lsp, etc)
 		"nvim-telescope/telescope.nvim",
@@ -283,7 +230,7 @@ require("lazy").setup({
 
 	{ "windwp/nvim-autopairs", event = "InsertEnter", config = true },
 
-	{ "machakann/vim-sandwich" },
+	-- { "machakann/vim-sandwich" },
 
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
@@ -734,22 +681,7 @@ require("lazy").setup({
 		end,
 	},
 
-	{ -- You can easily change to a different colorscheme.
-		-- Change the name of the colorscheme plugin below, and then
-		-- change the command in the config to whatever the name of that colorscheme is.
-		--
-		-- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-		"folke/tokyonight.nvim",
-		priority = 1000, -- Make sure to load this before all the other start plugins.
-		init = function()
-			-- Load the colorscheme here.
-			-- Like many other themes, this one has different styles, and you could load
-			-- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-			vim.cmd.colorscheme("tokyonight-moon")
-			-- You can configure highlights by doing something like:
-			vim.cmd.hi("Comment gui=none")
-		end,
-	},
+	require("plugins.color-scheme"),
 
 	-- Highlight todo, notes, etc in comments
 	{
@@ -775,7 +707,47 @@ require("lazy").setup({
 			-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
 			-- - sd'   - [S]urround [D]elete [']quotes
 			-- - sr)'  - [S]urround [R]eplace [)] [']
-			require("mini.surround").setup()
+			require("mini.surround").setup({
+				-- Add custom surroundings to be used on top of builtin ones. For more
+				-- information with examples, see `:h MiniSurround.config`.
+				custom_surroundings = nil,
+
+				-- Duration (in ms) of highlight when calling `MiniSurround.highlight()`
+				highlight_duration = 500,
+
+				-- Module mappings. Use `''` (empty string) to disable one.
+				mappings = {
+					add = "sa", -- Add surrounding in Normal and Visual modes
+					delete = "sd", -- Delete surrounding
+					find = "sf", -- Find surrounding (to the right)
+					find_left = "sF", -- Find surrounding (to the left)
+					highlight = "sh", -- Highlight surrounding
+					replace = "sr", -- Replace surrounding
+					update_n_lines = "sn", -- Update `n_lines`
+
+					suffix_last = "l", -- Suffix to search with "prev" method
+					suffix_next = "n", -- Suffix to search with "next" method
+				},
+
+				-- Number of lines within which surrounding is searched
+				n_lines = 20,
+
+				-- Whether to respect selection type:
+				-- - Place surroundings on separate lines in linewise mode.
+				-- - Place surroundings on each line in blockwise mode.
+				respect_selection_type = false,
+
+				-- How to search for surrounding (first inside current line, then inside
+				-- neighborhood). One of 'cover', 'cover_or_next', 'cover_or_prev',
+				-- 'cover_or_nearest', 'next', 'prev', 'nearest'. For more details,
+				-- see `:h MiniSurround.config`.
+				search_method = "cover",
+
+				-- Whether to disable showing non-error feedback
+				-- This also affects (purely informational) helper messages shown after
+				-- idle time if user input is required.
+				silent = false,
+			})
 
 			-- Simple and easy statusline.
 			--  You could remove this setup call if you don't like it,
@@ -871,12 +843,11 @@ require("lazy").setup({
 			auto_install = true,
 			highlight = {
 				enable = true,
-				disable = { "latex", "tex" },
 				-- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
 				--  If you are experiencing weird indenting issues, add the language to
 				--  the list of additional_vim_regex_highlighting and disabled languages for indent.
 
-				additional_vim_regex_highlighting = { "ruby", "latex", "tex", "markdown" },
+				additional_vim_regex_highlighting = { "ruby", "markdown" },
 			},
 			indent = { enable = true, disable = { "ruby" } },
 		},
