@@ -3,7 +3,8 @@ export PATH="$HOME/.local/bin":$PATH
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/git/ueberzugpp/build 
-export PATH=$PATH:$HOME/git/yazi/target/release 
+export PATH=$PATH:$HOME/git/yazi/target/release  # not important because I dont use Yazi
+export PATH=$PATH:/usr/local/texlive/2024/bin/x86_64-linux # TeXLive Install
 
 #ZSH variables
 export ZSH=$HOME/.config/zsh/.zshrc
@@ -63,8 +64,10 @@ bindkey -M menuselect "k" up-history
 bindkey -M menuselect "^I" .accept-line #Tab
 #enter to pick file but not continue down hierarchy
 
+#Autosuggest color - need this to work in tmux
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8" ##,bg=cyan,bold,underline"
 
-# Change cursor shape for different vi modes. source : https://gist.github.com/LukeSmithxyz/e62f26e55ea8b0ed41a65912fbebbe52
+######### Change cursor shape for different vi modes. source : https://gist.github.com/LukeSmithxyz/e62f26e55ea8b0ed41a65912fbebbe52
 function zle-keymap-select {
   if [[ ${KEYMAP} == vicmd ]] ||
      [[ $1 = 'block' ]]; then
@@ -84,7 +87,7 @@ zle-line-init() {
 zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
-
+#############
 
 
 #alias
@@ -117,4 +120,3 @@ fi
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(dircolors ~/.dircolors)"
-

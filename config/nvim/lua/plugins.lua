@@ -101,11 +101,22 @@ require("lazy").setup({
 		},
 	},
 
-	-- Tabular plugin (Vim plugin for aligning text with delimiters)
+	{
+		"lervag/vimtex",
+		lazy = false, -- we don't want to lazy load VimTeX
+		-- tag = "v2.15", -- uncomment to pin to a specific release
+		init = function()
+			-- VimTeX configuration goes here, e.g.
+			vim.g.vimtex_view_method = "zathura"
+			vim.g.vimtext_compiler_method = "latexmk"
+		end,
+	},
+
+	-- Tabular plugin (Vim plugin for aligning text with delimiters) :Tabular command
 	{ "godlygeek/tabular" },
 	--
 	--
-	-- Comment plugin
+	-- Comment plugin `gc` motion
 	{ "numToStr/Comment.nvim", opts = {} },
 	--
 	-- Useful plugin to show you pending keybinds.
@@ -271,6 +282,8 @@ require("lazy").setup({
 	{ "HiPhish/rainbow-delimiters.nvim" }, -- rainbow brackets and other delimiters
 
 	{ "windwp/nvim-autopairs", event = "InsertEnter", config = true },
+
+	{ "machakann/vim-sandwich" },
 
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
@@ -839,6 +852,7 @@ require("lazy").setup({
 		main = "nvim-treesitter.configs", -- Sets main module to use for opts
 		-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 		opts = {
+			ignore_install = { "latex" },
 			ensure_installed = {
 				"bash",
 				"c",
@@ -852,14 +866,17 @@ require("lazy").setup({
 				"vim",
 				"vimdoc",
 			},
+
 			-- Autoinstall languages that are not installed
 			auto_install = true,
 			highlight = {
 				enable = true,
+				disable = { "latex", "tex" },
 				-- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
 				--  If you are experiencing weird indenting issues, add the language to
 				--  the list of additional_vim_regex_highlighting and disabled languages for indent.
-				additional_vim_regex_highlighting = { "ruby" },
+
+				additional_vim_regex_highlighting = { "ruby", "latex", "tex", "markdown" },
 			},
 			indent = { enable = true, disable = { "ruby" } },
 		},

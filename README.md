@@ -18,32 +18,32 @@ Nvim is installed with [kickstart](https://github.com/nvim-lua/kickstart.nvim)
 
 ### Plugins
 
-   | Plugin                                                                              | Purpose                                  |
-   | :-                                                                                  | :-                                       |
-   | [Startup-Nvim](https://github.com/startup-nvim/startup.nvim)                        | Startup menu / greeter                   |
-   | [Lualine](https://github.com/nvim-lualine/lualine.nvim)                             |                                          |
-   | [Nvim-Tree](https://github.com/nvim-tree/nvim-tree.lua)                             | File explorer                            |
-   | [Render-Markdown](https://github.com/MeanderingProgrammer/render-markdown.nvim)     | Render markdown files in editor          |
-   | [Tabular](https://github.com/godlygeek/tabular)                                     | Table by delimiters                      |
-   | [Comment](https://github.com/numToStr/Comment.nvim)                                 | Comment macro                            |
-   | [Rainbow-Delimiters](https://github.com/HiPhish/rainbow-delimiters.nvim)            | Matching delimiters are colored the same |
-   | [Auto-Pair](https://github.com/windwp/nvim-autopairs)                               | Automatically pair delimiters            |
-   | [Tiny-Inline_diagnostic](https://github.com/rachartier/tiny-inline-diagnostic.nvim) | Prettier diagnostic messages             |
-   | [Trouble](https://github.com/folke/trouble.nvim)                                    | Quickfix list navigation                 |
-   | [Conform](https://github.com/stevearc/conform.nvim)                                 | Code formatting                          |
-   | [Todo-Comments](https://github.com/folke/todo-comments.nvim)                        | Highlight TODO in comments               |
-   | [Nvim-Ufo](https://github.com/kevinhwang91/nvim-ufo)                                | Fold manager                             |
-   | [Neominimap](https://github.com/plugins.neominimap)                                 | Code Minimap                             |
-   | [Nvim-Colorizer](https://github.com/NvChad/nvim-colorizer.lua)                      | Color Text Inline                        |
+| Plugin                                                                              | Purpose                                  |
+| :-                                                                                  | :-                                       |
+| [Startup-Nvim](https://github.com/startup-nvim/startup.nvim)                        | Startup menu / greeter                   |
+| [Lualine](https://github.com/nvim-lualine/lualine.nvim)                             |                                          |
+| [Nvim-Tree](https://github.com/nvim-tree/nvim-tree.lua)                             | File explorer                            |
+| [Render-Markdown](https://github.com/MeanderingProgrammer/render-markdown.nvim)     | Render markdown files in editor          |
+| [Tabular](https://github.com/godlygeek/tabular)                                     | :Tabularize /\[symbol\] to align text    |
+| [Comment](https://github.com/numToStr/Comment.nvim)                                 | Comment macro                            |
+| [Rainbow-Delimiters](https://github.com/HiPhish/rainbow-delimiters.nvim)            | Matching delimiters are colored the same |
+| [Auto-Pair](https://github.com/windwp/nvim-autopairs)                               | Automatically pair delimiters            |
+| [Tiny-Inline_diagnostic](https://github.com/rachartier/tiny-inline-diagnostic.nvim) | Prettier diagnostic messages             |
+| [Trouble](https://github.com/folke/trouble.nvim)                                    | Quickfix list navigation                 |
+| [Conform](https://github.com/stevearc/conform.nvim)                                 | Code formatting                          |
+| [Todo-Comments](https://github.com/folke/todo-comments.nvim)                        | Highlight TODO in comments               |
+| [Nvim-Ufo](https://github.com/kevinhwang91/nvim-ufo)                                | Fold manager                             |
+| [Neominimap](https://github.com/plugins.neominimap)                                 | Code Minimap                             |
+| [Nvim-Colorizer](https://github.com/NvChad/nvim-colorizer.lua)                      | Color Text Inline                        |
 
 ### Git
 
-   | Plugin                                         | Purpose      |
-   | :-                                             | :-           |
-   | [Fugitive](https://github.comtpope/vim-fugitive)       |              |
-   | [Rhubarb](https://github.com/tpope/vim-rhubarb)        |              |
-   | [Diffview](https://github.com/sindrets/diffview.nvim)  | Merge Editor |
-   | [Gitsigns](https://github.com/lewis6991/gitsigns.nvim) |              |
+  | Plugin                                                 | Purpose      |
+  | :----------------------------------------------------- | :----------- |
+  | [Fugitive](https://github.comtpope/vim-fugitive)       |              |
+  | [Rhubarb](https://github.com/tpope/vim-rhubarb)        |              |
+  | [Diffview](https://github.com/sindrets/diffview.nvim)  | Merge Editor |
+  | [Gitsigns](https://github.com/lewis6991/gitsigns.nvim) |              |
 
 ## Alacritty 
 
@@ -86,15 +86,36 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 
 ## NVim
 
-  | Action                  | Mode        | Bind        |
-  | :---------------------- | :---------- | :---------- |
-  | Toggle Relative-Numbers | Normal      | ``CTRL+` `` |
-  | Open Minimap Menu       | Normal      | `SPACE>+M`  |
-  | Open Debug Menu         | Normal      | `SPACE+Q`   |
-  | Open Keybind Menu       | Normal      | `SPACE`     |
-  | Open Fold Menu          | Normal      | `Z`         |
+| Action                        | Mode        | Bind                                             |
+| :----------------------       | :---------- | :----------                                      |
+| Toggle Relative-Numbers       | Normal      | ``CTRL+` ``                                      |
+| Open Minimap Menu             | Normal      | `SPACE>+M`                                       |
+| Open Debug Menu               | Normal      | `SPACE+Q`                                        |
+| Open Keybind Menu             | Normal      | `SPACE`                                          |
+| Open Fold Menu                | Normal      | `Z`                                              |
+| Replace Surrounding           | Normal      | `[cont]sr[replace_symbol][replace_with]`         |
+| Delete Surrounding            | Normal      | `[cont]sd[surrounding_symbol]`                   |
+| Add Surrounding (to selected) | Normal      | `[cont]sa[symbol_to_add]`                        |
+| Delete in Surrounding         | Normal      | `[cont]ci[surrounding]`, `[cont]ca[surrounding]` |
+| Copy in Surrounding           | Normal      | `[cont]yi[surrounding]`, `[cont]ya[surrounding]` |
+| Select Word                   | Normal      | `[cont]viw`, `[cont]vaw`                         |
 
-    
+## LaTex
+
+The TeX distribution chosen is: [TeX Live](https://tug.org/texlive/)
+Integreted to Nvim with [VimTeX](https://github.com/lervag/vimtex)
+Some useful [keybinds](https://ejmastnak.com/tutorials/vim-latex/vimtex/)
+
+  | Action                         | Example                      | Mode   | Bind  |
+  | :-                             | :-                           | :-     | :-    |
+  | Change Surrounding Environment | {enumerate} -> {itemize}     | Normal | `cse` |
+  | Delete Surrounding Environment |                              | Normal | `dse` |
+  | Delete Surrounding Command     | \sqrt\[b\]{a} -> a )           | Normal | `dsc` |
+  | Change Surrounding Command     | \textit{a} -> \textbf{a}     | Normal | `csc` |
+  | Toggle Surrounding Delimiters  | (a+b) -> \left(a + b \right) | Normal | `tsd` |
+  | Toggle Surrounding Fraction    | a/b -> \frac{a}{b}           | Normal | `tsf` |
+  | Navigate Matching Content       |                              | Normal | `%`   |
+
 # Packages:
 
 - [bat](https://github.com/sharkdp/bat)
@@ -109,15 +130,11 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 
 # Todo:
 
-- Configure and customise Nvim
-- Title screen for nvim
+- Title screen for nvim -- maybe use alpha because supports colors
 - VimTeX
 - Move distros to Fedora
 - Set up Wayland, Nvidia drivers on Fedora
 - Look into hyprland
 - Set up wine for stuff like paint.net
-- Set up recording with OBS or ffmpeg 
-- Neofetch
-- Ranger preview syntax highlighting
 - Zshell "which-key" menu just like neovim's which-key plugin
 -  Look into Tmux
