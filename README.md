@@ -108,6 +108,7 @@ The TeX distribution chosen is: [TeX Live](https://tug.org/texlive/)
 Integreted to Nvim with [VimTeX](https://github.com/lervag/vimtex)
 Helpful [article](https://ejmastnak.com/tutorials/vim-latex/vimtex/)
 
+
  | Action                         | Example                      | Mode   | Bind  |
  | :-                             | :-                           | :-     | :-    |
  | Change Surrounding Environment | {enumerate} -> {itemize}     | Normal | `cse` |
@@ -118,6 +119,16 @@ Helpful [article](https://ejmastnak.com/tutorials/vim-latex/vimtex/)
  | Toggle Surrounding Fraction    | a/b -> \frac{a}{b}           | Normal | `tsf` |
  | Navigate Matching Content      |                              | Normal | `%`   |
  | Close Environment              | \begin{env} +-> \end{env}    | Insert | `]]`  |
+
+ | Text Object | Description  |
+ | :-          | :-           |
+ | `ic`, `ac`  | Commands     |
+ | `ie`, `ae`  | Environments |
+ | `i$`, `a$`  | Math Mode    |
+ | `im`, `am`  | Items        |
+
+
+
 
 For more default-keybinds: `:h vimtex-default-mappings`
 

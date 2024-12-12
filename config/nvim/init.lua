@@ -62,9 +62,9 @@ vim.g.have_nerd_font = true
 
 require("options")
 
-require("keymaps")
-
 require("plugins")
+
+require("keymaps")
 
 require("autocmd")
 -- this shouldn't be here

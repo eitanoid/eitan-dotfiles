@@ -36,7 +36,6 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 vim.keymap.set("n", "<C-Tab>", ":bnext<CR>", { desc = "Next Buffer (Tab)" })
 vim.keymap.set("n", "<C-S-Tab>", ":bprevious<CR>", { desc = "Previous Buffer (Tab)" })
 
--- My keymaps
 vim.keymap.set("n", "<C-`>", function()
 	vim.wo.relativenumber = not vim.wo.relativenumber
 end, { noremap = true, desc = "toggle relative numbers" })
@@ -49,3 +48,5 @@ vim.keymap.set("n", "<leader>e%", "%", { desc = "Move to Matching Delimiter - %"
 vim.keymap.set("n", "<leader>eyi", "yi", { desc = "Yank Text Inside Next Delimiter" })
 vim.keymap.set("n", "<leader>e>", ">", { desc = "Indent Forwards" })
 vim.keymap.set("n", "<leader>e<", "<", { desc = "Indent Backwards" })
+
+vim.keymap.set("n", "<leader>/", "gcc", { desc = "Toggle Comment" })
