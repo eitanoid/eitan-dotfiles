@@ -147,6 +147,7 @@ For more default-keybinds: `:h vimtex-default-mappings`
 # Todo:
 
 - Title screen for nvim -- maybe use alpha because supports colors
+- set up LSP properly
 - VimTeX
 - Move distros to Fedora
 - Set up Wayland, Nvidia drivers on Fedora
