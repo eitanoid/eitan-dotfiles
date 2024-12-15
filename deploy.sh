@@ -14,6 +14,10 @@ echo "Synced Starship"
 rsync -rav $HERE/config/alacritty $HOME/.config
 echo "Synced Alacritty"
 
+## Foot
+rsync -rav $HERE/config/foot $HOME/.config
+echo "Synced Foot"
+
 ## Colors
 rsync -rav $HERE/.dircolors $HOME
 echo "Synced Dircolors"

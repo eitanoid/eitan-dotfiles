@@ -155,3 +155,6 @@ For more default-keybinds: `:h vimtex-default-mappings`
 - Set up wine for stuff like paint.net
 - Zshell "which-key" menu just like neovim's which-key plugin
 -  Look into Tmux
+- I am now on Wayland - Uberzugpp doesnt work on WL.
+- Devicons not working
+- Make actual installer

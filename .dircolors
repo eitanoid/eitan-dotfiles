@@ -31,6 +31,8 @@ TERM terminator
 TERM tmux*
 TERM vt100
 TERM xterm*
+TERM foot
+TERM alacritty
 # Below are the color init strings for the basic file types.
 # One can use codes for 256 or more colors supported by modern terminals.
 # The default color codes use the capabilities of an 8 color terminal
