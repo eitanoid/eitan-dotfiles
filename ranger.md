@@ -1,8 +1,7 @@
 
 # The Ranger Configuration
 
-
-- [ueberzugg](https://github.com/jstkdng/ueberzugpp) for image preview.
+- Synax highlighing in preview tbd
 
 - `.md` files are previewed with [glow](https://github.com/charmbracelet/glow)
 
@@ -17,4 +16,4 @@
 - `pip install python-bidi` to display hebrew text
 - `pip install rainbowcsv` `.csv` files
 - `go install glow` for `.md` file preview
-- follow `Ueberzugg` installation on the github repo.
+- Currently using Kitty terminal for image preview, this is subect to change.

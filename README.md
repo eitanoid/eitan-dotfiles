@@ -71,9 +71,11 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 
 ## General
 
- | Action                    | Bind        |
- | :------------------------ | :---------- |
- | Open Terminal (Alacritty) | `SUPER+T`   |
+ | Action                     | Bind            |
+ | :------------------------  | :----------     |
+ | Open Terminal (Alacritty)  | `SUPER+T`       |
+ | Campure Rectangular Region | `SUPER+SHIFT+S` |
+ | Change Imput Language      | `ALT+SHIFT`     |
 
 ## Zshell
 

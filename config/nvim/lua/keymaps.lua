@@ -50,3 +50,34 @@ vim.keymap.set("n", "<leader>e>", ">", { desc = "Indent Forwards" })
 vim.keymap.set("n", "<leader>e<", "<", { desc = "Indent Backwards" })
 
 vim.keymap.set("n", "<leader>/", "gcc", { desc = "Toggle Comment" })
+
+-- Cool thing I saw in a vimtex video skip to next instance of (<>) and remove it.
+vim.api.nvim_create_user_command("JumpToPlaceholder", function()
+	local bufnr = vim.api.nvim_get_current_buf()
+	local cursor = vim.api.nvim_win_get_cursor(0)
+	local row, col = cursor[1] - 1, cursor[2]
+
+	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+
+	local pattern = "%(%<%>%)"
+	for i = row, #lines - 1 do
+		local line = lines[i + 1]
+		local start_idx, end_idx = line:find(pattern, i == row and col + 1 or 1)
+
+		if start_idx and end_idx then
+			vim.api.nvim_win_set_cursor(0, { i + 1, start_idx - 1 })
+			local new_line = line:sub(1, start_idx - 1) .. line:sub(end_idx + 1)
+			vim.api.nvim_buf_set_lines(bufnr, i, i + 1, false, { new_line })
+			vim.cmd("startinsert")
+			return
+		end
+	end
+	print("No instance of (<>) found")
+end, {})
+
+vim.keymap.set(
+	"n",
+	"<leader><leader>",
+	"<Cmd>JumpToPlaceholder<CR>",
+	{ desc = "Jump to next occurence of (<>) and enter insert mode" }
+)
