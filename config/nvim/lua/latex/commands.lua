@@ -28,7 +28,7 @@ vim.api.nvim_create_user_command(
 		end
 		table.insert(full_mat, "\\end{" .. env .. "}")
 		-- print matrix
-		vim.api.nvim_put(full_mat, "l", true, false)
+		vim.api.nvim_put(full_mat, "c", true, false)
 	end,
 	{
 		nargs = "*",
@@ -69,4 +69,108 @@ vim.api.nvim_create_user_command(
 -- \end{pmatrix}
 --]]
 --
---
+
+vim.api.nvim_create_user_command(
+	"CreateLatexCycle",
+	function(opts) -- create a len cycle with spacing dividers (default \quad)
+		-- get args
+		local len = tonumber(opts.fargs[1])
+		local spacing = tostring(opts.fargs[2])
+
+		local err = "" --verify user input
+		if not len or len <= 0 then
+			err = err .. "Len invalid"
+		end
+		if spacing == "" then
+			spacing = "\\quad"
+		end
+
+		if err ~= "" then
+			return err
+		end
+
+		-- make cycle
+		local line = "( " .. "(<>) " .. string.rep(spacing .. " (<>) ", len - 1) .. ")" -- indent + first char + rest of chars + newline char
+		-- print cycle
+		vim.api.nvim_put({ line }, "c", true, false)
+	end,
+	{
+		nargs = "*",
+		desc = "CreateLaTeXCycle len spacing. Create a latex cycle of the form (a ... b) with length `len` and element spacing `spacing`. (<>) placeholder entires in the indecies. ",
+	}
+)
+
+vim.api.nvim_create_user_command(
+	"PromptLatexCycle",
+	function() -- prompt user for line and col and create matrix at cursor
+		-- get user input
+		local len = tonumber(vim.fn.input("Cycle Length: "))
+		if not len or len <= 0 then
+			print("Invalid Length.")
+			return
+		end
+
+		local spacing = tostring(vim.fn.input("Spacing style (default is '\\quad'): ")) -- default is placeholder
+		if not spacing or spacing == "" then
+			spacing = "\\quad"
+		end
+		vim.cmd("CreateLatexCycle " .. tostring(len) .. " " .. spacing)
+	end,
+	{}
+)
+
+vim.api.nvim_create_user_command("CreateLatexList", function(opts) -- Create a latex list env with len items[suffix]
+	-- get args
+	local env = tostring(opts.fargs[1] or "")
+	local len = tonumber(opts.fargs[2])
+	local suffix = tostring(opts.fargs[3] or "")
+
+	local err = "" --verify user input
+
+	if not env or env == "" then
+		env = "(<>)"
+	end
+
+	if not len or len <= 0 then
+		err = err .. "Len invalid"
+	end
+
+	suffix = suffix or "" -- sets default value for suffix
+
+	if err ~= "" then
+		return err
+	end
+
+	-- make list
+	local full_list = {}
+	local line = "	\\item" .. suffix .. " (<>)"
+	table.insert(full_list, "\\begin{" .. env .. "}")
+	for var = 1, len do
+		table.insert(full_list, line)
+	end
+	table.insert(full_list, "\\end{" .. env .. "}")
+	-- print matrix
+	vim.api.nvim_put(full_list, "c", true, false)
+end, {
+	nargs = "*",
+	desc = "CreateLaTeXList env len suffix. Create a latex list environment with (<>) placeholder entires in the items.",
+})
+
+vim.api.nvim_create_user_command(
+	"PromptLatexList",
+	function() -- prompt user for line and col and create matrix at cursor
+		-- get user input
+		local env = tostring(vim.fn.input("Type of list: ") or "")
+
+		local len = tonumber(vim.fn.input("Number of bullet points:"))
+		if not len or len <= 0 then
+			print("Invalid Length.")
+			return
+		end
+
+		local suffix = tostring(vim.fn.input("Suffix for each item: ") or "")
+
+		vim.cmd("CreateLatexList " .. env .. " " .. tostring(len) .. " " .. suffix)
+	end,
+	{}
+)
