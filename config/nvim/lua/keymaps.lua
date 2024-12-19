@@ -10,6 +10,8 @@
 --  See `:help hlsearch`
 --vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
+-- TEMPORARY TO TURN INTO CONDITIONAL IMPORT
+
 -- Diagnostic keymaps
 -- vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 --vim.keymap.set("n", "<leader>q", "<cmd>lua vim.diagnostic.setqflist()<CR>", { desc = "Display diagnostics" })
@@ -48,7 +50,6 @@ vim.keymap.set("n", "<leader>e%", "%", { desc = "Move to Matching Delimiter - %"
 vim.keymap.set("n", "<leader>eyi", "yi", { desc = "Yank Text Inside Next Delimiter" })
 vim.keymap.set("n", "<leader>e>", ">", { desc = "Indent Forwards" })
 vim.keymap.set("n", "<leader>e<", "<", { desc = "Indent Backwards" })
-
 vim.keymap.set("n", "<leader>/", "gcc", { desc = "Toggle Comment" })
 
 -- Cool thing I saw in a vimtex video skip to next instance of (<>) and remove it.
@@ -81,3 +82,57 @@ vim.keymap.set(
 	"<Cmd>JumpToPlaceholder<CR>",
 	{ desc = "Jump to next occurence of (<>) and enter insert mode" }
 )
+
+-- vim.api.nvim_create_user_command("TeXMat", function()
+-- 	-- get user input
+-- 	local rows = tonumber(vim.fn.input("Rows: "))
+-- 	if not rows or rows <= 0 then
+-- 		print("Invalid number of rows.")
+-- 		return
+-- 	end
+-- 	local cols = tonumber(vim.fn.input("Cols:"))
+-- 	if not cols or cols <= 0 then
+-- 		print("Invalid number of rows.")
+-- 		return
+-- 	end
+-- 	-- make matrix
+-- 	local full_mat = {}
+-- 	local line = "(<>)" .. string.rep(" & (<>)", cols - 1) .. "\\" .. "\\"
+-- 	table.insert(full_mat, "\\begin{pmatrix}")
+-- 	for var = 1, cols do
+-- 		table.insert(full_mat, line)
+-- 	end
+-- 	table.insert(full_mat, "\\end{pmatrix}")
+-- 	-- print matrix
+-- 	vim.api.nvim_put(full_mat, "l", false, false)
+-- end, {})
+--
+-- vim.api.nvim_create_user_command("TeXMatArgs", function(opts) -- prompt user for line and col and creatematrix
+-- 	-- get args
+-- 	print(opts.fargs)
+-- 	local rows = tonumber(opts.fargs[1])
+-- 	local cols = tonumber(opts.fargs[2])
+-- 	local env = tostring(opts.fargs[3])
+--
+-- 	local err = ""
+-- 	if not rows or rows <= 0 then
+-- 		err = err .. "Rows invalid"
+-- 	end
+-- 	if not cols or cols <= 0 then
+-- 		err = err .. "Cols invalid"
+-- 	end
+-- 	if err then
+-- 		return err
+-- 	end
+--
+-- 	-- make matrix
+-- 	local full_mat = {}
+-- 	local line = "(<>)" .. string.rep(" & (<>)", cols - 1) .. " \\" .. "\\"
+-- 	table.insert(full_mat, "\\begin{" .. env .. "}")
+-- 	for var = 1, cols do
+-- 		table.insert(full_mat, line)
+-- 	end
+-- 	table.insert(full_mat, "\\end{" .. env .. "}")
+-- 	-- print matrix
+-- 	vim.api.nvim_put(full_mat, "l", false, false)
+-- end, { nargs = "*" })

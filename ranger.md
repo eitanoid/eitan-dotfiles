@@ -17,3 +17,5 @@
 - `pip install rainbowcsv` `.csv` files
 - `go install glow` for `.md` file preview
 - Currently using Kitty terminal for image preview, this is subect to change.
+
+`dnf install highlight`
