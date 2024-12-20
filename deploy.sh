@@ -18,6 +18,11 @@ echo "Synced Alacritty"
 rsync -rav $HERE/config/foot $HOME/.config
 echo "Synced Foot"
 
+## Kitty
+rsync -rav $HERE/config/kitty $HOME/.config
+echo "Synced Kitty"
+
+
 ## Colors
 rsync -rav $HERE/.dircolors $HOME
 echo "Synced Dircolors"

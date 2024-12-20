@@ -159,3 +159,8 @@ For more default-keybinds: `:h vimtex-default-mappings`
 - Zshell "which-key" menu just like neovim's which-key plugin
 - Look into Tmux
 - Make actual installer
+- Stylua and other formatters
+- Hydra and the whichkey like menu
+- Lualine
+- nvim cmp with latex
+- 
