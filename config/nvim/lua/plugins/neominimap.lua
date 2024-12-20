@@ -40,7 +40,7 @@ M.init = function()
 	----@type Neominimap.UserConfig
 	vim.g.neominimap = {
 
-		winblend = 40,
+		winblend = 100,
 		auto_enable = true,
 
 		log_level = vim.log.levels.OFF, ---@type Neominimap.Log.Levels

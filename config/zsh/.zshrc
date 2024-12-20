@@ -1,8 +1,8 @@
 #Exports
 export PATH="$HOME/.local/bin":$PATH
-export PATH=$PATH:/usr/local/go/bin
+
+export PATH=$PATH:/usr/local/go/bin # go paths
 export PATH=$PATH:$HOME/go/bin
-export PATH=$PATH:/usr/local/texlive/2024/bin/x86_64-linux # TeXLive Install
 
 #ZSH variables
 export ZSH=$HOME/.config/zsh/.zshrc
@@ -16,7 +16,7 @@ export VISUAL=nvim
 export HIGHLIGHT_STYLE=rootwater
 
 #Location of Screen Saver
-SCEEN_SAVER=$HOME/git/pipes.sh
+SCEEN_SAVER=$HOME/git/pipes-sh/pipes.sh
 
 #History
 HISTFILE=${HOME}/.zsh_history
@@ -93,7 +93,7 @@ alias cd='z'
 
 #Inactivty Screen Saver
 TMOUT=1000 #~20 mins
-trap 'echo ;bash $SCEEN_SAVER/pipes.sh' ALRM
+trap 'echo ;bash $SCEEN_SAVER' ALRM
 #cursor set again in alacritty
 #echo -ne "\e[6 q"
 
