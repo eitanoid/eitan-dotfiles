@@ -67,6 +67,7 @@ require("plugins")
 require("keymaps")
 
 require("autocmd")
+require("templates")
 
 require("latex.init")
 

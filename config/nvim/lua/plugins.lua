@@ -88,6 +88,31 @@ require("lazy").setup({
 		keys = {},
 	},
 
+	-- tabs
+	{
+		"romgrk/barbar.nvim",
+		dependencies = {
+			"lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
+			"nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
+		},
+		init = function()
+			vim.g.barbar_auto_setup = false
+		end,
+		opts = {
+			-- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+			-- animation = true,
+			-- insert_at_start = true,
+			-- …etc.
+			icons = {
+				-- Configure the base icons on the bufferline.
+				-- Valid options to display the buffer index and -number are `true`, 'superscript' and 'subscript'
+				buffer_index = false,
+				buffer_number = true,
+				button = "x",
+			},
+		},
+	},
+
 	{ -- colorizer
 		"NvChad/nvim-colorizer.lua",
 		event = "BufReadPre",
@@ -249,6 +274,7 @@ require("lazy").setup({
 			"hrsh7th/cmp-path", -- path competions
 			"hrsh7th/cmp-omni", -- Neovim Omnifunc
 			"kdheepak/cmp-latex-symbols", -- LaTeX Letters
+			"Snikimonkd/cmp-go-pkgs", -- golang packages
 
 			-- Snippet Engine & its associated nvim-cmp source
 			{

@@ -104,6 +104,7 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
  | Select Inside Surrounding     | Normal      | `vi"`, `va"` where `"` is any surrounding.             |
  | Select Word                   | Normal      | `[cont]viw`, `[cont]vaw`                               |
  | Select Inside of Envrionment  | Normal      | `vie`, `vae`                                           |
+ | Navigate Tabs                 | Normal      | `ALT+l`, `ALT+h`, `ALT+SHIFT+l`, `ALT+SHIFT+h`         |
 
 ## LaTex
 
@@ -153,7 +154,6 @@ For more default-keybinds: `:h vimtex-default-mappings`
 # Todo:
 
 - Title screen for nvim -- maybe use alpha because supports colors
-- set up LSP properly
 - Look into hyprland
 - Set up wine for stuff like paint.net
 - Zshell "which-key" menu just like neovim's which-key plugin
@@ -162,5 +162,5 @@ For more default-keybinds: `:h vimtex-default-mappings`
 - Stylua and other formatters
 - Hydra and the whichkey like menu
 - Lualine
-- nvim cmp with latex
-- 
+- VimWiki - look into
+- nvim tabs

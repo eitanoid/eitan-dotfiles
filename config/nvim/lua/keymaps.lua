@@ -35,8 +35,10 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 -- Buffer Keymaps
-vim.keymap.set("n", "<C-Tab>", ":bnext<CR>", { desc = "Next Buffer (Tab)" })
-vim.keymap.set("n", "<C-S-Tab>", ":bprevious<CR>", { desc = "Previous Buffer (Tab)" })
+vim.keymap.set("n", "<A-l>", "<Cmd>bnext<CR>", { desc = "Next Buffer (Tab)" })
+vim.keymap.set("n", "<A-S-h>", "<Cmd>bnext<CR>", { desc = "Next Buffer (Tab)" })
+vim.keymap.set("n", "<A-S-l>", "<Cmd>bprevious<CR>", { desc = "Previous Buffer (Tab)" })
+vim.keymap.set("n", "<A-h>", "<Cmd>bprevious<CR>", { desc = "Previous Buffer (Tab)" })
 
 vim.keymap.set("n", "<C-`>", function()
 	vim.wo.relativenumber = not vim.wo.relativenumber

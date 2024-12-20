@@ -59,11 +59,12 @@ return function()
 				group_index = 0,
 			},
 			{ name = "git" },
-			{ name = "calc" },
+			-- { name = "calc" },
 			{ name = "nvim_lsp" },
 			{ name = "omni" },
 			{ name = "luasnip" },
 			{ name = "path" },
+			{ name = "go_pkgs" },
 			{
 				name = "latex_symbols",
 				option = {
