@@ -17,11 +17,11 @@ vim.keymap.set("i", ";D", "\\Delta")
 vim.keymap.set("i", ";g", "\\gamma")
 vim.keymap.set("i", ";G", "\\Gamma")
 
-vim.keymap.set("i", ";p", "\\pi")
-vim.keymap.set("i", ";P", "\\Pi")
-
-vim.keymap.set("i", ";p", "\\psi")
-vim.keymap.set("i", ";P", "\\Psi")
+-- vim.keymap.set("i", ";p", "\\pi")
+-- vim.keymap.set("i", ";P", "\\Pi")
+--
+-- vim.keymap.set("i", ";p", "\\psi")
+-- vim.keymap.set("i", ";P", "\\Psi")
 --
 -- vim.keymap.set("i", ";p", "\\phi")
 -- vim.keymap.set("i", ";P", "\\Phi")

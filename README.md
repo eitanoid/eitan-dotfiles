@@ -90,6 +90,7 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 
  | Action                        | Mode        | Bind                                                   |
  | :----------------------       | :---------- | :----------                                            |
+ | Toggle Bool Value             | Normal      | `undeided`                                             |
  | Toggle Relative-Numbers       | Normal      | ``CTRL+` ``                                            |
  | Open Minimap Menu             | Normal      | `SPACE>+M`                                             |
  | Open Debug Menu               | Normal      | `SPACE+Q`                                              |
@@ -111,16 +112,19 @@ Integreted to Nvim with [VimTeX](https://github.com/lervag/vimtex)
 Helpful [article](https://ejmastnak.com/tutorials/vim-latex/vimtex/)
 
 
- | Action                         | Example                      | Mode   | Bind  |
- | :-                             | :-                           | :-     | :-    |
- | Change Surrounding Environment | {enumerate} -> {itemize}     | Normal | `cse` |
- | Delete Surrounding Environment |                              | Normal | `dse` |
- | Delete Surrounding Command     | \sqrt\[b\]{a} -> a )         | Normal | `dsc` |
- | Change Surrounding Command     | \textit{a} -> \textbf{a}     | Normal | `csc` |
- | Toggle Surrounding Delimiters  | (a+b) -> \left(a + b \right) | Normal | `tsd` |
- | Toggle Surrounding Fraction    | a/b -> \frac{a}{b}           | Normal | `tsf` |
- | Navigate Matching Content      |                              | Normal | `%`   |
- | Close Environment              | \begin{env} +-> \end{env}    | Insert | `]]`  |
+ | Action                         | Example                      | Mode   | Bind        |
+ | :-                             | :-                           | :-     | :-          |
+ | Change Surrounding Environment | {enumerate} -> {itemize}     | Normal | `cse`       |
+ | Delete Surrounding Environment |                              | Normal | `dse`       |
+ | Delete Surrounding Command     | \sqrt\[b\]{a} -> a )         | Normal | `dsc`       |
+ | Change Surrounding Command     | \textit{a} -> \textbf{a}     | Normal | `csc`       |
+ | Toggle Surrounding Delimiters  | (a+b) -> \left(a + b \right) | Normal | `tsd`       |
+ | Toggle Surrounding Fraction    | a/b -> \frac{a}{b}           | Normal | `tsf`       |
+ | Navigate Matching Content      |                              | Normal | `%`         |
+ | Close Environment              | \begin{env} +-> \end{env}    | Insert | `]]`        |
+ | Prompt Create Matrix           | \begin{pmatrix} ...          | Normal | `<space>im` |
+ | Prompt Create n-Cycle          | (a\_1 \\quad a\_2 ...)       | Normal | `<space>ic` |
+ | Prompt Create List             | \begin{itemize} ...          | Normal | `<space>il` |
 
  | Text Object | Description  |
  | :-          | :-           |
@@ -150,13 +154,8 @@ For more default-keybinds: `:h vimtex-default-mappings`
 
 - Title screen for nvim -- maybe use alpha because supports colors
 - set up LSP properly
-- VimTeX
-- Move distros to Fedora
-- Set up Wayland, Nvidia drivers on Fedora
 - Look into hyprland
 - Set up wine for stuff like paint.net
 - Zshell "which-key" menu just like neovim's which-key plugin
--  Look into Tmux
-- I am now on Wayland - Uberzugpp doesnt work on WL.
-- Devicons not working
+- Look into Tmux
 - Make actual installer

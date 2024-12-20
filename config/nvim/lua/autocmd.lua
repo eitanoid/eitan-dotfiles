@@ -6,6 +6,7 @@
 -- 	command = "colorscheme tokyonight-moon",
 -- })
 vim.cmd("set termguicolors")
+
 -- NVImTree autoclose -- doesnt work
 vim.api.nvim_create_autocmd("QuitPre", {
 	callback = function()

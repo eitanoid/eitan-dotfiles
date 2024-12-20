@@ -2,7 +2,7 @@
 
 -- Make line numbers default
 vim.opt.number = true
-vim.opt.relativenumber = false
+vim.opt.relativenumber = true
 
 -- tiny diagnostic display only
 vim.diagnostic.config({ virtual_text = false })
@@ -11,7 +11,7 @@ vim.diagnostic.config({ virtual_text = false })
 vim.opt.winbar = "%=%m %f"
 
 -- redundant because mode is in status line
-vim.opt.showmode = false
+vim.opt.showmode = true
 -- cursor options
 vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 
@@ -56,7 +56,7 @@ vim.opt.updatetime = 250
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
-vim.opt.timeoutlen = 300
+vim.opt.timeoutlen = 400
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true

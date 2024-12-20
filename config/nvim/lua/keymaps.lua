@@ -83,56 +83,33 @@ vim.keymap.set(
 	{ desc = "Jump to next occurence of (<>) and enter insert mode" }
 )
 
--- vim.api.nvim_create_user_command("TeXMat", function()
--- 	-- get user input
--- 	local rows = tonumber(vim.fn.input("Rows: "))
--- 	if not rows or rows <= 0 then
--- 		print("Invalid number of rows.")
--- 		return
--- 	end
--- 	local cols = tonumber(vim.fn.input("Cols:"))
--- 	if not cols or cols <= 0 then
--- 		print("Invalid number of rows.")
--- 		return
--- 	end
--- 	-- make matrix
--- 	local full_mat = {}
--- 	local line = "(<>)" .. string.rep(" & (<>)", cols - 1) .. "\\" .. "\\"
--- 	table.insert(full_mat, "\\begin{pmatrix}")
--- 	for var = 1, cols do
--- 		table.insert(full_mat, line)
--- 	end
--- 	table.insert(full_mat, "\\end{pmatrix}")
--- 	-- print matrix
--- 	vim.api.nvim_put(full_mat, "l", false, false)
--- end, {})
---
--- vim.api.nvim_create_user_command("TeXMatArgs", function(opts) -- prompt user for line and col and creatematrix
--- 	-- get args
--- 	print(opts.fargs)
--- 	local rows = tonumber(opts.fargs[1])
--- 	local cols = tonumber(opts.fargs[2])
--- 	local env = tostring(opts.fargs[3])
---
--- 	local err = ""
--- 	if not rows or rows <= 0 then
--- 		err = err .. "Rows invalid"
--- 	end
--- 	if not cols or cols <= 0 then
--- 		err = err .. "Cols invalid"
--- 	end
--- 	if err then
--- 		return err
--- 	end
---
--- 	-- make matrix
--- 	local full_mat = {}
--- 	local line = "(<>)" .. string.rep(" & (<>)", cols - 1) .. " \\" .. "\\"
--- 	table.insert(full_mat, "\\begin{" .. env .. "}")
--- 	for var = 1, cols do
--- 		table.insert(full_mat, line)
--- 	end
--- 	table.insert(full_mat, "\\end{" .. env .. "}")
--- 	-- print matrix
--- 	vim.api.nvim_put(full_mat, "l", false, false)
--- end, { nargs = "*" })
+vim.api.nvim_create_user_command("FlipBool", function()
+	local word = vim.fn.expand("<cword>")
+	local case = {
+		["TRUE"] = "FALSE",
+		["True"] = "False",
+		["true"] = "false",
+		["FALSE"] = "TRUE",
+		["False"] = "True",
+		["false"] = "true",
+	}
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0)) -- curent position
+	local line = vim.fn.getline(row)
+	local char = line:sub(col + 1, col + 1)
+
+	if not char:match("%a") then -- cursor is on an ascii char and not a word.
+		return
+	end
+
+	if case[word] then
+		vim.cmd("normal ciw" .. case[word]) -- swaps
+		local newc = vim.api.nvim_win_get_cursor(0)[2] -- get new col
+		if col > newc then
+			col = col - 1
+		end
+		vim.api.nvim_win_set_cursor(0, { row, col })
+	end
+end, { desc = "Toggle Boolian" })
+
+vim.keymap.set("n", "<C-X>", "<CMD>FlipBool<CR>", { desc = "Toggle Bool Under Cursor" })
+vim.keymap.set("n", "<C-A>", "<CMD>FlipBool<CR>", { desc = "Toggle Bool Under Cursor" })

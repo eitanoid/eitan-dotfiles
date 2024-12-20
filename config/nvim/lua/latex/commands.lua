@@ -93,6 +93,7 @@ vim.api.nvim_create_user_command(
 		local line = "( " .. "(<>) " .. string.rep(spacing .. " (<>) ", len - 1) .. ")" -- indent + first char + rest of chars + newline char
 		-- print cycle
 		vim.api.nvim_put({ line }, "c", true, false)
+		vim.cmd("%") -- for some reason cursor is being moved, this moves it back.
 	end,
 	{
 		nargs = "*",
