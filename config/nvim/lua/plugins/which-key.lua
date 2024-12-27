@@ -1,4 +1,5 @@
 return {
+	expand = 1, -- expand mapes if there's space
 	icons = {
 		-- set icon mappings to true if you have a Nerd Font
 		mappings = vim.g.have_nerd_font,
@@ -39,6 +40,7 @@ return {
 	-- Document existing key chains
 	spec = {
 		{ "<leader>c", group = "Code", mode = { "n", "x" } },
+		{ "<leader>`", group = "LSP Actions}" },
 		{ "<leader>d", group = "Document" },
 		{ "<leader>r", group = "Rename" },
 		{ "<leader>s", group = "Search" },
@@ -49,6 +51,7 @@ return {
 		{ "<leader>m", group = "MiniMap" },
 		{ "<leader>q", group = "Diagnostics" },
 		{ "<leader>l", group = "LaTeX" },
-		{ "<leaver>i", group = "Insert" },
+		{ "<leader>h", group = "Hydra" },
+		{ "<leader>i", group = "Insert" },
 	},
 }

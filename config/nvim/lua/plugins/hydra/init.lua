@@ -7,3 +7,4 @@ local Hydra = require("hydra")
 -- Hydra(require('plugins.hydra.side_scroll'))
 ---@source ./resize_split.lua
 Hydra(require("plugins.hydra.resize_split"))
+Hydra(require("plugins.hydra.git_hydra"))

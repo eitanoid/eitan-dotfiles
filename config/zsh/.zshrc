@@ -65,6 +65,10 @@ bindkey -M menuselect "^I" .accept-line #Tab
 #Autosuggest color - need this to work in tmux
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8" ##,bg=cyan,bold,underline"
 
+
+# Keybinds
+
+
 ######### Change cursor shape for different vi modes. source : https://gist.github.com/LukeSmithxyz/e62f26e55ea8b0ed41a65912fbebbe52
 function zle-keymap-select {
   if [[ ${KEYMAP} == vicmd ]] ||

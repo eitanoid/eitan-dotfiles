@@ -22,7 +22,6 @@
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-
 -- Clear highlight
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
@@ -56,26 +55,35 @@ vim.keymap.set("n", "<leader>/", "gcc", { desc = "Toggle Comment" })
 
 -- Cool thing I saw in a vimtex video skip to next instance of (<>) and remove it.
 vim.api.nvim_create_user_command("JumpToPlaceholder", function()
-	local bufnr = vim.api.nvim_get_current_buf()
-	local cursor = vim.api.nvim_win_get_cursor(0)
-	local row, col = cursor[1] - 1, cursor[2]
-
-	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
-
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local pattern = "%(%<%>%)"
-	for i = row, #lines - 1 do
-		local line = lines[i + 1]
-		local start_idx, end_idx = line:find(pattern, i == row and col + 1 or 1)
+	local lines = vim.api.nvim_buf_get_lines(0, row - 1, row + 30, false) -- from this row til 30 rows down inclusive
+	local p_x
 
-		if start_idx and end_idx then
-			vim.api.nvim_win_set_cursor(0, { i + 1, start_idx - 1 })
-			local new_line = line:sub(1, start_idx - 1) .. line:sub(end_idx + 1)
-			vim.api.nvim_buf_set_lines(bufnr, i, i + 1, false, { new_line })
-			vim.cmd("startinsert")
-			return
+	for p_y, line in pairs(lines) do
+		if p_y == 1 then
+			if col < 2 then -- if too close to left edge set 0, otherwise remove 2 so curosr at anypoint of placeholder still goes to the same one.
+				col = 0
+			else
+				col = col - 2
+			end
+
+			p_x, _ = line:find(pattern, col) -- search after the cursor on current line
+		else
+			p_x, _ = line:find(pattern)
+		end
+
+		if p_x then -- once found pattern
+			print(p_x, p_y)
+			vim.api.nvim_win_set_cursor(0, { row + p_y - 1, p_x - 1 })
+			-- vim.api.nvim_buf_set_lines(0, row-1, row,false,line[]) TODO: use vimapi at some point for this because feedkeys is jank
+
+			vim.api.nvim_feedkeys("v3lc", "n", false) -- select 3 ahead, go into change mode
+			break
 		end
 	end
-	print("No instance of (<>) found")
+
+	print("No instance of (<>) found within 30 lines")
 end, {})
 
 vim.keymap.set(
