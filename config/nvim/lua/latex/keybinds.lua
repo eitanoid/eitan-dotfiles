@@ -2,6 +2,8 @@ vim.keymap.set("n", "<leader>im", "<Cmd>PromptLatexMatrix<CR>", { desc = "Prompt
 vim.keymap.set("n", "<leader>ic", "<Cmd>PromptLatexCycle<CR>", { desc = "Prompt for Cycle" })
 vim.keymap.set("n", "<leader>il", "<Cmd>PromptLatexList<CR>", { desc = "Prompt for List" })
 
+vim.keymap.set("v", "sw", "<Cmd>PromptLatexSurroundWrap<CR>", { desc = "Prompt for Command then wrap selection" })
+
 -- greek letters
 vim.keymap.set("i", ";;", ";") --makes it not annoying to type ;
 

@@ -175,3 +175,37 @@ vim.api.nvim_create_user_command(
 	end,
 	{}
 )
+
+vim.api.nvim_create_user_command("LatexSurroundWrap", function(opts) -- Create a latex list env with len items[suffix]
+	-- get args
+	local env = tostring(opts.fargs[1] or "")
+	local start_row, start_col = vim.fn.getpos("v")[2], vim.fn.getpos("v")[3]
+	local end_row, end_col = vim.fn.getpos(".")[2], vim.fn.getpos(".")[3]
+
+	-- make list
+	-- set end of env
+	vim.api.nvim_win_set_cursor(0, { end_row, end_col - 1 })
+	vim.api.nvim_put({ "}" }, "c", true, false)
+
+	--set start of env
+	vim.api.nvim_win_set_cursor(0, { start_row, start_col - 1 })
+	vim.api.nvim_put({ "\\" .. env .. "{" }, "c", false, false)
+
+	--set back to previous pos
+	vim.api.nvim_win_set_cursor(0, { end_row, end_col - 1 })
+	vim.api.nvim_input("<Esc>") -- go back to normal mode
+end, {
+	nargs = "*",
+	desc = "CreateLaTeXList env len suffix. Create a latex list environment with (<>) placeholder entires in the items.",
+})
+
+vim.api.nvim_create_user_command(
+	"PromptLatexSurroundWrap",
+	function() -- prompt user for line and col and create matrix at cursor
+		-- get user input
+		local cmd = tostring(vim.fn.input("Command: ") or "")
+
+		vim.cmd("LatexSurroundWrap " .. cmd)
+	end,
+	{}
+)
