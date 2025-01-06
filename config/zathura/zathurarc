@@ -2,3 +2,6 @@ map <C-i> zoom in
 
 
 set selection-clipboard clipboard
+set adjust-open "best-fit"
+
+# set highlight-color rgba(255,255,0,100)
