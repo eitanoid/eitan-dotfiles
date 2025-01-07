@@ -1,11 +1,11 @@
 #Exports
 export PATH="$HOME/.local/bin":$PATH
-
 export PATH=$PATH:/usr/local/go/bin # go paths
 export PATH=$PATH:$HOME/go/bin
+export PATH=$PATH:$HOME/.cargo/bin # rust
+export ZSH=$HOME/.config/zsh/.zshrc #zsh
 
-#ZSH variables
-export ZSH=$HOME/.config/zsh/.zshrc
+#Here
 ZSHF=$HOME/.config/zsh
 
 #editor
@@ -40,7 +40,6 @@ source $ZSHF/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZSHF/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source $ZSHF/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-#source <(fzf --zsh)
 
 # enable vi mode
 bindkey -v
@@ -66,8 +65,7 @@ bindkey -M menuselect "^I" .accept-line #Tab
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8" ##,bg=cyan,bold,underline"
 
 
-# Keybinds
-
+#Vi mode related settings
 
 ######### Change cursor shape for different vi modes. source : https://gist.github.com/LukeSmithxyz/e62f26e55ea8b0ed41a65912fbebbe52
 function zle-keymap-select {
@@ -89,31 +87,41 @@ zle-line-init() {
 zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
 #############
+
+
+
+######################################################################################################
+
+#C dev stuff
+function clangrun() {
+	clang "${1}" -o "${1}".out "${@:2}" && ./"${1}.out"
+}
+
+######################################################################################################
+
+#Inactivty Screen Saver
+TMOUT=1000 #~20 mins
+trap 'echo ;bash $SCEEN_SAVER' ALRM
 
 
 #alias
 alias cd='z'
 
-#Inactivty Screen Saver
-TMOUT=1000 #~20 mins
-trap 'echo ;bash $SCEEN_SAVER' ALRM
-#cursor set again in alacritty
-#echo -ne "\e[6 q"
-
-#.bashrc script for adding colors to ls and grep
+# use colors set by .dircolors
+eval "$(dircolors ~/.dircolors)"
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
-
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
 
-
+#set pointer
 eval "$(starship init zsh)"
+
 eval "$(zoxide init zsh)"
-eval "$(dircolors ~/.dircolors)"

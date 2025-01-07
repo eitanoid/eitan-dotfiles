@@ -21,7 +21,8 @@ M.opts = {
 	end,
 	formatters_by_ft = {
 		lua = { "stylua" },
-		tex = { "Conform" },
+		tex = { "latexindent" },
+		go = { "goimports", " gofmt" },
 		-- Conform can also run multiple formatters sequentially
 		-- python = { "isort", "black" },
 		--
