@@ -146,14 +146,29 @@ return function()
 	--  - settings (table): Override the default settings passed when initializing the server.
 	--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 	local servers = {
-		clangd = {
-			-- cmd = {},
+
+		clangd = { -- https://www.andersevenrud.net/neovim.github.io/lsp/configurations/clangd/ useful for future config
+			cmd = { "clangd", "--background-index", "--clang-tidy", "--log=verbose" },
 			filetypes = { "c", "cpp", "objc", "objcpp" },
-			-- capabilities = {},
-			-- settings = {},
+			capabilities = {
+				textDocument = {
+					semanticHighlightingCapabilities = {
+						semanticHighlighting = true,
+					},
+				},
+			},
 		},
 
-		gopls = {},
+		gopls = {
+			settings = {
+				gopls = {
+					completeUnimported = true,
+					analysis = {
+						unusedparams = true,
+					},
+				},
+			},
+		},
 
 		rust_analyzer = {},
 

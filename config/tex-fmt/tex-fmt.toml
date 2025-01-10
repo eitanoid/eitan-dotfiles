@@ -1,0 +1,20 @@
+# tex-fmt.toml
+
+# Check formatting, do not modify files
+check = false
+# Print to stdout, do not modify files
+print = false
+# Do not wrap long lines
+wrap = false
+# Line length for wrapping
+wraplen = 80
+# Number of characters to use as tab size
+tabsize = 4
+
+tabchar = "space"
+# Process stdin as a single file, output to stdout
+stdin = false
+# Show info messages
+verbosity = "warn"
+# Extra list environments to be formatted as itemize
+lists = [] 

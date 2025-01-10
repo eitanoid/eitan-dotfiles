@@ -178,9 +178,16 @@ vim.api.nvim_create_user_command(
 
 vim.api.nvim_create_user_command("LatexSurroundWrap", function(opts) -- Create a latex list env with len items[suffix]
 	-- get args
+
 	local env = tostring(opts.fargs[1] or "")
 	local start_row, start_col = vim.fn.getpos("v")[2], vim.fn.getpos("v")[3]
 	local end_row, end_col = vim.fn.getpos(".")[2], vim.fn.getpos(".")[3]
+
+	local mode = vim.api.nvim_get_mode()["mode"]
+	if mode ~= "v" or env == "" then
+		print("Must be in visual mode")
+		return
+	end
 
 	-- make list
 	-- set end of env

@@ -29,12 +29,16 @@ echo "Synced Dircolors"
 
 ##Ranger 
 mkdir -p $HOME/.config/ranger/plugins
-rsync -rav $HERE/config/ranger $HOME/.config 
+rsync -rav $HERE/config/ranger $HOME/.config
 echo "Synced Ranger"
 
 ##Nvim
-rsync -rav $HERE/config/nvim $HOME/.config 
+rsync -rav $HERE/config/nvim $HOME/.config
 echo "Synced NeoVim"
+
+##Nvim - latex formatter
+rsync -rav $HERE/config/tex-fmt $HOME/.config
+echo "Synced tex-fmt"
 
 ##Zathura
 rsync -rav $HERE/config/zathura $HOME/.config 
