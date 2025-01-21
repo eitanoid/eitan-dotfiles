@@ -12,6 +12,9 @@ ZSHF=$HOME/.config/zsh
 export EDITOR=nvim
 export VISUAL=nvim
 
+# enable vi mode in shell
+bindkey -v
+
 #Ranger preview syntax highlighting style
 export HIGHLIGHT_STYLE=rootwater
 
@@ -40,10 +43,6 @@ source $ZSHF/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZSHF/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source $ZSHF/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-
-# enable vi mode
-bindkey -v
-
 #zsh history-substring-search
 export HISTORY_SUBSTRING_SEARCH_PREFIXED=true
 bindkey -M vicmd 'K' history-substring-search-up
@@ -66,8 +65,9 @@ bindkey -M menuselect "^I" .accept-line #Tab
 
 
 #Vi mode related settings
-
-######### Change cursor shape for different vi modes. source : https://gist.github.com/LukeSmithxyz/e62f26e55ea8b0ed41a65912fbebbe52
+#
+################################################################
+# Change cursor shape for different vi modes. source : https://gist.github.com/LukeSmithxyz/e62f26e55ea8b0ed41a65912fbebbe52
 function zle-keymap-select {
   if [[ ${KEYMAP} == vicmd ]] ||
      [[ $1 = 'block' ]]; then
@@ -79,6 +79,7 @@ function zle-keymap-select {
     echo -ne '\e[5 q'
   fi
 }
+
 zle -N zle-keymap-select
 zle-line-init() {
     zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
@@ -88,16 +89,20 @@ zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
-#############
+################################################################
 
 
 
 ######################################################################################################
 
 #C dev stuff
-function clangrun() {
-	clang "${1}" -o "${1}".out "${@:2}" && ./"${1}.out"
+
+function clangrun() { # like `go run` but for c.
+	clang "${1}" -o "${1}".out "${@:2}" &&  echo "compiled successfully" && ./"${1}.out"
 }
+
+######################################################################################################
+
 
 ######################################################################################################
 
@@ -105,6 +110,7 @@ function clangrun() {
 TMOUT=1000 #~20 mins
 trap 'echo ;bash $SCEEN_SAVER' ALRM
 
+######################################################################################################
 
 #alias
 alias cd='z'

@@ -12,7 +12,7 @@ style = "purple"
 [character]
 success_symbol = "[ඞ](green bold)"
 error_symbol = "[ඞ](red bold)"
-vimcmd_symbol = "[ඞ](yellow bold)"
+vimcmd_symbol = "[ඞ](cyan bold)"
 
 
 [git_branch]

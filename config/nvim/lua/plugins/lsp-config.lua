@@ -182,7 +182,19 @@ return function()
 		-- ts_ls = {},
 		--
 		-- digestif = {}, -- latex
-		texlab = {}, -- latex
+		texlab = {
+			settings = {
+				texlab = {
+					chktex = {
+						onOpenAndSave = true,
+						onEdit = true,
+					},
+					diagnosticsDelay = 300,
+				},
+			},
+		}, -- latex
+
+		pyright = {},
 
 		lua_ls = {
 			-- cmd = {...},
