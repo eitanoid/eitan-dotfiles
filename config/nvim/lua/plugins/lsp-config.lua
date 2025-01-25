@@ -191,8 +191,8 @@ return function()
 					},
 					diagnosticsDelay = 300,
 				},
-			},
-		}, -- latex
+			}, -- latex
+		},
 
 		pyright = {},
 
