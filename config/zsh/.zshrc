@@ -1,16 +1,17 @@
-#Exports
+#Exports 
+export ZSH=$HOME/.config/zsh/.zshrc
+#Path
 export PATH="$HOME/.local/bin":$PATH
 export PATH=$PATH:/usr/local/go/bin # go paths
 export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/.cargo/bin # rust
-export ZSH=$HOME/.config/zsh/.zshrc #zsh
 
-#Here
-ZSHF=$HOME/.config/zsh
-
-#editor
 export EDITOR=nvim
 export VISUAL=nvim
+export MANPAGER='nvim -c Man! -o -'
+
+#This config file
+ZSHF=$HOME/.config/zsh
 
 # enable vi mode in shell
 bindkey -v
