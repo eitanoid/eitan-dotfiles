@@ -1,4 +1,4 @@
-CONFIG=~/git/dotfiles/config
+CONFIG=$(pwd)/config
 
 # alacritty
 read -p "Download Alacritty Themes? (y/n)?" CONT

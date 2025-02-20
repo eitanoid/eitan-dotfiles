@@ -140,8 +140,6 @@ Helpful [article](https://ejmastnak.com/tutorials/vim-latex/vimtex/)
  | `im`, `am`  | Items        |
 
 
-
-
 For more default-keybinds: `:h vimtex-default-mappings`
 
 # Packages:

@@ -20,7 +20,7 @@ bindkey -v
 export HIGHLIGHT_STYLE=rootwater
 
 #Location of Screen Saver
-SCEEN_SAVER=$HOME/git/pipes-sh/pipes.sh
+SCREEN_SAVER=$HOME/git/pipes-sh/pipes.sh
 
 #History
 HISTFILE=${HOME}/.zsh_history
@@ -109,7 +109,7 @@ function clangrun() { # like `go run` but for c.
 
 #Inactivty Screen Saver
 TMOUT=1000 #~20 mins
-trap 'echo ;bash $SCEEN_SAVER' ALRM
+trap "echo ;bash $SCREEN_SAVER" ALRM
 
 ######################################################################################################
 
@@ -130,5 +130,4 @@ fi
 
 #set pointer
 eval "$(starship init zsh)"
-
 eval "$(zoxide init zsh)"

@@ -3,6 +3,7 @@ local M = {}
 M.opts = {
 	ignore_install = { "latex" },
 	ensure_installed = {
+		"printf",
 		"bash",
 		"c",
 		"diff",

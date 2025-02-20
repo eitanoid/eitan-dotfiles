@@ -1,45 +1,44 @@
-HERE=$HOME/git/dotfiles
 
 #copy zsh directory and keep .zshrc in $HOME
-rsync -rav $HERE/config/zsh $HOME/.config
+rsync -rav $(pwd)/config/zsh $HOME/.config
 ln -s -T ~/.config/zsh/.zshrc ~/.zshrc
 
 echo "Synced Zsh"
 
 ##Starship Prompt
-rsync -rav $HERE/config/starship.toml $HOME/.config
+rsync -rav $(pwd)/config/starship.toml $HOME/.config
 echo "Synced Starship"
 
 ## Alacritty
-rsync -rav $HERE/config/alacritty $HOME/.config
+rsync -rav $(pwd)/config/alacritty $HOME/.config
 echo "Synced Alacritty"
 
 ## Foot
-rsync -rav $HERE/config/foot $HOME/.config
+rsync -rav $(pwd)/config/foot $HOME/.config
 echo "Synced Foot"
 
 ## Kitty
-rsync -rav $HERE/config/kitty $HOME/.config
+rsync -rav $(pwd)/config/kitty $HOME/.config
 echo "Synced Kitty"
 
 
 ## Colors
-rsync -rav $HERE/.dircolors $HOME
+rsync -rav $(pwd)/.dircolors $HOME
 echo "Synced Dircolors"
 
 ##Ranger 
 mkdir -p $HOME/.config/ranger/plugins
-rsync -rav $HERE/config/ranger $HOME/.config
+rsync -rav $(pwd)/config/ranger $HOME/.config
 echo "Synced Ranger"
 
 ##Nvim
-rsync -rav $HERE/config/nvim $HOME/.config
+rsync -rav $(pwd)/config/nvim $HOME/.config
 echo "Synced NeoVim"
 
 ##Nvim - latex formatter
-rsync -rav $HERE/config/tex-fmt $HOME/.config
+rsync -rav $(pwd)/config/tex-fmt $HOME/.config
 echo "Synced tex-fmt"
 
 ##Zathura
-rsync -rav $HERE/config/zathura $HOME/.config 
+rsync -rav $(pwd)/config/zathura $HOME/.config 
 echo "Synced Zathura"
