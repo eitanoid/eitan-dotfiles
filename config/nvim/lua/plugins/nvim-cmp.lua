@@ -59,18 +59,29 @@ return function()
 				group_index = 0,
 			},
 			{ name = "git" },
-			-- { name = "calc" },
 			{ name = "nvim_lsp" },
 			{ name = "omni" },
 			{ name = "luasnip" },
-			{ name = "path" },
+			{ name = "path" }, -- file system path
 			{ name = "go_pkgs" },
+		},
+	})
+
+	cmp.setup.filetype({ "tex", "bib" }, { --TODO: FINISH THIS.
+		sources = cmp.config.sources({
+			{ name = "git" },
+			{ name = "nvim_lsp" },
+			{ name = "omni" },
 			{
 				name = "latex_symbols",
 				option = {
-					strategy = 2, -- latex commnand
+					strategy = 2,
 				},
 			},
-		},
+			{
+				name = "vimtex",
+			},
+			{ name = "path" }, -- file system path
+		}),
 	})
 end

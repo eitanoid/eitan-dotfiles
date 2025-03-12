@@ -8,13 +8,13 @@ return function()
 	vim.g.vimtex_compiler_latexmk = {
 		aux_dir = "./tex/aux",
 		out_dir = "./tex/out",
-		-- callback = 1,
+		callback = 1,
 		continuous = 1,
 		executable = "latexmk",
 		-- hooks = {},
 		options = {
-			-- '-verbose',
-			-- '-file-line-error',
+			"-verbose",
+			"-file-line-error",
 			"-synctex=1",
 			"-interaction=nonstopmode",
 		},

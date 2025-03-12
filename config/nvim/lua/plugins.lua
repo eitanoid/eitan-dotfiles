@@ -136,13 +136,18 @@ require("lazy").setup({
 		},
 	},
 
-	{
+	{ -- latex plugins
 		"lervag/vimtex",
 		ft = { "latex", "tex", "bib" },
 		lazy = false, -- we don't want to lazy load VimTeX
 		-- tag = "v2.15", -- uncomment to pin to a specific release
 		init = require("plugins.vimtex")(),
 	},
+	-- cmp support for vimtex
+	{ "micangl/cmp-vimtex" },
+
+	-- quarto configuration
+	require("plugins.quarto"),
 
 	-- Tabular plugin (Vim plugin for aligning text with delimiters) :Tabular command
 	{ "godlygeek/tabular" },

@@ -194,7 +194,9 @@ return function()
 			}, -- latex
 		},
 
-		pyright = {},
+		pyright = {}, -- python
+
+		r_language_server = {},
 
 		lua_ls = {
 			-- cmd = {...},
