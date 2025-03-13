@@ -46,6 +46,10 @@ end, { noremap = true, desc = "toggle relative numbers" })
 -- Nvim-Tree
 vim.keymap.set("n", "<leader>ff", "<Cmd>NvimTreeToggle<CR>", { desc = "Toggle file tr[ee]" })
 
+-- keep indent in visual mode
+vim.keymap.set("v", ">", ">gv")
+vim.keymap.set("v", "<", "<gv")
+
 -- Edit keymaps for binds I might forget
 vim.keymap.set("n", "<leader>e%", "%", { desc = "Move to Matching Delimiter - %" })
 vim.keymap.set("n", "<leader>eyi", "yi", { desc = "Yank Text Inside Next Delimiter" })
