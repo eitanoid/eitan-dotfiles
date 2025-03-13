@@ -37,18 +37,9 @@ require("lazy").setup({
 		end,
 	},
 
-	-- Git related plugins
-	{ "tpope/vim-fugitive", event = "SafeState" },
-
-	{ "tpope/vim-rhubarb", event = "SafeState" },
-	--
-	{ -- proper merge editor
-		--- @see documentation at https://github.com/sindrets/diffview.nvim
-		"sindrets/diffview.nvim",
-		event = "SafeState",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-	},
-	--
+	-----------
+	--- git ---
+	-----------
 	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
 		opts = {
@@ -61,10 +52,25 @@ require("lazy").setup({
 			},
 		},
 	},
-	-- Detect tabstop and shiftwidth automatically
+
+	{ "tpope/vim-fugitive", event = "SafeState" },
+
+	{ "tpope/vim-rhubarb", event = "SafeState" },
+	--
+	{ -- proper merge editor
+		--- @see documentation at https://github.com/sindrets/diffview.nvim
+		"sindrets/diffview.nvim",
+		event = "SafeState",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
+
+	-- Detect tabstop and shiftwidth automatically, including stuff like modeline
 	{ "tpope/vim-sleuth", event = "BufEnter" },
 
-	-- Editor Customisation
+	---------------------------------
+	--- Editor Behaviour Features ---
+	---------------------------------
+
 	{
 		"Isrothy/neominimap.nvim",
 		version = "v3.*.*",
@@ -75,10 +81,11 @@ require("lazy").setup({
 		init = require("plugins.neominimap").init,
 	},
 
-	-- lualine
+	-- lualine statusline
 	{ "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
-	--
-	{ -- directory navigation
+
+	-- directory tree
+	{
 		"nvim-tree/nvim-tree.lua",
 		priority = 900, -- we want this loaded pretty much immediately
 		dependencies = {
@@ -88,7 +95,7 @@ require("lazy").setup({
 		keys = {},
 	},
 
-	-- tabs
+	-- tabs in neovim
 	{
 		"romgrk/barbar.nvim",
 		dependencies = {
@@ -113,18 +120,53 @@ require("lazy").setup({
 		},
 	},
 
-	{ -- colorizer
-		"NvChad/nvim-colorizer.lua",
-		event = "BufReadPre",
-		opts = { -- set to setup table
-			user_default_options = { names = true },
-			buftypes = {
-				"*",
-				"!prompt",
-				"!opoup",
-				"!lazy",
+	{ -- enables folds
+		"kevinhwang91/nvim-ufo",
+		dependencies = { "kevinhwang91/promise-async" },
+		event = "BufRead",
+		keys = {
+			{
+				"zR",
+				function()
+					require("ufo").openAllFolds()
+				end,
 			},
-		},
+			{
+				"zM",
+				function()
+					require("ufo").closeAllFolds()
+				end,
+			},
+			{
+				"K",
+				function()
+					local winid = require("ufo").peekFoldedLinesUnderCursor()
+					if not winid then
+						vim.lsp.buf.hover()
+					end
+				end,
+			},
+		}, --TODO: automatically folds all my tex stuff
+		config = function()
+			vim.o.foldcolumn = "1"
+			vim.o.foldlevel = 99
+			vim.o.foldlevelstart = 99
+			vim.o.foldenable = true
+
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities.textDocument.foldingRange = {
+				dynamicRegistration = false,
+				lineFoldingOnly = true,
+			}
+			local language_servers = require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
+			for _, ls in ipairs(language_servers) do
+				require("lspconfig")[ls].setup({
+					capabilities = capabilities,
+					-- you can add other fields for setting up lsp server in this table
+				})
+			end
+			require("ufo").setup()
+		end,
 	},
 
 	{ -- nicer looking Markdown
@@ -136,6 +178,10 @@ require("lazy").setup({
 		},
 	},
 
+	-----------------------------
+	--- Work i.e TeX Ajdacent ---
+	-----------------------------
+
 	{ -- latex plugins
 		"lervag/vimtex",
 		ft = { "latex", "tex", "bib" },
@@ -143,21 +189,17 @@ require("lazy").setup({
 		-- tag = "v2.15", -- uncomment to pin to a specific release
 		init = require("plugins.vimtex")(),
 	},
-	-- cmp support for vimtex
+	-- completions support for vimtex
 	{ "micangl/cmp-vimtex" },
 
 	-- quarto configuration
 	require("plugins.quarto"),
 
-	-- Tabular plugin (Vim plugin for aligning text with delimiters) :Tabular command
-	{ "godlygeek/tabular" },
-	--
-	--
-	-- Comment plugin `gc` motion
-	{ "numToStr/Comment.nvim", opts = {} },
-	--
-	-- Useful plugin to show you pending keybinds.
+	---------------------
+	--- Functionality ---
+	---------------------
 
+	-- Useful plugin to show you pending keybinds.
 	{
 		"folke/which-key.nvim",
 		event = "VimEnter", -- Sets the loading event to 'VimEnter'
@@ -168,108 +210,6 @@ require("lazy").setup({
 		"anuvyklack/hydra.nvim",
 		event = "BufEnter",
 	},
-
-	-- {
-	-- 	"mrjones2014/smart-splits.nvim",
-	-- },
-	-- require("smart-splits").setup({
-	-- 	-- Ignored buffer types (only while resizing)
-	-- 	ignored_buftypes = {
-	-- 		"nofile",
-	-- 		"quickfix",
-	-- 		"prompt",
-	-- 	},
-	-- 	-- Ignored filetypes (only while resizing)
-	-- 	ignored_filetypes = { "NvimTree" },
-	-- 	-- the default number of lines/columns to resize by at a time
-	-- 	default_amount = 3,
-	-- 	-- Desired behavior when your cursor is at an edge and you
-	-- 	-- are moving towards that same edge:
-	-- 	-- 'wrap' => Wrap to opposite side
-	-- 	-- 'split' => Create a new split in the desired direction
-	-- 	-- 'stop' => Do nothing
-	-- 	-- function => You handle the behavior yourself
-	-- 	-- NOTE: If using a function, the function will be called with
-	-- 	-- a context object with the following fields:
-	--
-	-- 	-- NOTE: `at_edge = 'wrap'` is not supported on Kitty terminal
-	-- 	-- multiplexer, as there is no way to determine layout via the CLI
-	-- 	at_edge = "stop",
-	-- 	-- Desired behavior when the current window is floating:
-	-- 	-- 'previous' => Focus previous Vim window and perform action
-	-- 	-- 'mux' => Always forward action to multiplexer
-	-- 	float_win_behavior = "previous",
-	-- 	-- when moving cursor between splits left or right,
-	-- 	-- place the cursor on the same row of the *screen*
-	-- 	-- regardless of line numbers. False by default.
-	-- 	-- Can be overridden via function parameter, see Usage.
-	-- 	move_cursor_same_row = false,
-	-- 	-- whether the cursor should follow the buffer when swapping
-	-- 	-- buffers by default; it can also be controlled by passing
-	-- 	-- `{ move_cursor = true }` or `{ move_cursor = false }`
-	-- 	-- when calling the Lua function.
-	-- 	cursor_follows_swapped_bufs = false,
-	-- 	-- resize mode options
-	-- 	resize_mode = {
-	-- 		-- key to exit persistent resize mode
-	-- 		quit_key = "<ESC>",
-	-- 		-- keys to use for moving in resize mode
-	-- 		-- in order of left, down, up' right
-	-- 		resize_keys = { "h", "j", "k", "l" },
-	-- 		-- set to true to silence the notifications
-	-- 		-- when entering/exiting persistent resize mode
-	-- 		silent = false,
-	-- 		-- must be functions, they will be executed when
-	-- 		-- entering or exiting the resize mode
-	-- 		hooks = {
-	-- 			on_enter = nil,
-	-- 			on_leave = nil,
-	-- 		},
-	-- 	},
-	-- 	-- ignore these autocmd events (via :h eventignore) while processing
-	-- 	-- smart-splits.nvim computations, which involve visiting different
-	-- 	-- buffers and windows. These events will be ignored during processing,
-	-- 	-- and un-ignored on completed. This only applies to resize events,
-	-- 	-- not cursor movement events.
-	-- 	ignored_events = {
-	-- 		"BufEnter",
-	-- 		"WinEnter",
-	-- 	},
-	-- 	-- enable or disable a multiplexer integration;
-	-- 	-- automatically determined, unless explicitly disabled or set,
-	-- 	-- by checking the $TERM_PROGRAM environment variable,
-	-- 	-- and the $KITTY_LISTEN_ON environment variable for Kitty
-	-- 	multiplexer_integration = nil,
-	-- 	-- disable multiplexer navigation if current multiplexer pane is zoomed
-	-- 	-- this functionality is only supported on tmux and Wezterm due to kitty
-	-- 	-- not having a way to check if a pane is zoomed
-	-- 	disable_multiplexer_nav_when_zoomed = true,
-	-- 	-- Supply a Kitty remote control password if needed,
-	-- 	-- or you can also set vim.g.smart_splits_kitty_password
-	-- 	-- see https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.remote_control_password
-	-- 	kitty_password = nil,
-	-- 	-- default logging level, one of: 'trace'|'debug'|'info'|'warn'|'error'|'fatal'
-	-- 	log_level = "info",
-	-- 	-- recommended mappings
-	-- 	-- resizing splits
-	-- 	-- these keymaps will also accept a range,
-	-- 	-- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
-	-- 	vim.keymap.set("n", "<A-h>", require("smart-splits").resize_left),
-	-- 	vim.keymap.set("n", "<A-j>", require("smart-splits").resize_down),
-	-- 	vim.keymap.set("n", "<A-k>", require("smart-splits").resize_up),
-	-- 	vim.keymap.set("n", "<A-l>", require("smart-splits").resize_right),
-	-- 	-- moving between splits,
-	-- 	vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left),
-	-- 	vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down),
-	-- 	vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up),
-	-- 	vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right),
-	-- 	vim.keymap.set("n", "<C-\\>", require("smart-splits").move_cursor_previous),
-	-- 	-- swapping buffers between windows,
-	-- 	vim.keymap.set("n", "<leader><leader>h", require("smart-splits").swap_buf_left),
-	-- 	vim.keymap.set("n", "<leader><leader>j", require("smart-splits").swap_buf_down),
-	-- 	vim.keymap.set("n", "<leader><leader>k", require("smart-splits").swap_buf_up),
-	-- 	vim.keymap.set("n", "<leader><leader>l", require("smart-splits").swap_buf_right),
-	-- }),
 
 	{ -- Fuzzy Finder (files, lsp, etc)
 		"nvim-telescope/telescope.nvim",
@@ -295,37 +235,9 @@ require("lazy").setup({
 		config = require("plugins.telescope"),
 	},
 
-	{ "HiPhish/rainbow-delimiters.nvim" }, -- rainbow brackets and other delimiters
-
-	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		opts = {
-			enable_check_bracket_line = false,
-		},
-		config = function()
-			local npairs = require("nvim-autopairs")
-			local Rule = require("nvim-autopairs.rule")
-			-- local cond = require("nvim-autopairs.conds")
-
-			npairs.setup({})
-
-			npairs.add_rules({
-				Rule("$", "$", "tex"),
-			})
-		end,
-	},
-
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		---@module "ibl"
-		---@type ibl.config
-		opts = {},
-	},
-	--
-	-- { "machakann/vim-sandwich" }, -- not needed because mini.nvim includes surround
-
+	--------------------------
+	--- Diagnostic Plugins ---
+	--------------------------
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
 		event = "VeryLazy", -- Or `LspAttach`
@@ -342,7 +254,10 @@ require("lazy").setup({
 		keys = require("plugins.trouble").keys,
 	},
 
-	-- LSP Plugins
+	-------------------
+	--- LSP Plugins ---
+	-------------------
+
 	{
 		-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
 		-- used for completion, annotations and signatures of Neovim apis
@@ -436,10 +351,9 @@ require("lazy").setup({
 		config = require("plugins.nvim-cmp"),
 	},
 
-	-- {
-	-- 	"olimorris/onedarkpro.nvim",
-	-- 	priority = 1000, -- Ensure it loads first
-	-- },
+	--------------------
+	--- Color Scheme ---
+	--------------------
 
 	{
 		"folke/tokyonight.nvim",
@@ -451,16 +365,62 @@ require("lazy").setup({
 			vim.cmd.hi("Comment gui=none")
 		end,
 	},
-	-- { "jacoborus/tender.vim",
-	-- 	priority = 1000, -- Make sure to load this before all the other start plugins.
-	-- 	init = function()
-	-- 	-- Load the colorscheme here.
-	-- 	-- Like many other themes, this one has different styles, and you could load
-	-- 	-- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-	-- 	vim.cmd.colorscheme("tender")
-	-- 	-- You can configure highlights by doing something like:
-	-- 	vim.cmd.hi("Comment gui=none")
-	-- end,},
+
+	-------------------
+	--- misc plugins---
+	-------------------
+
+	-- Tabular plugin (Vim plugin for aligning text with delimiters) :Tabular command
+	{ "godlygeek/tabular" },
+
+	-- color preview eg.
+	{
+		"NvChad/nvim-colorizer.lua",
+		event = "BufReadPre",
+		opts = { -- set to setup table
+			user_default_options = { names = true },
+			buftypes = {
+				"*",
+				"!prompt",
+				"!opoup",
+				"!lazy",
+			},
+		},
+	},
+
+	-- Comment plugin `gc` motion
+	{ "numToStr/Comment.nvim", opts = {} },
+	--
+	-- self explanatory, raindow brackets etc
+	{ "HiPhish/rainbow-delimiters.nvim" },
+
+	-- closes pairs automatically
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		opts = {
+			enable_check_bracket_line = false,
+		},
+		config = function()
+			local npairs = require("nvim-autopairs")
+			local Rule = require("nvim-autopairs.rule")
+			-- local cond = require("nvim-autopairs.conds")
+
+			npairs.setup({})
+
+			npairs.add_rules({
+				Rule("$", "$", "tex"),
+			})
+		end,
+	},
+
+	{ -- indent guides
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		---@module "ibl"
+		---@type ibl.config
+		opts = {},
+	},
 
 	-- Highlight todo, notes, etc in comments
 	{
@@ -547,55 +507,9 @@ require("lazy").setup({
 		end,
 	},
 
-	{ -- fold plugin
-		"kevinhwang91/nvim-ufo",
-		dependencies = { "kevinhwang91/promise-async" },
-		event = "BufRead",
-		keys = {
-			{
-				"zR",
-				function()
-					require("ufo").openAllFolds()
-				end,
-			},
-			{
-				"zM",
-				function()
-					require("ufo").closeAllFolds()
-				end,
-			},
-			{
-				"K",
-				function()
-					local winid = require("ufo").peekFoldedLinesUnderCursor()
-					if not winid then
-						vim.lsp.buf.hover()
-					end
-				end,
-			},
-		}, --TODO: automatically folds all my tex stuff
-		config = function()
-			vim.o.foldcolumn = "1"
-			vim.o.foldlevel = 99
-			vim.o.foldlevelstart = 99
-			vim.o.foldenable = true
-
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities.textDocument.foldingRange = {
-				dynamicRegistration = false,
-				lineFoldingOnly = true,
-			}
-			local language_servers = require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
-			for _, ls in ipairs(language_servers) do
-				require("lspconfig")[ls].setup({
-					capabilities = capabilities,
-					-- you can add other fields for setting up lsp server in this table
-				})
-			end
-			require("ufo").setup()
-		end,
-	},
-
+	------------------
+	--- treesitter ---
+	------------------
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
