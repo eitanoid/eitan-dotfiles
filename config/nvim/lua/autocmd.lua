@@ -1,12 +1,6 @@
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
--- vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
--- 	pattern = { "*" },
--- 	command = "colorscheme tokyonight-moon",
--- })
-vim.cmd("set termguicolors")
-
 -- NVImTree autoclose -- doesnt work
 vim.api.nvim_create_autocmd("QuitPre", {
 	callback = function()

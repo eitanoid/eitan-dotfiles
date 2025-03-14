@@ -36,22 +36,4 @@ return {
 			F12 = "<F12>",
 		},
 	},
-
-	-- Document existing key chains
-	spec = {
-		{ "<leader>c", group = "Code", mode = { "n", "x" } },
-		{ "<leader>`", group = "LSP Actions}" },
-		{ "<leader>d", group = "Document" },
-		{ "<leader>r", group = "Rename" },
-		{ "<leader>s", group = "Search" },
-		{ "<leader>w", group = "Workspace" },
-		{ "<leader>t", group = "Toggle" },
-		{ "<leader>h", group = "Git Hunk", mode = { "n", "v" } },
-		{ "<leader>e", group = "Edit" },
-		{ "<leader>m", group = "MiniMap" },
-		{ "<leader>q", group = "Diagnostics" },
-		{ "<leader>l", group = "LaTeX" },
-		{ "<leader>h", group = "Hydra" },
-		{ "<leader>i", group = "Insert" },
-	},
 }

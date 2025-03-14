@@ -12,6 +12,7 @@ vim.opt.winbar = "%=%m %f"
 
 -- redundant because mode is in status line
 vim.opt.showmode = true
+
 -- cursor options
 vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 
@@ -19,17 +20,18 @@ vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 vim.opt.mouse = "a"
 
 -- 1 tab is 4 spaces instead of default 8
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4 -- use tabstop option
-vim.opt.expandtab = false
+local tabsize = 4
+vim.opt.expandtab = true
+vim.opt.tabstop = tabsize
+vim.opt.shiftwidth = tabsize -- use tabstop option
 
 -- text options
-vim.opt.wrap = true
+vim.opt.wrap = false
 
 -- fold
 vim.opt.foldmethod = "manual"
 vim.opt.foldcolumn = "1"
+
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.

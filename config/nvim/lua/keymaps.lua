@@ -18,10 +18,31 @@
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
---
+
+----------------------------------------------------------------
+local wk = require("which-key")
+
+local nmap = function(key, effect)
+	vim.keymap.set("n", key, effect, { silent = true, noremap = true })
+end
+
+local vmap = function(key, effect)
+	vim.keymap.set("v", key, effect, { silent = true, noremap = true })
+end
+
+local imap = function(key, effect)
+	vim.keymap.set("i", key, effect, { silent = true, noremap = true })
+end
+
+local cmap = function(key, effect)
+	vim.keymap.set("c", key, effect, { silent = true, noremap = true })
+end
+----------------------------------------------------------------
+
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
 -- Clear highlight
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
@@ -127,3 +148,90 @@ end, { desc = "Toggle Boolian" })
 
 vim.keymap.set("n", "<C-X>", "<CMD>FlipBool<CR>", { desc = "Toggle Bool Under Cursor" })
 vim.keymap.set("n", "<C-A>", "<CMD>FlipBool<CR>", { desc = "Toggle Bool Under Cursor" })
+
+----------------------
+--- Which Key Menu ---
+----------------------
+
+wk.add({
+	{ "<leader>c", group = "[C]ode", mode = { "n", "x" } },
+	{ "<leader>`", group = "LSP Actions" },
+	{ "<leader>d", group = "[D]ocument" },
+	{ "<leader>r", group = "Rename" },
+	{ "<leader>s", group = "Search" },
+	{ "<leader>w", group = "Workspace" },
+	{ "<leader>t", group = "Toggle" },
+	{ "<leader>h", group = "Git Hunk", mode = { "n", "v" } },
+	{ "<leader>e", group = "Edit" },
+	{ "<leader>q", group = "Diagnostics" },
+	{ "<leader>l", group = "LaTeX" },
+	{ "<leader>h", group = "Hydra" },
+	{ "<leader>i", group = "Insert" },
+})
+
+-- minimap controls
+wk.add({
+	mode = { "n" },
+	{ "<leader>m", group = "[M]iniMap" },
+	-- Global Minimap Controls
+	{ "<leader>mm", "<cmd>Neominimap toggle<cr>", desc = "Toggle global minimap" },
+	{ "<leader>mo", "<cmd>Neominimap on<cr>", desc = "Enable global minimap" },
+	{ "<leader>mc", "<cmd>Neominimap off<cr>", desc = "Disable global minimap" },
+	{ "<leader>mr", "<cmd>Neominimap refresh<cr>", desc = "Refresh global minimap" },
+
+	-- Window-Specific Minimap Controls
+	{ "<leader>mwt", "<cmd>Neominimap winToggle<cr>", desc = "Toggle minimap for current window" },
+	{ "<leader>mwr", "<cmd>Neominimap winRefresh<cr>", desc = "Refresh minimap for current window" },
+	{ "<leader>mwo", "<cmd>Neominimap winOn<cr>", desc = "Enable minimap for current window" },
+	{ "<leader>mwc", "<cmd>Neominimap winOff<cr>", desc = "Disable minimap for current window" },
+
+	-- Tab-Specific Minimap Controls
+	{ "<leader>mtt", "<cmd>Neominimap tabToggle<cr>", desc = "Toggle minimap for current tab" },
+	{ "<leader>mtr", "<cmd>Neominimap tabRefresh<cr>", desc = "Refresh minimap for current tab" },
+	{ "<leader>mto", "<cmd>Neominimap tabOn<cr>", desc = "Enable minimap for current tab" },
+	{ "<leader>mtc", "<cmd>Neominimap tabOff<cr>", desc = "Disable minimap for current tab" },
+
+	-- Buffer-Specific Minimap Controls
+	{ "<leader>mbt", "<cmd>Neominimap bufToggle<cr>", desc = "Toggle minimap for current buffer" },
+	{ "<leader>mbr", "<cmd>Neominimap bufRefresh<cr>", desc = "Refresh minimap for current buffer" },
+	{ "<leader>mbo", "<cmd>Neominimap bufOn<cr>", desc = "Enable minimap for current buffer" },
+	{ "<leader>mbc", "<cmd>Neominimap bufOff<cr>", desc = "Disable minimap for current buffer" },
+
+	---Focus Controls
+	{ "<leader>mf", "<cmd>Neominimap focus<cr>", desc = "Focus on minimap" },
+	{ "<leader>mu", "<cmd>Neominimap unfocus<cr>", desc = "Unfocus minimap" },
+	{ "<leader>ms", "<cmd>Neominimap toggleFocus<cr>", desc = "Switch focus on minimap" },
+})
+
+local function new_terminal(lang)
+	vim.cmd("vsplit term://" .. lang)
+end
+
+local function new_terminal_python()
+	new_terminal("python")
+end
+
+local function new_terminal_r()
+	new_terminal("R --no-save")
+end
+
+local function new_terminal_ipython()
+	new_terminal("ipython --no-confirm-exit")
+end
+
+local function new_terminal_julia()
+	new_terminal("julia")
+end
+
+local function new_terminal_shell()
+	new_terminal("$SHELL")
+end
+
+wk.add({
+	{ "<leader>c", group = "[c]ode / [c]ell / [c]hunk" },
+	{ "<leader>ci", new_terminal_ipython, desc = "new [i]python terminal" },
+	{ "<leader>cj", new_terminal_julia, desc = "new [j]ulia terminal" },
+	{ "<leader>cn", new_terminal_shell, desc = "[n]ew terminal with shell" },
+	{ "<leader>cp", new_terminal_python, desc = "new [p]ython terminal" },
+	{ "<leader>cr", new_terminal_r, desc = "new [R] terminal" },
+})
