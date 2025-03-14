@@ -35,7 +35,7 @@ function M.setup()
 			multilines = false,
 
 			-- Show all diagnostics on the cursor line.
-			show_all_diags_on_cursorline = false,
+			show_all_diags_on_cursorline = true,
 
 			-- Enable diagnostics on Insert mode. You should also se the `throttle` option to 0, as some artefacts may appear.
 			enable_on_insert = false,

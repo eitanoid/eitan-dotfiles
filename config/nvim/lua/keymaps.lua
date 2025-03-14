@@ -154,7 +154,6 @@ vim.keymap.set("n", "<C-A>", "<CMD>FlipBool<CR>", { desc = "Toggle Bool Under Cu
 ----------------------
 
 wk.add({
-	{ "<leader>c", group = "[C]ode", mode = { "n", "x" } },
 	{ "<leader>`", group = "LSP Actions" },
 	{ "<leader>d", group = "[D]ocument" },
 	{ "<leader>r", group = "Rename" },

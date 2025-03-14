@@ -3,7 +3,7 @@ return function()
 	vim.g.vimtex_view_method = "zathura"
 	vim.g.vimtext_compiler_method = "latexmk"
 	vim.g.vimtex_complier_latexmk_engine = {
-		_ = "-xelatex", -- set default engine
+		_ = "-xelatex", -- set default engine and it's not doing anything.
 	}
 	vim.g.vimtex_compiler_latexmk = {
 		aux_dir = "./tex/aux",
