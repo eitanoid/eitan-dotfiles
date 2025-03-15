@@ -162,7 +162,6 @@ wk.add({
 	{ "<leader>t", group = "Toggle" },
 	{ "<leader>h", group = "Git Hunk", mode = { "n", "v" } },
 	{ "<leader>e", group = "Edit" },
-	{ "<leader>q", group = "Diagnostics" },
 	{ "<leader>l", group = "LaTeX" },
 	{ "<leader>h", group = "Hydra" },
 	{ "<leader>i", group = "Insert" },
@@ -202,6 +201,10 @@ wk.add({
 	{ "<leader>ms", "<cmd>Neominimap toggleFocus<cr>", desc = "Switch focus on minimap" },
 })
 
+-----------------
+--- Terminals ---
+-----------------
+
 local function new_terminal(lang)
 	vim.cmd("vsplit term://" .. lang)
 end
@@ -233,4 +236,66 @@ wk.add({
 	{ "<leader>cn", new_terminal_shell, desc = "[n]ew terminal with shell" },
 	{ "<leader>cp", new_terminal_python, desc = "new [p]ython terminal" },
 	{ "<leader>cr", new_terminal_r, desc = "new [R] terminal" },
+})
+
+----------------------
+--- Quatro Actions ---
+----------------------
+
+-- Show R dataframe in the browser
+-- might not use what you think should be your default web browser
+-- because it is a plain html file, not a link
+-- see https://askubuntu.com/a/864698 for places to look for
+
+local function show_r_table()
+	local node = vim.treesitter.get_node({ ignore_injections = false })
+	assert(node, "no symbol found under cursor")
+	local text = vim.treesitter.get_node_text(node, 0)
+	local cmd = [[call slime#send("DT::datatable(]] .. text .. [[)" . "\r")]]
+	vim.cmd(cmd)
+end
+
+-- TODO: make this only load when Quarto, R or Python are loaded?
+wk.add({
+	{ "<leader>Q", group = "[Q]uarto" },
+	{
+		"<leader>QE",
+		function()
+			require("otter").export(true)
+		end,
+		desc = "[E]xport with overwrite",
+	},
+	{ "<leader>Qa", ":QuartoActivate<cr>", desc = "[a]ctivate" },
+	{ "<leader>Qe", require("otter").export, desc = "[e]xport" },
+	{ "<leader>Qh", ":QuartoHelp ", desc = "[h]elp" },
+	{ "<leader>Qp", ":lua require'quarto'.quartoPreview()<cr>", desc = "[p]review" },
+	{ "<leader>Qq", ":lua require'quarto'.quartoClosePreview()<cr>", desc = "[q]uiet preview" },
+
+	{ "<leader>Qr", group = "[r]un" },
+	{ "<leader>Qra", ":QuartoSendAll<cr>", desc = "run [a]ll" },
+	{ "<leader>Qrb", ":QuartoSendBelow<cr>", desc = "run [b]elow" },
+	{ "<leader>Qrr", ":QuartoSendAbove<cr>", desc = "to cu[r]sor" },
+
+	{ "<leader>r", group = "[r] R specific tools" },
+	{ "<leader>rt", show_r_table, desc = "show [t]able" },
+})
+
+---------------------------
+--- Trouble Diagnostics ---
+---------------------------
+
+wk.add({
+	{ "<leader>q", group = "Diagnostics" },
+
+	{ "<leader>qx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+
+	{ "<leader>qX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
+	{ "<leader>qs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
+	{
+		"<leader>ql",
+		"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+		desc = "LSP Definitions / references / ... (Trouble)",
+	},
+	{ "<leader>qL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
+	{ "<leader>qQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
 })
