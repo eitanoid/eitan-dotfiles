@@ -203,7 +203,8 @@ require("lazy").setup({
 	{
 		"folke/which-key.nvim",
 		event = "VimEnter", -- Sets the loading event to 'VimEnter'
-		opts = require("plugins.which-key"),
+		opts = require("plugins.which-key").opts,
+		sort = require("plugins.which-key").sorter, -- TODO: not working, read someone else's which-key documentation
 	},
 
 	{ -- todo later -- repeat keybinds and hint menus

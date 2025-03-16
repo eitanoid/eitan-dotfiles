@@ -9,7 +9,6 @@ M.init = function()
 	----@type Neominimap.UserConfig
 	vim.g.neominimap = {
 
-		winblend = 100,
 		auto_enable = true,
 
 		log_level = vim.log.levels.OFF, ---@type Neominimap.Log.Levels
@@ -103,7 +102,7 @@ M.init = function()
 		-- For performance issue, when text changed,
 		-- minimap is refreshed after a certain delay
 		-- Set the delay in milliseconds
-		delay = 200, ---@type integer
+		delay = 1000, ---@type integer
 
 		-- Sync the cursor position with the minimap
 		sync_cursor = true, ---@type boolean

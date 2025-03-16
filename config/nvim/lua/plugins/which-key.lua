@@ -1,11 +1,14 @@
-return {
+local M = {}
+
+M.opts = {
+	preset = "modern",
 	expand = 1, -- expand mapes if there's space
 	icons = {
 		-- set icon mappings to true if you have a Nerd Font
 		mappings = vim.g.have_nerd_font,
 		-- If you are using a Nerd Font: set icons.keys to an empty table which will use the
 		-- default which-key.nvim defined Nerd Font icons, otherwise define a string table
-		keys = vim.g.have_nerd_font and {} or {
+		keys = vim.g.have_nerd_font and { BS = "<BS> " } or { -- <BS> doesn't work in my font for some reason, added.
 			Up = "<Up> ",
 			Down = "<Down> ",
 			Left = "<Left> ",
@@ -37,3 +40,7 @@ return {
 		},
 	},
 }
+
+-- M.sort = { "group", "alphanum", "local", "order", "mod" } -- TODO: figure out how to make this work ]]
+
+return M

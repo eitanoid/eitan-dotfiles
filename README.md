@@ -65,13 +65,11 @@ The [pipes.sh](https://github.com/pipeseroni/pipes.sh) is set as the inactivity 
 ## Fonts
 The [Hack](https://github.com/source-foundry/Hack) typeface is installed and used as default monospaced font.
 
-
-
 # Keybinds
 
 ## General
 
- (Not Part of the dot files, but my recommended binds)
+ (Not Part of the dot files, but my personal binds)
 
  | Action                     | Bind            |
  | :------------------------  | :----------     |
@@ -84,6 +82,8 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 
 ## Zshell
 
+Zshell with `vi` mode enabled.
+
  | Action                  | Mode        | Bind                 |
  | :------                 | :---------- | :-----------         |
  | Enter Normal Mode       | Insert      | `Esc`                |
@@ -91,25 +91,16 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
  | Search Histroy Prefixed | Insert      | `CTRL+Q`, `CTRL+P`   |
  | Search Histtory Prefiex | Normal      | `SHIFT+J`, `SHIFT+K` |
 
-## NVim
+## Neovim
 
  | Action                        | Mode        | Bind                                                   |
  | :----------------------       | :---------- | :----------                                            |
- | Toggle Bool Value             | Normal      | `undeided`                                             |
+ | Open Which-Key Menu             | Normal      | `SPACE`                                                |
+ | Toggle Bool Value             | Normal      | `CTRL+x / CTRL+a`                                      |
  | Toggle Relative-Numbers       | Normal      | ``CTRL+` ``                                            |
- | Open Minimap Menu             | Normal      | `SPACE>+M`                                             |
- | Open Debug Menu               | Normal      | `SPACE+Q`                                              |
- | Open Keybind Menu             | Normal      | `SPACE`                                                |
- | Open Fold Menu                | Normal      | `Z`                                                    |
- | Replace Surrounding           | Normal      | `[cont]sr[replace_symbol][replace_with]`               |
- | Delete Surrounding            | Normal      | `[cont]sd"` where `"` is any surrounding.              |
- | Add Surrounding (to selected) | Normal      | `[cont]sa"` where `"` is any surrounding.              |
- | Delete in Surrounding         | Normal      | `[cont]ci"`, `[cont]ca"` where `"` is any surrounding. |
- | Copy in Surrounding           | Normal      | `[cont]yi"`, `[cont]ya"`where `"` is any surrounding.  |
- | Select Inside Surrounding     | Normal      | `vi"`, `va"` where `"` is any surrounding.             |
- | Select Word                   | Normal      | `[cont]viw`, `[cont]vaw`                               |
- | Select Inside of Envrionment  | Normal      | `vie`, `vae`                                           |
- | Navigate Tabs                 | Normal      | `ALT+l`, `ALT+h`, `ALT+SHIFT+l`, `ALT+SHIFT+h`         |
+ | Navigate Buffers                 | Normal      | `ALT+l`, `ALT+h`, `ALT+SHIFT+l`, `ALT+SHIFT+h`         |
+ | Surrpound Bind           | Normal      | `s` eg. `sr`, `sd`, `sa` for replace, delete, add.              |
+
 
 ## LaTex
 
@@ -117,30 +108,32 @@ The TeX distribution chosen is: [TeX Live](https://tug.org/texlive/)
 Integreted to Nvim with [VimTeX](https://github.com/lervag/vimtex)
 Helpful [article](https://ejmastnak.com/tutorials/vim-latex/vimtex/)
 
-
+The following are mainly to help my memory.
  | Action                         | Example                      | Mode   | Bind        |
  | :-                             | :-                           | :-     | :-          |
+ | Which-Key Menu                 |                              | Normal | `l`         |
  | Change Surrounding Environment | {enumerate} -> {itemize}     | Normal | `cse`       |
  | Delete Surrounding Environment |                              | Normal | `dse`       |
  | Delete Surrounding Command     | \sqrt\[b\]{a} -> a )         | Normal | `dsc`       |
  | Change Surrounding Command     | \textit{a} -> \textbf{a}     | Normal | `csc`       |
  | Toggle Surrounding Delimiters  | (a+b) -> \left(a + b \right) | Normal | `tsd`       |
  | Toggle Surrounding Fraction    | a/b -> \frac{a}{b}           | Normal | `tsf`       |
- | Navigate Matching Content      |                              | Normal | `%`         |
  | Close Environment              | \begin{env} +-> \end{env}    | Insert | `]]`        |
  | Prompt Create Matrix           | \begin{pmatrix} ...          | Normal | `<space>im` |
  | Prompt Create n-Cycle          | (a\_1 \\quad a\_2 ...)       | Normal | `<space>ic` |
  | Prompt Create List             | \begin{itemize} ...          | Normal | `<space>il` |
 
- | Text Object | Description  |
- | :-          | :-           |
- | `ic`, `ac`  | Commands     |
- | `ie`, `ae`  | Environments |
- | `i$`, `a$`  | Math Mode    |
- | `im`, `am`  | Items        |
-
-
 For more default-keybinds: `:h vimtex-default-mappings`
+
+
+## Quarto
+
+[ Quarto-nvim ](https://github.com/quarto-dev/quarto-nvim) is used for a notebook style environment for `R`, `Python` and `Julia`
+
+ | Action                   | Mode   | Bind             |
+ | :-                       | :-     | :-               |
+ | Which-Key Menu           | Normal | `Q`              |
+ | Add Python / R codeblock | Normal | `ALT+p`, `ALT+r` |
 
 # Packages:
 
@@ -148,11 +141,6 @@ For more default-keybinds: `:h vimtex-default-mappings`
 - [rainbowcsv](https://pypi.org/project/rainbowcsv/)
 - [fzf](https://github.com/junegunn/fzf)
 - [zoxide](https://github.com/ajeetdsouza/zoxide)
--
--
--
--
--
 
 # Todo:
 
@@ -166,7 +154,3 @@ For more default-keybinds: `:h vimtex-default-mappings`
 - Hydra and the whichkey like menu
 - Lualine
 - neoorg - look into for note taking.
-- Make sympy intergration into my custom sympets
-- R in nvim
-- Configure UFO to stop hiding envs in latex
-- 
