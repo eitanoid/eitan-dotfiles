@@ -223,6 +223,8 @@ wk.add({
 	{ "<leader>cn", new_terminal_shell, desc = "[n]ew terminal with shell" },
 	{ "<leader>cp", new_terminal_python, desc = "new [p]ython terminal" },
 	{ "<leader>cr", new_terminal_r, desc = "new [R] terminal" },
+	-- { "<C-c><C-c>", ":SlimeSend<cr>" },
+	-- { "<leader>cc", ":SlimeSend<cr>" },
 })
 
 ----------------------
@@ -238,80 +240,83 @@ wk.add({
 
 -- only load settings in a Quarto file.
 -- TODO: Work in buffer only rather than in neovim globally
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "quarto",
-	callback = function()
-		local is_code_chunk = function()
-			local current, _ = require("otter.keeper").get_current_language_context()
-			if current then
-				return true
-			else
-				return false
-			end
-		end
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = "quarto",
+-- 	callback = function()
+local is_code_chunk = function()
+	local current, _ = require("otter.keeper").get_current_language_context()
+	if current then
+		return true
+	else
+		return false
+	end
+end
 
-		--- Insert code chunk of given language
-		--- Splits current chunk if already within a chunk
-		--- @param lang string
-		local insert_code_chunk = function(lang)
-			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>", true, false, true), "n", true)
-			local keys
-			if is_code_chunk() then
-				keys = [[o```<cr><cr>```{]] .. lang .. [[}<esc>o]]
-			else
-				keys = [[o```{]] .. lang .. [[}<cr>```<esc>O]]
-			end
-			keys = vim.api.nvim_replace_termcodes(keys, true, false, true)
-			vim.api.nvim_feedkeys(keys, "n", false)
-		end
+--- Insert code chunk of given language
+--- Splits current chunk if already within a chunk
+--- @param lang string
+local insert_code_chunk = function(lang)
+	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>", true, false, true), "n", true)
+	local keys
+	if is_code_chunk() then
+		keys = [[o```<cr><cr>```{]] .. lang .. [[}<esc>o]]
+	else
+		keys = [[o```{]] .. lang .. [[}<cr>```<esc>O]]
+	end
+	keys = vim.api.nvim_replace_termcodes(keys, true, false, true)
+	vim.api.nvim_feedkeys(keys, "n", false)
+end
 
-		local insert_r_chunk = function()
-			insert_code_chunk("r")
-		end
+local insert_r_chunk = function()
+	insert_code_chunk("r")
+end
 
-		local insert_py_chunk = function()
-			insert_code_chunk("python")
-		end
+local insert_py_chunk = function()
+	insert_code_chunk("python")
+end
 
-		local function show_r_table()
-			local node = vim.treesitter.get_node({ ignore_injections = false })
-			assert(node, "no symbol found under cursor")
-			local text = vim.treesitter.get_node_text(node, 0)
-			local cmd = [[call slime#send("DT::datatable(]] .. text .. [[)" . "\r")]]
-			vim.cmd(cmd)
-		end
-
-		-- TODO: make this only load when Quarto, R or Python are loaded?
-		-- Quatro settings
-		wk.add({
-			{ "<leader>Q", group = "[Q]uarto" },
-
-			{ "<leader>Qa", ":QuartoActivate<cr>", desc = "[a]ctivate" },
-			{ "<leader>Qe", require("otter").export, desc = "[e]xport" },
-			{ "<leader>Qh", ":QuartoHelp ", desc = "[h]elp" },
-			{ "<leader>Qp", ":lua require'quarto'.quartoPreview()<cr>", desc = "[p]review" },
-			{ "<leader>Qq", ":lua require'quarto'.quartoClosePreview()<cr>", desc = "[q]uiet preview" },
-
-			{ "<leader>Qr", group = "[r]un" },
-			{ "<leader>Qra", ":QuartoSendAll<cr>", desc = "run [a]ll" },
-			{ "<leader>Qrb", ":QuartoSendBelow<cr>", desc = "run [b]elow" },
-			{ "<leader>Qrr", ":QuartoSendAbove<cr>", desc = "to cu[r]sor" },
-
-			{ "<leader>r", group = "[r] R specific tools" },
-			{ "<leader>rt", show_r_table, desc = "show [t]able" },
-
-			{
-				"<leader>QE",
-				function()
-					require("otter").export(true)
-				end,
-				desc = "[E]xport with overwrite",
-			},
-
-			{ "<m-p>", insert_py_chunk, desc = "python code chunk" }, -- Meta i.e Alt
-			{ "<m-r>", insert_r_chunk, desc = "r code chunk" },
-		})
+local function show_r_table()
+	local node = vim.treesitter.get_node({ ignore_injections = false })
+	assert(node, "no symbol found under cursor")
+	local text = vim.treesitter.get_node_text(node, 0)
+	local cmd = [[call slime#send("DT::datatable(]] .. text .. [[)" . "\r")]]
+	vim.cmd(cmd)
+end
+-- 	end,
+-- })
+-- TODO: make this only load when Quarto, R or Python are loaded?
+-- Quatro settings
+wk.add({
+	cond = function()
+		return vim.o.ft == "quarto" or vim.o.ft == "qmd"
 	end,
+
+	{ "<leader>Q", group = "[Q]uarto" },
+
+	{ "<leader>Qa", ":QuartoActivate<cr>", desc = "[a]ctivate" },
+	{ "<leader>Qe", require("otter").export, desc = "[e]xport" },
+	{ "<leader>Qh", ":QuartoHelp ", desc = "[h]elp" },
+	{ "<leader>Qp", ":lua require'quarto'.quartoPreview()<cr>", desc = "[p]review" },
+	{ "<leader>Qq", ":lua require'quarto'.quartoClosePreview()<cr>", desc = "[q]uiet preview" },
+
+	{ "<leader>Qr", group = "[r]un" },
+	{ "<leader>Qra", ":QuartoSendAll<cr>", desc = "run [a]ll" },
+	{ "<leader>Qrb", ":QuartoSendBelow<cr>", desc = "run [b]elow" },
+	{ "<leader>Qrr", ":QuartoSendAbove<cr>", desc = "to cu[r]sor" },
+
+	{ "<leader>r", group = "[r] R specific tools" },
+	{ "<leader>rt", show_r_table, desc = "show [t]able" },
+
+	{
+		"<leader>QE",
+		function()
+			require("otter").export(true)
+		end,
+		desc = "[E]xport with overwrite",
+	},
+
+	{ "<m-p>", insert_py_chunk, desc = "python code chunk" }, -- Meta i.e Alt
+	{ "<m-r>", insert_r_chunk, desc = "r code chunk" },
 })
 
 ---------------------------

@@ -39,6 +39,7 @@ M.opts = {
 			F12 = "<F12>",
 		},
 	},
+	sort = { "alphanum", "group" },
 }
 
 -- M.sort = { "group", "alphanum", "local", "order", "mod" } -- TODO: figure out how to make this work ]]
