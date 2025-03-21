@@ -32,19 +32,34 @@ require("lazy").setup({
 		sort = require("plugins.which-key").sorter, -- TODO: not working, read someone else's which-key documentation
 	},
 
+	------------------
+	--- Dashboards ---
+	------------------
+	-- {
+	-- 	"goolord/alpha-nvim",
+	-- 	-- dependencies = { 'echasnovski/mini.icons' },
+	-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	-- 	event = "VimEnter",
+	-- 	config = function()
+	-- 		require("plugins.alpha")
+	-- 		-- available: devicons, mini, default is mini
+	-- 		-- if provider not loaded and enabled is true, it will try to use another provider
+	-- 		-- startify.file_icons.provider = "devicons"
+	-- 		-- require("alpha").setup(startify.config)
+	-- 	end,
+	-- },
+
 	{
 		"goolord/alpha-nvim",
 		-- dependencies = { 'echasnovski/mini.icons' },
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = "VimEnter",
-		config = function()
-			require("plugins.alpha")
-			-- available: devicons, mini, default is mini
-			-- if provider not loaded and enabled is true, it will try to use another provider
-			-- startify.file_icons.provider = "devicons"
-			-- require("alpha").setup(startify.config)
-		end,
+		config = require("plugins.alpha.alpha").config --[[ require("plugins.alpha_colored_animation").config, ]],
+		-- available: devicons, mini, default is mini
+		-- if provider not loaded and enabled is true, it will try to use another provider
 	},
+
+	-- require("plugins.alpha_animatedwip"),
 
 	-- { -- another title screen -- possibly better and more documented than alpha
 	-- 	"startup-nvim/startup.nvim",
