@@ -93,13 +93,13 @@ Zshell with `vi` mode enabled.
 
 ## Neovim
 
- | Action                        | Mode        | Bind                                                   |
- | :----------------------       | :---------- | :----------                                            |
- | Open Which-Key Menu             | Normal      | `SPACE`                                                |
- | Toggle Bool Value             | Normal      | `CTRL+x / CTRL+a`                                      |
- | Toggle Relative-Numbers       | Normal      | ``CTRL+` ``                                            |
- | Navigate Buffers                 | Normal      | `ALT+l`, `ALT+h`, `ALT+SHIFT+l`, `ALT+SHIFT+h`         |
- | Surrpound Bind           | Normal      | `s` eg. `sr`, `sd`, `sa` for replace, delete, add.              |
+  | Action                  | Mode        | Bind                                                      |
+  | :---------------------- | :---------- | :----------                                               |
+  | Open Which-Key Menu     | Normal      | `SPACE`                                                   |
+  | Toggle Bool Value       | Normal      | `CTRL+x / CTRL+a`                                         |
+  | Toggle Relative-Numbers | Normal      | ``CTRL+` ``                                               |
+  | Navigate Buffers        | Normal      | `ALT+l`, `ALT+h`, `ALT+SHIFT+l`, `ALT+SHIFT+h`, `SPACE+b` |
+  | Surrpound Bind          | Normal      | `s` eg. `sr`, `sd`, `sa` for replace, delete, add.        |
 
 
 ## LaTex
@@ -126,14 +126,17 @@ The following are mainly to help my memory.
 For more default-keybinds: `:h vimtex-default-mappings`
 
 
-## Quarto
+## Python and R
 
-[ Quarto-nvim ](https://github.com/quarto-dev/quarto-nvim) is used for a notebook style environment for `R`, `Python` and `Julia`
+[ Quarto-nvim ](https://github.com/quarto-dev/quarto-nvim) is used for a notebook style environment for `R`, `Python` and `Julia`. 
+[Slime](https://github.com/jpalardy/vim-slime) is used as a code runner.
 
- | Action                   | Mode   | Bind             |
- | :-                       | :-     | :-               |
- | Which-Key Menu           | Normal | `Q`              |
- | Add Python / R codeblock | Normal | `ALT+p`, `ALT+r` |
+  | Action                              | Mode   | Bind                  |
+  | :-                                  | :-     | :-                    |
+  | Which-Key Menu                      | Normal | `Q`                   |
+  | Open Neovim Terminal (python and R) | Normal | `SPACE+cp` `SPACE+cr`
+  | Send code to terminal               | Normal | `CTRL+cc`             |
+  | Add Python / R codeblock            | Normal | `ALT+p`, `ALT+r`      |
 
 # Packages:
 
