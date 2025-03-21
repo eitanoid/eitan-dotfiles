@@ -24,18 +24,40 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require("lazy").setup({
 
-	{ -- another title screen -- possibly better and more documented than alpha
-		"startup-nvim/startup.nvim",
-		-- event = "VimEnter",
-		dependencies = {
-			"nvim-telescope/telescope.nvim",
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope-file-browser.nvim",
-		},
+	-- Keybind manager
+	{
+		"folke/which-key.nvim",
+		event = "VimEnter", -- Sets the loading event to 'VimEnter'
+		opts = require("plugins.which-key").opts,
+		sort = require("plugins.which-key").sorter, -- TODO: not working, read someone else's which-key documentation
+	},
+
+	{
+		"goolord/alpha-nvim",
+		-- dependencies = { 'echasnovski/mini.icons' },
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		event = "VimEnter",
 		config = function()
-			require("startup").setup(require("plugins.startup"))
+			require("plugins.alpha")
+			-- available: devicons, mini, default is mini
+			-- if provider not loaded and enabled is true, it will try to use another provider
+			-- startify.file_icons.provider = "devicons"
+			-- require("alpha").setup(startify.config)
 		end,
 	},
+
+	-- { -- another title screen -- possibly better and more documented than alpha
+	-- 	"startup-nvim/startup.nvim",
+	-- 	-- event = "VimEnter",
+	-- 	dependencies = {
+	-- 		"nvim-telescope/telescope.nvim",
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-telescope/telescope-file-browser.nvim",
+	-- 	},
+	-- 	config = function()
+	-- 		require("startup").setup(require("plugins.startup"))
+	-- 	end,
+	-- },
 
 	-----------
 	--- git ---
@@ -195,17 +217,12 @@ require("lazy").setup({
 	-- quarto configuration
 	require("plugins.quarto"),
 
+	-- Send to terminal / code runner
+	require("plugins.slime"),
+
 	---------------------
 	--- Functionality ---
 	---------------------
-
-	-- Useful plugin to show you pending keybinds.
-	{
-		"folke/which-key.nvim",
-		event = "VimEnter", -- Sets the loading event to 'VimEnter'
-		opts = require("plugins.which-key").opts,
-		sort = require("plugins.which-key").sorter, -- TODO: not working, read someone else's which-key documentation
-	},
 
 	{ -- todo later -- repeat keybinds and hint menus
 		"anuvyklack/hydra.nvim",
