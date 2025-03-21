@@ -12,15 +12,15 @@ Ranger is installed with:
 
 dev icons in preview with [dev-icons](https://github.com/alexanderjeurissen/ranger_devicons)
 
-## Nvim
+## Neovim
 
-Nvim is installed with [kickstart](https://github.com/nvim-lua/kickstart.nvim)
+Neovim is used as the go-to text editor. The configuration is built on top of the [kickstart](https://github.com/nvim-lua/kickstart.nvim) project.
 
 ### Plugins
 
 | Plugin                                                                              | Purpose                                  |
 | :-                                                                                  | :-                                       |
-| [Startup-Nvim](https://github.com/startup-nvim/startup.nvim)                        | Startup menu / greeter                   |
+| [Alpha](https://github.com/goolord/alpha-nvim)                        | Startup menu / greeter                   |
 | [Lualine](https://github.com/nvim-lualine/lualine.nvim)                             |                                          |
 | [Nvim-Tree](https://github.com/nvim-tree/nvim-tree.lua)                             | File explorer                            |
 | [Render-Markdown](https://github.com/MeanderingProgrammer/render-markdown.nvim)     | Render markdown files in editor          |
@@ -45,10 +45,11 @@ Nvim is installed with [kickstart](https://github.com/nvim-lua/kickstart.nvim)
 | [Diffview](https://github.com/sindrets/diffview.nvim)  | Merge Editor |
 | [Gitsigns](https://github.com/lewis6991/gitsigns.nvim) |              |
 
-## Alacritty 
+## Kitty 
 
-Alacritty is used as the default terminal emulator.
-The color theme is [Blood Moon](https://github.com/dguo/blood-moon)
+The Kitty terminal emulator is used as the default terminal.
+The terminal color scheme is inspired by [Blood Moon](https://github.com/dguo/blood-moon)..
+The [Hack](https://github.com/source-foundry/Hack) typeface is the default monospaced font.
 
 ## Zshell
 
@@ -62,9 +63,6 @@ The Prompt is managed using [starship](starship.rc).
 
 The [pipes.sh](https://github.com/pipeseroni/pipes.sh) is set as the inactivity terminal screen saver (default after 300 seconds).
 
-## Fonts
-The [Hack](https://github.com/source-foundry/Hack) typeface is installed and used as default monospaced font.
-
 # Keybinds
 
 ## General
@@ -73,7 +71,7 @@ The [Hack](https://github.com/source-foundry/Hack) typeface is installed and use
 
  | Action                     | Bind            |
  | :------------------------  | :----------     |
- | Open Terminal (Alacritty)  | `SUPER+T`       |
+ | Open Terminal (Kitty)  | `SUPER+T`       |
  | Campure Rectangular Region | `SUPER+SHIFT+S` |
  | Change Imput Language      | `ALT+SHIFT`     |
  | Spotify Pause Play         | `ALT+END`       |
@@ -91,7 +89,7 @@ Zshell with `vi` mode enabled.
  | Search Histroy Prefixed | Insert      | `CTRL+Q`, `CTRL+P`   |
  | Search Histtory Prefiex | Normal      | `SHIFT+J`, `SHIFT+K` |
 
-## Neovim
+## Neovim Binds
 
   | Action                  | Mode        | Bind                                                      |
   | :---------------------- | :---------- | :----------                                               |
@@ -102,7 +100,7 @@ Zshell with `vi` mode enabled.
   | Surrpound Bind          | Normal      | `s` eg. `sr`, `sd`, `sa` for replace, delete, add.        |
 
 
-## LaTex
+### LaTex In Noevim
 
 The TeX distribution chosen is: [TeX Live](https://tug.org/texlive/)
 Integreted to Nvim with [VimTeX](https://github.com/lervag/vimtex)
@@ -126,7 +124,7 @@ The following are mainly to help my memory.
 For more default-keybinds: `:h vimtex-default-mappings`
 
 
-## Python and R
+### Python and R in Neovim
 
 [ Quarto-nvim ](https://github.com/quarto-dev/quarto-nvim) is used for a notebook style environment for `R`, `Python` and `Julia`. 
 [Slime](https://github.com/jpalardy/vim-slime) is used as a code runner.
@@ -147,7 +145,6 @@ For more default-keybinds: `:h vimtex-default-mappings`
 
 # Todo:
 
-- Title screen for nvim -- maybe use alpha because supports colors
 - Set up wine for stuff like paint.net
 - switch off of Ranger to a different terminal file manager that is less slow and works better.
 - Zshell "which-key" menu just like neovim's which-key plugin

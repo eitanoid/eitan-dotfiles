@@ -15,6 +15,14 @@ local function read_theme(name) -- read assii art from text file
 	return lines
 end
 
+--------------
+--- Colors ---
+--------------
+
+vim.api.nvim_set_hl(0, "AlphaFooterWhite", { fg = "#ffffff" })
+vim.api.nvim_set_hl(0, "AlphaFooterGray", { fg = "#999999" })
+vim.api.nvim_set_hl(0, "AlphaButtons", { fg = "#5fd6fa" })
+
 -- local header = {
 -- 	"   █████          ███  █████████████████████████████████████████████████     ",
 -- 	" ███████████████████████████████████████████████████████████████████████████ ",
@@ -65,12 +73,12 @@ local color_map = read_theme("coplands_colors.txt")
 
 local color_codes = {
 	["-"] = { fg = "#ff0000" }, -- Empty (Red)
-	["B"] = { fg = "#000000" }, -- Black
+	-- ["B"] = { fg = "#000000" }, -- Black
 	["G"] = { fg = "#555555" }, -- Gray (kind of)
-	["."] = { fg = "#ffffff" }, -- White
-	["Y"] = { fg = "#ffff00" }, -- Yellow
-	["P"] = { fg = "#ff00ff" }, -- Puple
-	["D"] = { fg = "#550055" }, -- Dark purple
+	-- ["."] = { fg = "#ffffff" }, -- White
+	-- ["Y"] = { fg = "#ffff00" }, -- Yellow
+	-- ["P"] = { fg = "#ff00ff" }, -- Puple
+	-- ["D"] = { fg = "#550055" }, -- Dark purple
 	["X"] = { fg = "#999999" },
 }
 
@@ -84,7 +92,7 @@ end
 
 local function colorize(_header, _header_color_map, _colors)
 	for letter, color in pairs(_colors) do
-		local color_name = "FoxNordColor" .. letter
+		local color_name = "AlphaHeader" .. letter
 		vim.api.nvim_set_hl(0, color_name, color)
 		_colors[letter] = color_name
 	end
@@ -126,15 +134,13 @@ local buttons = {
 	dashboard.button("c", " Colorschemes", ":Telescope colorscheme<cr>"),
 	dashboard.button("q", " Exit Vim", ":q<cr>"),
 }
-vim.api.nvim_set_hl(0, "buttons1", { fg = "#5fd6fa" })
-vim.api.nvim_set_hl(0, "buttons2", { fg = "#5fd6fa" })
 
 -- show table of options command:
 -- :lua print(vim.inspect(require("alpha.themes.dashboard").button("c", " Colorschemes", ":Telescope colorscheme<cr>")))
 
 for key, _ in ipairs(buttons) do
-	buttons[key].opts.hl_shortcut = "buttons1" -- rhs colors
-	buttons[key].opts.hl = "buttons1" -- lhs colors
+	buttons[key].opts.hl_shortcut = "AlphaButtons" -- rhs colors
+	buttons[key].opts.hl = "AlphaButtons" -- lhs colors
 	buttons[key].opts.width = 35 -- number of columns width
 	buttons[key].opts.cursor = 17 -- number of columns width
 end
@@ -178,7 +184,7 @@ dashboard.config.layout = {
 	{
 		type = "text",
 		val = "No matter where you go, everyone's connected.",
-		opts = { hl = "gray1", position = "center" },
+		opts = { hl = "AlphaFooterGray", position = "center" },
 	},
 	{ type = "padding", val = 2 },
 	dashboard.section.buttons,
@@ -190,8 +196,6 @@ alpha.setup(dashboard.config)
 
 -- Set footer
 -- Draw Footer After Startup
-vim.api.nvim_set_hl(0, "footer1", { fg = "#ffffff" })
-vim.api.nvim_set_hl(0, "gray1", { fg = "#999999" })
 
 vim.api.nvim_create_autocmd("User", {
 	once = true,
@@ -218,14 +222,14 @@ vim.api.nvim_create_autocmd("User", {
 			plugins_loaded,
 		}
 		dashboard.section.footer.opts.hl = {
-			{ { "gray1", 0, -1 } }, -- 2d array for each row
-			{ { "gray1", 0, -1 } },
-			{ { "gray1", 0, -1 } }, -- empty line
-			{ { "footer1", 0, -1 } },
-			{ { "footer1", 0, -1 } },
-			{ { "gray1", 0, -1 } }, -- empty line
-			{ { "gray1", 0, -1 } },
-			{ { "gray1", 0, -1 } },
+			{ { "AlphaFooterGray", 0, -1 } }, -- 2d array for each row
+			{ { "AlphaFooterGray", 0, -1 } }, -- NOTE: this colors each line from index 0 to -1 (last val) as AlphaFooterGray.
+			{ { "AlphaFooterGray", 0, -1 } }, -- empty line
+			{ { "AlphaFooterWhite", 0, -1 } },
+			{ { "AlphaFooterWhite", 0, -1 } },
+			{ { "AlphaFooterGray", 0, -1 } }, -- empty line
+			{ { "AlphaFooterGray", 0, -1 } },
+			{ { "AlphaFooterGray", 0, -1 } },
 		}
 		pcall(vim.cmd.AlphaRedraw)
 	end,
