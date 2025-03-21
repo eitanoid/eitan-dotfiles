@@ -54,7 +54,7 @@ require("lazy").setup({
 		-- dependencies = { 'echasnovski/mini.icons' },
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = "VimEnter",
-		config = require("plugins.alpha.alpha").config --[[ require("plugins.alpha_colored_animation").config, ]],
+		config = require("plugins.alpha").config --[[ require("plugins.alpha_colored_animation").config, ]],
 		-- available: devicons, mini, default is mini
 		-- if provider not loaded and enabled is true, it will try to use another provider
 	},

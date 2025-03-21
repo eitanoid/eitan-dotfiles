@@ -110,7 +110,7 @@ local function create_animation_timer(dashboard, alpha, chosen_file, colors_file
 		end)
 	)
 
-	vim.api.nvim_create_autocmd("BufLeave", {
+	vim.api.nvim_create_autocmd("BufLeave", { -- stop animating when alpha closes
 		pattern = "alpha",
 		callback = function()
 			timer:stop()

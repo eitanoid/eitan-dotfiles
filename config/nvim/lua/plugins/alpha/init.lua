@@ -6,14 +6,13 @@ local M = {}
 
 -------- Variables For Animated Header -------------
 
---- Path to animation file
---- path to colors file
---- frame delay (in ms)
+local config = vim.fn.stdpath("config")
+local animation_file = config .. "/lua/plugins/alpha/themes/" .. "/coplands-animation.txt" -- path to the animation ascii art map
+local colors_file = config .. "/lua/plugins/alpha/themes/" .. "/coplands-animation-colormap.txt" -- path to the animation color map
+local frame_delay = 500 -- Header animation delay between frames in ms
 
-local home = os.getenv("HOME")
-local animation_file = home .. "/.config/nvim/lua/plugins/themes/" .. "/coplands-animation.txt" -- whereis the animation stored
-local colors_file = home .. "/.config/nvim/lua/plugins/themes/" .. "/coplands-animation-colormap.txt" -- whereis the animation stored
-local frame_delay = 100
+-------- Color map for the animation map file --------
+
 local color_key = {
 	["-"] = { fg = "#ff0000" }, -- Empty (Red)
 	["G"] = { fg = "#555555" }, -- Gray (kind of)
@@ -24,7 +23,6 @@ M.config = function()
 	local alpha = require("alpha")
 	local dashboard = require("alpha.themes.dashboard")
 	local animation = require("plugins.alpha.alpha_colored_animation")
-
 	--------------
 	--- Colors ---
 	--------------
@@ -42,8 +40,8 @@ M.config = function()
 		dashboard.button("q", " Exit Vim", ":q<cr>"),
 	}
 
-	-- show table of options command (useful):
-	-- :lua print(vim.inspect(require("alpha.themes.dashboard").button("c", " Colorschemes", ":Telescope colorscheme<cr>")))
+	-- debug to show the table of button opts :lua print(vim.inspect(require("alpha.themes.dashboard").button("c", " Colorschemes", ":Telescope colorscheme<cr>")))
+
 	for key, _ in ipairs(buttons) do
 		buttons[key].opts.hl_shortcut = "AlphaButtons" -- rhs colors
 		buttons[key].opts.hl = "AlphaButtons" -- lhs colors
@@ -67,13 +65,13 @@ M.config = function()
 		dashboard.section.footer,
 	}
 
-	animation.init_header(dashboard, animation_file, color_key, colors_file)
+	animation.init_header(dashboard, animation_file, color_key, colors_file) -- first frame of header
 
 	alpha.setup(dashboard.config)
 
-	animation.init_animation(dashboard, alpha, animation_file, colors_file, color_key, frame_delay)
+	animation.init_animation(dashboard, alpha, animation_file, colors_file, color_key, frame_delay) -- animate header
 
-	-- Draw Footer with information after startup
+	-- Draw Footer with information after lazy startup to show plugin and load time
 	vim.api.nvim_create_autocmd("User", {
 		once = true,
 		pattern = "LazyVimStarted",
@@ -99,12 +97,12 @@ M.config = function()
 				plugins_loaded,
 			}
 			dashboard.section.footer.opts.hl = {
-				{ { "AlphaFooterGray", 0, -1 } }, -- 2d array for each row
-				{ { "AlphaFooterGray", 0, -1 } }, -- NOTE: this colors each line from index 0 to -1 (last val) as AlphaFooterGray.
-				{ { "AlphaFooterGray", 0, -1 } }, -- empty line
+				{ { "AlphaFooterGray", 0, -1 } }, -- 2d array for each row indexed from 0 to last -1 col
+				{ { "AlphaFooterGray", 0, -1 } },
+				{ { "AlphaFooterGray", 0, -1 } },
 				{ { "AlphaFooterWhite", 0, -1 } },
 				{ { "AlphaFooterWhite", 0, -1 } },
-				{ { "AlphaFooterGray", 0, -1 } }, -- empty line
+				{ { "AlphaFooterGray", 0, -1 } },
 				{ { "AlphaFooterGray", 0, -1 } },
 				{ { "AlphaFooterGray", 0, -1 } },
 			}
