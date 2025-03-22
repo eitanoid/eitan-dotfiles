@@ -17,7 +17,7 @@ local function colorize(_header_color_map, _colors)
 		color_names[letter] = color_name
 	end
 
-	local colorized = {}
+    local colorized = {}
 
 	for _, line in ipairs(_header_color_map) do
 		local colorized_line = {}

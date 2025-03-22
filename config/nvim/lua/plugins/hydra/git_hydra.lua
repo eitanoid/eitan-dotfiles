@@ -12,10 +12,10 @@ local GitSigns = package.loaded["gitsigns"] or {}
 --- You're gonna need 'lewis6991/gitsigns.nvim', okay?
 ---@diagnostic disable: undefined-field, need-check-nil
 return {
-	name = "Git",
-	mode = { "n", "x" },
-	hint = hint,
-	body = "<leader>g",
+    name = "Git",
+    mode = { "n", "x" },
+    hint = hint,
+    body = "<leader>g",
   -- stylua: ignore
   heads = {
     { '<Down>', function()
@@ -50,28 +50,28 @@ return {
     { 'v', GitSigns.select_hunk,                   { desc = '[v]isually select hunk' } },
     { 'q', nil,                                    { exit = true, nowait = true, desc = '[q]uit Git Hydra' } },
   },
-	config = {
-		color = "pink",
-		invoke_on_body = true,
-		hint = {
-			---@see api-win_config
-			float_opts = {
-				style = "minimal",
-				border = "single",
-				focusable = false,
-				noautocmd = true,
-			},
-		},
-		on_enter = function()
-			vim.cmd.mkview()
-			vim.cmd("silent! %foldopen!")
-			vim.bo.modifiable = false
-		end,
-		on_exit = function()
-			local cursor_pos = vim.api.nvim_win_get_cursor(0)
-			vim.cmd.loadview()
-			vim.api.nvim_win_set_cursor(0, cursor_pos)
-			vim.cmd.normal("zv")
-		end,
-	},
+    config = {
+        color = "pink",
+        invoke_on_body = true,
+        hint = {
+            ---@see api-win_config
+            float_opts = {
+                style = "minimal",
+                border = "single",
+                focusable = false,
+                noautocmd = true,
+            },
+        },
+        on_enter = function()
+            vim.cmd.mkview()
+            vim.cmd("silent! %foldopen!")
+            vim.bo.modifiable = false
+        end,
+        on_exit = function()
+            local cursor_pos = vim.api.nvim_win_get_cursor(0)
+            vim.cmd.loadview()
+            vim.api.nvim_win_set_cursor(0, cursor_pos)
+            vim.cmd.normal("zv")
+        end,
+    },
 }

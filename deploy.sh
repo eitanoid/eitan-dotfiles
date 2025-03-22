@@ -53,3 +53,7 @@ echo "Synced Tmux"
 mkdir -p $HOME/.config/zathura
 rsync -rav $(pwd)/config/zathura $HOME/.config 
 echo "Synced Zathura"
+
+##Stylua
+rsync -rav $(pwd)/.stylua.toml $HOME/
+echo "Synced Stylua"
