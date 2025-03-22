@@ -109,24 +109,17 @@ M.config = function()
 			local clock = " " .. os.date("%H:%M")
 			local date = " " .. os.date("%d-%m-%y")
 
+            -- stylua: ignore start
 			local footer = {
-				{ type = "text", val = clock, opts = { hl = "AlphaFooterGray", position = "center" } },
-
-				{ type = "text", val = date, opts = { hl = "AlphaFooterGray", position = "center" } },
-				{ type = "padding", val = 1 },
-				{
-					type = "text",
-					val = "Coplands OS Enterprise",
-					opts = { hl = "AlphaFooterWhite", position = "center" },
-				},
-				{
-					type = "text",
-					val = "Produced by Tachibana Lab",
-					opts = { hl = "AlphaFooterWhite", position = "center" },
-				},
-				{ type = "padding", val = 1 },
-				{ type = "text", val = plugins_loaded, opts = { hl = "AlphaFooterGray", position = "center" } },
+				{ type = "text",    val = clock, opts = { hl = "AlphaFooterGray", position = "center"                        }   } ,
+				{ type = "text",    val = date, opts = { hl = "AlphaFooterGray", position = "center"                         }   } ,
+				{ type = "padding", val = 1                                                                                  } ,
+				{ type = "text",    val = "Coplands OS Enterprise", opts = { hl = "AlphaFooterWhite", position = "center"    }   } ,
+				{ type = "text",    val = "Produced by Tachibana Lab", opts = { hl = "AlphaFooterWhite", position = "center" }   } ,
+				{ type = "padding", val = 1                                                                                  } ,
+				{ type = "text",    val = plugins_loaded, opts = { hl = "AlphaFooterGray", position = "center"               }   } ,
 			}
+			-- stylua: ignore end
 
 			for i = 1, #footer do
 				table.insert(dashboard.config.layout, footer[i])
