@@ -11,8 +11,8 @@ local config = vim.fn.stdpath("config")
 -------------------------------------
 
 local animation_file = config .. "/lua/plugins/alpha/themes/" .. "/coplands-animation.txt" -- path to the animation ascii art map
-local colors_file = config .. "/lua/plugins/alpha/themes/" .. "/coplands-animation-colormap.txt" -- path to the animation color map
-local frame_delay = 200 -- Header animation delay between frames in ms
+local colors_file = config .. "/lua/plugins/alpha/themes/" .. "/coplands-colortest.txt" -- path to the animation color map
+local frame_delay = 300 -- Header animation delay between frames in ms
 
 ---------------------------
 --- Animation Color Map ---
@@ -93,7 +93,7 @@ M.config = function()
 		val = "                                             No matter where you go, everyone's connected.",
 		width = 35, --# width of shown text
 		frame_delay = 100, -- ms
-		speed = -1, -- # of shifts per frame. Negative value changes direction
+		speed = 1, -- # of shifts per frame. Negative value changes direction
 	}
 	-- create subheader animation loop
 	animation.init_section_scroller(alpha, dashboard.config.layout[4], subheader_config) -- subheader is at index 4
@@ -104,7 +104,7 @@ M.config = function()
 		pattern = "LazyVimStarted",
 		callback = function()
 			local stats = require("lazy").stats()
-			local ms = math.floor(stats.startuptime)
+			local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100) -- ms to 2 decimals
 			local plugins_loaded = "Loaded " .. stats.loaded .. "/" .. stats.count .. " Plugins in " .. ms .. "ms"
 			local row_len = string.len(plugins_loaded)
 

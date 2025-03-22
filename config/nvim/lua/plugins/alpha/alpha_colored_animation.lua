@@ -83,7 +83,7 @@ local function read_ascii_frames(chosen_file)
 	return frames
 end
 
--- Create the animation and animation timer
+-- Create the dashboard animation and animation timer
 local function create_animation(alpha, dashboard, config) -- chosen_file, colors_file, color_codes, frame_delay
 	--[[ 
     local animation_config = {
@@ -115,14 +115,15 @@ local function create_animation(alpha, dashboard, config) -- chosen_file, colors
 
 	timer:start(
 		0,
-		config.frame_delay, -- 50
+		config.frame_delay,
 		vim.schedule_wrap(function()
+			alpha.redraw()
 			index = (index % (math.max(#colors, #frames))) + 1
 			local color_index = (index % #colors) + 1
 			local frame_index = (index % #frames) + 1
 			dashboard.section.header.val = frames[frame_index]
 			dashboard.section.header.opts.hl = colorize(colors[color_index], cloneTable(config.color_map))
-			alpha.redraw()
+			-- alpha.redraw()
 		end)
 	)
 
