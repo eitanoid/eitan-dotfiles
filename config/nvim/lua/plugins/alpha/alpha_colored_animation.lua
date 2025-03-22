@@ -85,6 +85,15 @@ end
 
 -- Create the animation and animation timer
 local function create_animation(alpha, dashboard, config) -- chosen_file, colors_file, color_codes, frame_delay
+	--[[ 
+    local animation_config = {
+        file = animation_file, -- path to animation file
+        colors = colors_file, -- path to colors animation file
+        color_map = color_key, -- map of symbol to colors
+        frame_delay = frame_delay, -- delay between frames in ms
+    }
+]]
+
 	if not config.frames then
 		return
 	end
@@ -124,12 +133,22 @@ local function create_animation(alpha, dashboard, config) -- chosen_file, colors
 	})
 end
 
-local function create_scroller_animation(alpha, section, config) -- TODO: shifting isn't correct
+local function cycle_string(str, cycle_offset) -- offset ranges from -#str to #str
+	local shifted = str .. str .. str
+	cycle_offset = cycle_offset -- fixes indexing as otherwise -1 doesnt't shift
+	local l = cycle_offset
+	local r = #str + cycle_offset
+	shifted = shifted:sub(#str + l, #str + r - 1)
+	return shifted
+end
+
+local function create_scroller_animation(alpha, section, config) -- scroll text animation
 	--[[ 
     config = {
-    val = "no matter where you go, everyone's connected"
-    frame_delay = 100 ms
-    speed = 1 # shifts per frame
+        val = "no matter where you go, everyone's connected"
+        width = 10 chars displayed at a time
+        frame_delay = 100 ms
+        speed = 1 # shifts per frame. changing sign changse direciton.
     }
      ]]
 
@@ -137,22 +156,22 @@ local function create_scroller_animation(alpha, section, config) -- TODO: shifti
 		return
 	end
 
+	config.speed = config.speed - 1 -- fixes offset. 0 is no scrolling.
+
 	-- Set initial frame
-	section.val = config.val
+	section.val = config.val:sub(1, config.width)
 	alpha.redraw()
 
 	local timer = vim.uv.new_timer()
-	local cycle_offset = config.speed --- shift val by 'cycle_offset' value.
+	local start_index = 1
 
 	timer:start(
 		0,
 		config.frame_delay, -- 50
 		vim.schedule_wrap(function()
-			local current = section.val
-			local shifted = current .. current
-			cycle_offset = (cycle_offset + config.speed) % #current
-			shifted = shifted:sub(cycle_offset, cycle_offset + #current - 1)
-			section.val = shifted
+			local shifted = cycle_string(config.val, start_index + config.speed)
+			start_index = (start_index + config.speed) % #shifted + 1
+			section.val = shifted:sub(1, config.width)
 			alpha.redraw()
 		end)
 	)
@@ -164,15 +183,6 @@ local function create_scroller_animation(alpha, section, config) -- TODO: shifti
 		end,
 	})
 end
-
---[[ 
-local animation_config = {
-	file = animation_file, -- path to animation file
-	colors = colors_file, -- path to colors animation file
-	color_map = color_key, -- map of symbol to colors
-	frame_delay = frame_delay, -- delay between frames in ms
-}
-]]
 
 -- start animation after alpha is ready
 -- this means the header is only configured after neovim has loaded

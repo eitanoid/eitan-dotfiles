@@ -55,8 +55,8 @@ M.config = function()
 		dashboard.section.header,
 		{ type = "padding", val = 2 },
 		{
-			type = "text",
-			val = "No matter where you go, everyone's connected.",
+			type = "text", -- subheader at index #4.
+			val = " ",
 			opts = { hl = "AlphaFooterGray", position = "center" },
 		},
 		{ type = "padding", val = 2 },
@@ -77,11 +77,12 @@ M.config = function()
 	}
 	animation.init_header_animation(alpha, dashboard, header_config) -- animate header
 	-- TODO: scrolling subheader
-	-- animation.init_section_scroller(alpha, dashboard.config.layout[4], {
-	-- 	val = "No matter where you go, everyone's connected.            ",
-	-- 	frame_delay = 200, -- ms
-	-- 	speed = 1, --# shifts per frame
-	-- }) -- animate header
+	animation.init_section_scroller(alpha, dashboard.config.layout[4], { -- subheader is at index 4
+		val = "                                             No matter where you go, everyone's connected.",
+		width = 35, --# width of shown text
+		frame_delay = 70, -- ms
+		speed = -1, -- # of shifts per frame. Negative value changes direction
+	}) -- animate header
 
 	-- Draw Footer with information after lazy startup to show plugin and load time
 	vim.api.nvim_create_autocmd("User", {
