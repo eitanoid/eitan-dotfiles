@@ -65,11 +65,23 @@ M.config = function()
 		dashboard.section.footer,
 	}
 
-	animation.init_header(dashboard, animation_file, color_key, colors_file) -- first frame of header
+	-- animation.init_header(dashboard, animation_file, color_key, colors_file) -- first frame of header
 
 	alpha.setup(dashboard.config)
 
-	animation.init_animation(dashboard, alpha, animation_file, colors_file, color_key, frame_delay) -- animate header
+	local header_config = {
+		frames = animation_file, -- path to animation file
+		color_frames = colors_file, -- path to colors file
+		color_map = color_key, -- map of symbol to colors
+		frame_delay = frame_delay, -- map of symbol to colors
+	}
+	animation.init_header_animation(alpha, dashboard, header_config) -- animate header
+	-- TODO: scrolling subheader
+	-- animation.init_section_scroller(alpha, dashboard.config.layout[4], {
+	-- 	val = "No matter where you go, everyone's connected.            ",
+	-- 	frame_delay = 200, -- ms
+	-- 	speed = 1, --# shifts per frame
+	-- }) -- animate header
 
 	-- Draw Footer with information after lazy startup to show plugin and load time
 	vim.api.nvim_create_autocmd("User", {

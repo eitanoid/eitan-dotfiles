@@ -4,13 +4,13 @@ The dotfiles/ directory is located in `$HOME/git/dotfiles`.
 
 ## Ranger
 
-Ranger is installed with:
+Ranger is used for the primary terminal file manager with:
 
-[ueberzugg](https://github.com/jstkdng/ueberzugpp) for image preview.
+Kitty's terminal image rendering.
 
-`.md` files are previewed with [glow](https://github.com/charmbracelet/glow)
+`.md` files are previewed with [glow](https://github.com/charmbracelet/glow).
 
-dev icons in preview with [dev-icons](https://github.com/alexanderjeurissen/ranger_devicons)
+dev icons in preview with [dev-icons](https://github.com/alexanderjeurissen/ranger_devicons).
 
 ## Neovim
 

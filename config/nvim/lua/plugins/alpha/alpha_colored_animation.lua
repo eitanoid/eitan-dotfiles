@@ -39,7 +39,13 @@ local function colorize(_header_color_map, _colors)
 	return colorized
 end
 
--- Read and interrupt frames from a text file
+-- Read and interrupt frames from a text file. begin frame with `frame:` and end with a line of `=`:
+--[[ 
+frame:
+ascii art here...
+more ascii art...
+=================
+ ]]
 local function read_ascii_frames(chosen_file)
 	local file = io.open(chosen_file, "r")
 	if not file then
@@ -78,13 +84,13 @@ local function read_ascii_frames(chosen_file)
 end
 
 -- Create the animation and animation timer
-local function create_animation_timer(dashboard, alpha, chosen_file, colors_file, color_codes, frame_delay)
-	if not chosen_file then
+local function create_animation(alpha, dashboard, config) -- chosen_file, colors_file, color_codes, frame_delay
+	if not config.frames then
 		return
 	end
 
-	local frames = read_ascii_frames(chosen_file)
-	local colors = read_ascii_frames(colors_file)
+	local frames = read_ascii_frames(config.frames)
+	local colors = read_ascii_frames(config.color_frames)
 
 	if #frames == 0 or #colors == 0 then
 		return
@@ -92,20 +98,20 @@ local function create_animation_timer(dashboard, alpha, chosen_file, colors_file
 
 	-- Set initial frame
 	dashboard.section.header.val = frames[1]
-	dashboard.section.header.opts.hl = colorize(colors[1], cloneTable(color_codes))
+	dashboard.section.header.opts.hl = colorize(colors[1], cloneTable(config.color_map))
 	alpha.redraw()
 
-	local timer = vim.loop.new_timer()
+	local timer = vim.uv.new_timer()
 	local frame_index = 1
 
 	timer:start(
 		0,
-		frame_delay, -- 50
+		config.frame_delay, -- 50
 		vim.schedule_wrap(function()
 			frame_index = (frame_index % #frames) + 1
 			local color_index = (frame_index % #colors) + 1
 			dashboard.section.header.val = frames[frame_index]
-			dashboard.section.header.opts.hl = colorize(colors[color_index], cloneTable(color_codes))
+			dashboard.section.header.opts.hl = colorize(colors[color_index], cloneTable(config.color_map))
 			alpha.redraw()
 		end)
 	)
@@ -118,24 +124,74 @@ local function create_animation_timer(dashboard, alpha, chosen_file, colors_file
 	})
 end
 
--- Set up initial header at the 1st frame.
-M.init_header = function(dashboard, animation_file, color_codes, colors_file)
-	if animation_file then
-		local initial_frames = read_ascii_frames(animation_file)
-		local initial_colors = read_ascii_frames(colors_file)
-		if #initial_frames > 0 then
-			dashboard.section.header.val = initial_frames[1]
-			dashboard.section.header.opts.hl = colorize(initial_colors[1], cloneTable(color_codes))
-		end
+local function create_scroller_animation(alpha, section, config) -- TODO: shifting isn't correct
+	--[[ 
+    config = {
+    val = "no matter where you go, everyone's connected"
+    frame_delay = 100 ms
+    speed = 1 # shifts per frame
+    }
+     ]]
+
+	if not config.val then
+		return
 	end
+
+	-- Set initial frame
+	section.val = config.val
+	alpha.redraw()
+
+	local timer = vim.uv.new_timer()
+	local cycle_offset = config.speed --- shift val by 'cycle_offset' value.
+
+	timer:start(
+		0,
+		config.frame_delay, -- 50
+		vim.schedule_wrap(function()
+			local current = section.val
+			local shifted = current .. current
+			cycle_offset = (cycle_offset + config.speed) % #current
+			shifted = shifted:sub(cycle_offset, cycle_offset + #current - 1)
+			section.val = shifted
+			alpha.redraw()
+		end)
+	)
+
+	vim.api.nvim_create_autocmd("BufLeave", { -- stop animating when alpha closes
+		pattern = "alpha",
+		callback = function()
+			timer:stop()
+		end,
+	})
 end
 
+--[[ 
+local animation_config = {
+	file = animation_file, -- path to animation file
+	colors = colors_file, -- path to colors animation file
+	color_map = color_key, -- map of symbol to colors
+	frame_delay = frame_delay, -- delay between frames in ms
+}
+]]
+
 -- start animation after alpha is ready
-M.init_animation = function(dashboard, alpha, animation_file, colors_file, color_codes, frame_delay)
+-- this means the header is only configured after neovim has loaded
+M.init_header_animation = function(alpha, dashboard, config_table)
 	vim.api.nvim_create_autocmd("User", {
+		once = true,
 		pattern = "AlphaReady",
 		callback = function()
-			create_animation_timer(dashboard, alpha, animation_file, colors_file, color_codes, frame_delay)
+			create_animation(alpha, dashboard, config_table)
+		end,
+	})
+end
+
+M.init_section_scroller = function(alpha, section, config_table)
+	vim.api.nvim_create_autocmd("User", {
+		once = true,
+		pattern = "AlphaReady",
+		callback = function()
+			create_scroller_animation(alpha, section, config_table)
 		end,
 	})
 end

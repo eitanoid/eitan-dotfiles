@@ -51,9 +51,9 @@ vim.api.nvim_create_user_command(
 			return
 		end
 
-		local env = tostring(vim.fn.input("Matrix (default is placeholder): ")) -- default is placeholder
+		local env = tostring(vim.fn.input("Matrix (default is matrix): ")) -- default is placeholder
 		if not env or env == "" then
-			env = "(<>)"
+			env = "matrix"
 		end
 		vim.cmd("CreateLatexMatrix " .. tostring(rows) .. " " .. tostring(cols) .. " " .. env)
 	end,
