@@ -111,14 +111,15 @@ local function create_animation(alpha, dashboard, config) -- chosen_file, colors
 	alpha.redraw()
 
 	local timer = vim.uv.new_timer()
-	local frame_index = 1
+	local index = 1
 
 	timer:start(
 		0,
 		config.frame_delay, -- 50
 		vim.schedule_wrap(function()
-			frame_index = (frame_index % #frames) + 1
-			local color_index = (frame_index % #colors) + 1
+			index = (index % (math.max(#colors, #frames))) + 1
+			local color_index = (index % #colors) + 1
+			local frame_index = (index % #frames) + 1
 			dashboard.section.header.val = frames[frame_index]
 			dashboard.section.header.opts.hl = colorize(colors[color_index], cloneTable(config.color_map))
 			alpha.redraw()
