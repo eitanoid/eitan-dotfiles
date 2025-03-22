@@ -128,6 +128,7 @@ local function create_animation(alpha, dashboard, config) -- chosen_file, colors
 	)
 
 	vim.api.nvim_create_autocmd("BufLeave", { -- stop animating when alpha closes
+		once = true,
 		pattern = "alpha",
 		callback = function()
 			timer:stop()
@@ -137,11 +138,8 @@ end
 
 local function cycle_string(str, cycle_offset) -- offset ranges from -#str to #str
 	local shifted = str .. str .. str
-	cycle_offset = cycle_offset -- fixes indexing as otherwise -1 doesnt't shift
-	local l = cycle_offset
-	local r = #str + cycle_offset
-	shifted = shifted:sub(#str + l, #str + r - 1)
-	return shifted
+	local l, r = cycle_offset, #str + cycle_offset
+	return shifted:sub(#str + l, #str + r - 1)
 end
 
 local function create_scroller_animation(alpha, section, config) -- scroll text animation
@@ -179,6 +177,7 @@ local function create_scroller_animation(alpha, section, config) -- scroll text 
 	)
 
 	vim.api.nvim_create_autocmd("BufLeave", { -- stop animating when alpha closes
+		once = true,
 		pattern = "alpha",
 		callback = function()
 			timer:stop()

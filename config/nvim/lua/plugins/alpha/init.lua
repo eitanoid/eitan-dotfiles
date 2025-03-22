@@ -40,7 +40,7 @@ M.config = function()
 
 	local buttons = {
 		-- { type = "text", val = "Quick links", opts = { hl = "buttons1", position = "center" } }, can add a button title
-		dashboard.button("i", " New Fie", ":ene <BAR> startinsert <cr>"),
+		dashboard.button("i", " New File", ":ene <BAR> startinsert <cr>"),
 		dashboard.button("r", " Recent Files", ":Telescope oldfiles<cr>"),
 		dashboard.button("<leader>ff", " File Browser", "<Cmd>NvimTreeToggle<CR>"),
 		dashboard.button("e", "󰈞 Find File", ":Telescope find_files<cr>"),
@@ -70,7 +70,6 @@ M.config = function()
 		{ type = "padding", val = 2 },
 		dashboard.section.buttons,
 		{ type = "padding", val = 2 },
-		dashboard.section.footer,
 	}
 
 	alpha.setup(dashboard.config) -- initialize static elements
@@ -90,7 +89,7 @@ M.config = function()
 	animation.init_header_animation(alpha, dashboard, header_config)
 
 	local subheader_config = {
-		val = "                                             No matter where you go, everyone's connected.",
+		val = "                                        No matter where you go, everyone's connected.",
 		width = 35, --# width of shown text
 		frame_delay = 100, -- ms
 		speed = 1, -- # of shifts per frame. Negative value changes direction
@@ -106,33 +105,33 @@ M.config = function()
 			local stats = require("lazy").stats()
 			local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100) -- ms to 2 decimals
 			local plugins_loaded = "Loaded " .. stats.loaded .. "/" .. stats.count .. " Plugins in " .. ms .. "ms"
-			local row_len = string.len(plugins_loaded)
 
-			local clock = string.rep(" ", row_len / 2 - 3) .. " " .. os.date("%H:%M") --always of length ahh:mm 6. 6/2 = 3
-			local date = string.rep(" ", row_len / 2 - 4) .. " " .. os.date("%d-%m-%y") -- mdd-mm-yy 9. 9/2 = 4
-			local foot1 = "Coplands OS Enterprise"
-			local foot2 = "Produced by Tachibana Lab"
+			local clock = " " .. os.date("%H:%M")
+			local date = " " .. os.date("%d-%m-%y")
 
-			-- Footer
-			dashboard.section.footer.val = {
-				clock,
-				date,
-				"",
-				string.rep(" ", (row_len - string.len(foot1)) / 2 + 1) .. foot1, -- centering
-				string.rep(" ", (row_len - string.len(foot2)) / 2 + 1) .. foot2,
-				"",
-				plugins_loaded,
+			local footer = {
+				{ type = "text", val = clock, opts = { hl = "AlphaFooterGray", position = "center" } },
+
+				{ type = "text", val = date, opts = { hl = "AlphaFooterGray", position = "center" } },
+				{ type = "padding", val = 1 },
+				{
+					type = "text",
+					val = "Coplands OS Enterprise",
+					opts = { hl = "AlphaFooterWhite", position = "center" },
+				},
+				{
+					type = "text",
+					val = "Produced by Tachibana Lab",
+					opts = { hl = "AlphaFooterWhite", position = "center" },
+				},
+				{ type = "padding", val = 1 },
+				{ type = "text", val = plugins_loaded, opts = { hl = "AlphaFooterGray", position = "center" } },
 			}
-			dashboard.section.footer.opts.hl = {
-				{ { "AlphaFooterGray", 0, -1 } }, -- 2d array for each row indexed from 0 to last -1 col
-				{ { "AlphaFooterGray", 0, -1 } },
-				{ { "AlphaFooterGray", 0, -1 } },
-				{ { "AlphaFooterWhite", 0, -1 } },
-				{ { "AlphaFooterWhite", 0, -1 } },
-				{ { "AlphaFooterGray", 0, -1 } },
-				{ { "AlphaFooterGray", 0, -1 } },
-				{ { "AlphaFooterGray", 0, -1 } },
-			}
+
+			for i = 1, #footer do
+				table.insert(dashboard.config.layout, footer[i])
+			end
+
 			pcall(vim.cmd.AlphaRedraw)
 		end,
 	})
