@@ -68,14 +68,14 @@ require("lazy").setup({
         },
     },
 
-    { "tpope/vim-fugitive", event = "SafeState" },
+    { "tpope/vim-fugitive", event = "VeryLazy" },
 
-    { "tpope/vim-rhubarb", event = "SafeState" },
+    { "tpope/vim-rhubarb", event = "VeryLazy" },
     --
     { -- proper merge editor
         --- @see documentation at https://github.com/sindrets/diffview.nvim
         "sindrets/diffview.nvim",
-        event = "SafeState",
+        event = "VeryLazy",
         dependencies = { "nvim-tree/nvim-web-devicons" },
     },
 
@@ -90,7 +90,8 @@ require("lazy").setup({
         "Isrothy/neominimap.nvim",
         version = "v3.*.*",
         enabled = true,
-        lazy = false, -- NOTE: NO NEED to Lazy load
+        lazy = true, -- NOTE: NO NEED to Lazy load
+        event = "VeryLazy",
 
         keys = require("plugins.neominimap").keys,
         init = require("plugins.neominimap").init,
@@ -261,7 +262,7 @@ require("lazy").setup({
 
     { -- todo later -- repeat keybinds and hint menus
         "anuvyklack/hydra.nvim",
-        event = "BufEnter",
+        event = "VeryLazy",
     },
 
     { -- Fuzzy Finder (files, lsp, etc)
