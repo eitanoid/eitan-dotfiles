@@ -106,7 +106,7 @@ require("lazy").setup({
     -- directory tree
     {
         "nvim-tree/nvim-tree.lua",
-        priority = 900, -- we want this loaded pretty much immediately
+        cmd = { "NvimTreeToggle", "NvimTreeFindFile" }, -- only load when the commands are ran
         dependencies = {
             "nvim-tree/nvim-web-devicons",
         },
@@ -117,6 +117,7 @@ require("lazy").setup({
     -- tabs in neovim
     {
         "romgrk/barbar.nvim",
+        event = "BufWinEnter",
         dependencies = {
             "lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
             "nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
@@ -142,7 +143,7 @@ require("lazy").setup({
     { -- enables folds
         "kevinhwang91/nvim-ufo",
         dependencies = { "kevinhwang91/promise-async" },
-        event = "BufReadPre",
+        event = "BufRead",
         keys = {
             {
                 "zR",
@@ -207,14 +208,52 @@ require("lazy").setup({
         lazy = false, -- we don't want to lazy load VimTeX
         -- tag = "v2.15", -- uncomment to pin to a specific release
         init = require("plugins.vimtex")(),
-        dependencies = { "micangl/cmp-vimtex" }, -- completions support for vimtex
     },
 
-    -- quarto configuration
-    require("plugins.quarto"),
+    --[[ 
+				Quarto Configuration:
+		]]
+
+    { -- requires plugins in lua/plugins/treesitter.lua and lua/plugins/lsp.lua
+        -- for complete functionality (language features)
+        "quarto-dev/quarto-nvim",
+        ft = { "quarto" },
+        dev = false,
+        opts = {},
+        dependencies = {
+            -- for language features in code cells
+            -- configured in lua/plugins/lsp.lua and
+            -- added as a nvim-cmp source in lua/plugins/completion.lua
+            "jmbuhr/otter.nvim",
+        },
+    },
+
+    -- directly open ipynb files as quarto docuements and convert back behind the scenes
+    {
+        "GCBallesteros/jupytext.nvim",
+        opts = {
+            custom_language_formatting = {
+                python = {
+                    extension = "qmd",
+                    style = "quarto",
+                    force_ft = "quarto",
+                },
+                r = {
+                    extension = "qmd",
+                    style = "quarto",
+                    force_ft = "quarto",
+                },
+            },
+        },
+    },
 
     -- Send to terminal / code runner
-    require("plugins.slime"),
+    {
+        "jpalardy/vim-slime",
+        dev = false,
+        init = require("plugins.slime").init,
+        config = require("plugins.slime").config,
+    },
 
     ---------------------
     --- Functionality ---
@@ -290,6 +329,7 @@ require("lazy").setup({
     {
         -- Main LSP Configuration
         "neovim/nvim-lspconfig",
+        event = { "BufReadPre", "BufNewFile" }, -- NOTE: remove if things break
         dependencies = {
             -- Automatically install LSPs and related tools to stdpath for Neovim
             { "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
@@ -297,7 +337,6 @@ require("lazy").setup({
             "WhoIsSethDaniel/mason-tool-installer.nvim",
 
             -- Useful status updates for LSP.
-            -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
             { "j-hui/fidget.nvim", opts = {}, lazy = true },
 
             -- Allows extra capabilities provided by nvim-cmp
@@ -326,15 +365,17 @@ require("lazy").setup({
     { -- Autocompletion
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
+        lazy = true,
         dependencies = {
             -- completion sources
+            "hrsh7th/cmp-omni", -- Neovim Omnifunc
+            "hrsh7th/cmp-path", -- path competions
             "saadparwaiz1/cmp_luasnip",
             "petertriho/cmp-git", -- Git
             "hrsh7th/cmp-nvim-lsp", -- lsp completions
-            "hrsh7th/cmp-path", -- path competions
-            "hrsh7th/cmp-omni", -- Neovim Omnifunc
-            "kdheepak/cmp-latex-symbols", -- LaTeX Letters
-            "Snikimonkd/cmp-go-pkgs", -- golang packages
+            { "Snikimonkd/cmp-go-pkgs" }, --, ft = "go" }, -- golang packages
+            { "micangl/cmp-vimtex" }, --, ft = "tex" }, -- completions support for vimtex
+            { "kdheepak/cmp-latex-symbols" }, --, ft = "tex" }, -- LaTeX Letters
 
             -- Snippet Engine & its associated nvim-cmp source
             {
@@ -402,9 +443,13 @@ require("lazy").setup({
     },
 
     -- Comment plugin `gc` motion
-    { "numToStr/Comment.nvim", opts = {} },
+    {
+        "numToStr/Comment.nvim",
+        event = "VeryLazy",
+        opts = {}, -- use defaults
+    },
     --
-    -- self explanatory, raindow brackets etc
+    -- self explanatory, raindow brackets etc. requires treesitter parsers.
     { "HiPhish/rainbow-delimiters.nvim" },
 
     -- closes pairs automatically
@@ -525,7 +570,7 @@ require("lazy").setup({
     ------------------
     { -- Highlight, edit, and navigate code
         "nvim-treesitter/nvim-treesitter",
-        event = "BufEnter",
+        event = "BufRead", -- NOTE: remove if this breaks stuff
         build = ":TSUpdate",
         main = "nvim-treesitter.configs", -- Sets main module to use for opts
         -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
