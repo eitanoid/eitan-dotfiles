@@ -89,13 +89,42 @@ return function()
         { name = "path" }, -- file system path
     }
 
-    config.formatting = {
-        fields = { "menu", "abbr", "kind" },
-        format = function(entry, item)
-            item.menu = entry.source.name
-            return item
-        end,
-    }
+    -- config.formatting = {
+    --     fields = { "kind", "abbr", "menu" },
+    --     format = function(entry, item)
+    --         item.menu = entry.source.name
+    --         return item
+    --     end,
+    -- }
+    local formatting = {}
+    formatting.fields = { "kind", "abbr", "menu" }
+    formatting.format = function(entry, item)
+        local kind = item.kind
+
+        local source = entry.source.name
+        if source == "nvim_lsp" or source == "path" then
+        else
+            item.menu_hl_group = "Comment"
+        end
+        item.menu = kind
+
+        if source == "buffer" then
+            item.menu_hl_group = nil
+            item.menu = nil
+        end
+
+        local half_win_width = math.floor(vim.api.nvim_win_get_width(0) * 0.5)
+        if vim.api.nvim_strwidth(item.abbr) > half_win_width then
+            item.abbr = ("%s…"):format(item.abbr:sub(1, half_win_width))
+        end
+
+        if item.menu then -- Add exta space to visually differentiate `abbr` and `menu`
+            item.abbr = ("%s "):format(item.abbr)
+        end
+
+        return item
+    end
+    config.formatting = formatting
 
     cmp.setup(config)
 

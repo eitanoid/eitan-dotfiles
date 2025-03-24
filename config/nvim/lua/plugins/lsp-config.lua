@@ -182,11 +182,25 @@ return function()
         texlab = {
             settings = {
                 texlab = {
-                    chktex = {
-                        onOpenAndSave = true,
-                        onEdit = true,
-                        additionalArgs = { "-n1", "-n3", "-n8", "-n25", "-n36" },
-                    },
+                    -- chktex = { -- pisses me off atm
+                    --     onOpenAndSave = true,
+                    --     onEdit = true,
+                    --     additionalArgs = {
+                    --         "-wall",
+                    --         "-n1",
+                    --         "-n9",
+                    --         "-n11",
+                    --         "-e16",
+                    --         "-n17",
+                    --         "-n21",
+                    --         "-n22",
+                    --         "-n26",
+                    --         "-n30",
+                    --         "-n35",
+                    --         "-n46",
+                    --         "-q",
+                    --     },
+                    -- },
                     diagnosticsDelay = 300,
                 },
             }, -- latex
