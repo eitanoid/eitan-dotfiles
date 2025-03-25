@@ -117,29 +117,53 @@ require("lazy").setup({
 
     -- tabs in neovim
     {
-        "romgrk/barbar.nvim",
+        "akinsho/bufferline.nvim",
         event = "BufWinEnter",
-        dependencies = {
-            "lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
-            "nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
-        },
-        init = function()
-            vim.g.barbar_auto_setup = false
+        version = "*",
+        dependencies = "nvim-tree/nvim-web-devicons",
+        config = function()
+            local bufferline = require("bufferline")
+            bufferline.setup({
+                options = {
+                    style_preset = {
+                        bufferline.style_preset.no_bold,
+                    },
+                    mode = "buffers",
+                    numbers = "buffer_id",
+                    sort_by = "id",
+                    indicator = {
+                        style = "underline",
+                    },
+                    separator_style = "slant",
+                },
+            })
         end,
-        opts = {
-            -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
-            -- animation = true,
-            -- insert_at_start = true,
-            -- …etc.
-            icons = {
-                -- Configure the base icons on the bufferline.
-                -- Valid options to display the buffer index and -number are `true`, 'superscript' and 'subscript'
-                buffer_index = false,
-                buffer_number = true,
-                button = "x",
-            },
-        },
     },
+
+    -- {
+    --     "romgrk/barbar.nvim",
+    --     event = "BufWinEnter",
+    --     dependencies = {
+    --         "lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
+    --         "nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
+    --     },
+    --     init = function()
+    --         vim.g.barbar_auto_setup = false
+    --     end,
+    --     opts = {
+    --         -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+    --         -- animation = true,
+    --         -- insert_at_start = true,
+    --         -- …etc.
+    --         icons = {
+    --             -- Configure the base icons on the bufferline.
+    --             -- Valid options to display the buffer index and -number are `true`, 'superscript' and 'subscript'
+    --             buffer_index = false,
+    --             buffer_number = true,
+    --             button = "x",
+    --         },
+    --     },
+    -- },
 
     { -- enables folds
         "kevinhwang91/nvim-ufo",
@@ -251,6 +275,7 @@ require("lazy").setup({
     -- Send to terminal / code runner
     {
         "jpalardy/vim-slime",
+        cmd = "SlimeSend",
         dev = false,
         init = require("plugins.slime").init,
         config = require("plugins.slime").config,
@@ -455,7 +480,10 @@ require("lazy").setup({
     },
     --
     -- self explanatory, raindow brackets etc. requires treesitter parsers.
-    { "HiPhish/rainbow-delimiters.nvim" },
+    {
+        "HiPhish/rainbow-delimiters.nvim",
+        event = "VeryLazy",
+    },
 
     -- closes pairs automatically
     {
@@ -479,6 +507,7 @@ require("lazy").setup({
 
     { -- indent guides
         "lukas-reineke/indent-blankline.nvim",
+        event = "VeryLazy",
         main = "ibl",
         ---@module "ibl"
         ---@type ibl.config
@@ -493,22 +522,37 @@ require("lazy").setup({
         opts = { signs = false },
     },
 
-    { -- Collection of various small independent plugins/modules
-        "echasnovski/mini.nvim",
+    {
+        "echasnovski/mini.ai",
+        event = "VeryLazy",
         config = function()
-            -- Better Around/Inside textobjects
-            --
-            -- Examples:
-            --  - va)  - [V]isually select [A]round [)]paren
-            --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-            --  - ci'  - [C]hange [I]nside [']quote
             require("mini.ai").setup({ n_lines = 500 })
+        end,
+        -- Better Around/Inside textobjects
+        --
+        -- Examples:
+        --  - va)  - [V]isually select [A]round [)]paren
+        --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
+        --  - ci'  - [C]hange [I]nside [']quote
+    },
 
-            -- Add/delete/replace surroundings (brackets, quotes, etc.)
-            --
-            -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-            -- - sd'   - [S]urround [D]elete [']quotes
-            -- - sr)'  - [S]urround [R]eplace [)] [']
+    {
+        "echasnovski/mini.ai",
+        event = "VeryLazy",
+        -- Add/delete/replace surroundings (brackets, quotes, etc.)
+        --
+        -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+        -- - sd'   - [S]urround [D]elete [']quotes
+        -- - sr)'  - [S]urround [R]eplace [)] [']
+        config = function()
+            require("mini.ai").setup({ n_lines = 500 })
+        end,
+    },
+
+    {
+        "echasnovski/mini.surround",
+        event = "VeryLazy",
+        config = function()
             require("mini.surround").setup({
                 -- Add custom surroundings to be used on top of builtin ones. For more
                 -- information with examples, see `:h MiniSurround.config`.
@@ -549,7 +593,13 @@ require("lazy").setup({
                 -- idle time if user input is required.
                 silent = false,
             })
+        end,
+    },
 
+    { -- Collection of various small independent plugins/modules
+        "echasnovski/mini.statusline",
+        event = "BufWinEnter",
+        config = function()
             -- Simple and easy statusline.
             --  You could remove this setup call if you don't like it,
             --  and try some other statusline plugin
