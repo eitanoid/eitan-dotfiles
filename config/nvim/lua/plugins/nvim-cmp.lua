@@ -10,19 +10,19 @@ return function()
     -- 		luasnip.lsp_expand(args.body)
     -- 	end,
     -- },
+
     local config = {
         preselect = cmp.PreselectMode.None,
         completion = {
             completeopt = "menu,menuone,noinsert",
-            keyword_length = 0,
-            max_item_count = 20,
+            keyword_length = 2,
         },
 
         window = {
             completion = {
                 -- winblend = 70,
                 scrollbar = false,
-                border = "rounded", -- { "╔", "═", "╗", "║", "╝", "═", "╚", "║" }, -- see :h nvim_open_win
+                border = "rounded", -- see :h nvim_open_win
                 -- winhighlight = "Normal:Pmenu,CursorLine:CmpCursorLine,Search:None",
                 col_offset = -3,
                 side_padding = 0,
@@ -36,7 +36,6 @@ return function()
 
         -- For an understanding of why these mappings were
         -- chosen, you will need to read `:help ins-completion`
-        --
         -- No, but seriously. Please read `:help ins-completion`, it is really good!
         mapping = cmp.mapping.preset.insert({
             -- Select the [n]ext item
@@ -76,59 +75,68 @@ return function()
         }),
     }
 
-    config.sources = {
+    local lspkind = require("lspkind")
+    config.formatting = {}
+    config.formatting.fields = { "abbr", "kind", "menu" }
+    config.formatting.format = lspkind.cmp_format({
+        mode = "symbol_text", -- show only symbol annotations
+        preset = "codicons",
+        maxwidth = {
+            -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+            -- can also be a function to dynamically calculate max width such as
+            -- menu = function() return math.floor(0.45 * vim.o.columns) end,
+            menu = 20, -- leading text (labelDetails)
+            abbr = 20, -- actual suggestion item
+        },
+        ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+        show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+
+        -- The function below will be called before any actual modifications from lspkind
+        -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+        before = function(entry, item) -- type / symbol / source
+            local source = entry.source.name
+            if source == "nvim_lsp" then
+                source = "LSP"
+            end
+            item.menu_hl_group = "Comment"
+
+            if source == "buffer" then
+                item.menu_hl_group = nil
+                item.menu = nil
+            else
+                item.menu = "[" .. source .. "]"
+            end
+
+            local frac_win_width = math.floor(vim.api.nvim_win_get_width(0) * 0.3)
+            if vim.api.nvim_strwidth(item.abbr) > frac_win_width then
+                item.abbr = ("%s…"):format(item.abbr:sub(1, frac_win_width))
+            end
+
+            if item.menu then -- Add exta space to visually differentiate `abbr` and `menu`
+                item.abbr = ("%s "):format(item.abbr)
+            end
+
+            return item
+            -- ...
+        end,
+    })
+
+    config.sources = { -- global sources
         {
             name = "lazydev",
             -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
             group_index = 0,
         },
         { name = "git" },
-        { name = "nvim_lsp" },
+        { name = "nvim_lsp" }, -- TODO: how to limit recommendation page hight
         { name = "omni" },
         { name = "luasnip" },
         { name = "path" }, -- file system path
     }
 
-    -- config.formatting = {
-    --     fields = { "kind", "abbr", "menu" },
-    --     format = function(entry, item)
-    --         item.menu = entry.source.name
-    --         return item
-    --     end,
-    -- }
-    local formatting = {}
-    formatting.fields = { "kind", "abbr", "menu" }
-    formatting.format = function(entry, item)
-        local kind = item.kind
-
-        local source = entry.source.name
-        if source == "nvim_lsp" or source == "path" then
-        else
-            item.menu_hl_group = "Comment"
-        end
-        item.menu = kind
-
-        if source == "buffer" then
-            item.menu_hl_group = nil
-            item.menu = nil
-        end
-
-        local half_win_width = math.floor(vim.api.nvim_win_get_width(0) * 0.5)
-        if vim.api.nvim_strwidth(item.abbr) > half_win_width then
-            item.abbr = ("%s…"):format(item.abbr:sub(1, half_win_width))
-        end
-
-        if item.menu then -- Add exta space to visually differentiate `abbr` and `menu`
-            item.abbr = ("%s "):format(item.abbr)
-        end
-
-        return item
-    end
-    config.formatting = formatting
-
     cmp.setup(config)
 
-    cmp.setup.filetype({ "tex", "bib" }, { --TODO: FINISH THIS.
+    cmp.setup.filetype({ "tex", "bib" }, { -- filetype sources. overrides global
         sources = cmp.config.sources({
             { name = "git" },
             { name = "nvim_lsp", group_index = 2, max_item_count = 7 },

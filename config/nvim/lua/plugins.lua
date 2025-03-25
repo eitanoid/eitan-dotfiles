@@ -48,7 +48,7 @@ require("lazy").setup({
 
     {
         "rktjmp/lush.nvim",
-        event = "VeryLazy",
+        cmd = { "Lushify", "LushImport", "LushRunTutorial" },
     },
 
     -----------
@@ -263,11 +263,14 @@ require("lazy").setup({
     { -- todo later -- repeat keybinds and hint menus
         "anuvyklack/hydra.nvim",
         event = "VeryLazy",
+        config = function()
+            require("plugins.hydra.init")
+        end,
     },
 
     { -- Fuzzy Finder (files, lsp, etc)
         "nvim-telescope/telescope.nvim",
-        event = "VimEnter",
+        event = "SafeState", -- was VimEnter
         branch = "0.1.x",
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -368,15 +371,16 @@ require("lazy").setup({
         event = "InsertEnter",
         lazy = true,
         dependencies = {
+            "onsails/lspkind.nvim", -- symbols
             -- completion sources
             "hrsh7th/cmp-omni", -- Neovim Omnifunc
             "hrsh7th/cmp-path", -- path competions
             "saadparwaiz1/cmp_luasnip",
             "petertriho/cmp-git", -- Git
             "hrsh7th/cmp-nvim-lsp", -- lsp completions
-            { "Snikimonkd/cmp-go-pkgs" }, --, ft = "go" }, -- golang packages
-            { "micangl/cmp-vimtex" }, --, ft = "tex" }, -- completions support for vimtex
-            { "kdheepak/cmp-latex-symbols" }, --, ft = "tex" }, -- LaTeX Letters
+            "Snikimonkd/cmp-go-pkgs", --, ft = "go" }, -- golang packages
+            "micangl/cmp-vimtex", --, ft = "tex" }, -- completions support for vimtex
+            "kdheepak/cmp-latex-symbols", --, ft = "tex" }, -- LaTeX Letters
 
             -- Snippet Engine & its associated nvim-cmp source
             {
