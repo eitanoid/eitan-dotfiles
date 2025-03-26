@@ -133,6 +133,13 @@ vim.api.nvim_create_autocmd("User", { -- lazy load keybinds to save like 3ms in 
     once = true,
     pattern = "VeryLazy",
     callback = function()
+        -- Lua Snip:
+        -- local opts = { noremap = true, silent = true }
+        -- vim.api.nvim_set_keymap("i", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
+        -- vim.api.nvim_set_keymap("s", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
+        -- vim.api.nvim_set_keymap("i", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
+        -- vim.api.nvim_set_keymap("s", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
+
         local wk = require("which-key")
         wk.add({
             { "<leader>`", group = "LSP Actions" },

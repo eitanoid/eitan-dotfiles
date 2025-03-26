@@ -5,13 +5,13 @@ return function()
     luasnip.config.setup({})
 
     -- cmp.setup({})
-    -- snippet = {
-    -- 	expand = function(args)
-    -- 		luasnip.lsp_expand(args.body)
-    -- 	end,
-    -- },
-
     local config = {
+        snippet = {
+            expand = function(args)
+                luasnip.lsp_expand(args.body)
+            end,
+        },
+
         preselect = cmp.PreselectMode.None,
         completion = {
             completeopt = "menu,menuone,noinsert",
@@ -122,27 +122,28 @@ return function()
     })
 
     config.sources = { -- global sources
+        { name = "nvim_lsp" }, -- TODO: how to limit recommendation page hight
         {
             name = "lazydev",
             -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
             group_index = 0,
         },
-        { name = "git" },
-        { name = "nvim_lsp" }, -- TODO: how to limit recommendation page hight
+        { name = "luasnip", group_index = 1 },
         { name = "omni" },
-        { name = "luasnip" },
         { name = "path" }, -- file system path
+        { name = "git" },
     }
 
     cmp.setup(config)
 
     cmp.setup.filetype({ "tex", "bib" }, { -- filetype sources. overrides global
         sources = cmp.config.sources({
-            { name = "git" },
             { name = "nvim_lsp", group_index = 2, max_item_count = 7 },
-            { name = "omni" },
-            -- { name = "latex_symbols", max_item_count = 8, group_index = 2, option = { strategy = 2 } },
             { name = "vimtex", group_index = 1, max_item_count = 8 },
+            { name = "luasnip", group_index = 0 },
+            { name = "omni" },
+            { name = "git" },
+            -- { name = "latex_symbols", max_item_count = 8, group_index = 2, option = { strategy = 2 } },
             { name = "path" }, -- file system path
         }),
     })
@@ -151,6 +152,7 @@ return function()
         sources = cmp.config.sources({
             { name = "nvim_lsp" },
             { name = "go_pkgs" },
+            { name = "luasnip", group_index = 1 },
             { name = "git" },
             { name = "omni" },
             { name = "path" }, -- file system path

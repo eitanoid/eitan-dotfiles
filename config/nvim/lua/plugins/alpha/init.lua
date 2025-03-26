@@ -52,7 +52,7 @@ M.config = function()
     local buttons = { -- stylua: ignore start
         -- { type = "text", val = "Quick links", opts = { hl = "buttons1", position = "center" } }, can add a button title
         add_button("i", " New File", ":ene <BAR> startinsert <cr>", { shortcut = "i" }),
-        add_button("r", " Recent Files", ":Telescope oldfiles<cr>", { shortcut = "r" }),
+        -- add_button("r", " Recent Files", ":Telescope oldfiles<cr>", { shortcut = "r" }),
         add_button("f", " File Browser", "<Cmd>NvimTreeToggle<CR>", { shortcut = "f" }),
         add_button("e", "󰈞 Find File", ":Telescope find_files<cr>", { shortcut = "e" }),
         add_button("c", " Colorschemes", ":Telescope colorscheme<cr>", { shortcut = "c" }),

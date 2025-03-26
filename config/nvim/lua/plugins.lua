@@ -134,7 +134,8 @@ require("lazy").setup({
                     indicator = {
                         style = "underline",
                     },
-                    separator_style = "slant",
+                    separator_style = "slim",
+                    -- separator_style = "slant",
                 },
             })
         end,
@@ -275,7 +276,7 @@ require("lazy").setup({
     -- Send to terminal / code runner
     {
         "jpalardy/vim-slime",
-        cmd = "SlimeSend",
+        event = "VeryLazy",
         dev = false,
         init = require("plugins.slime").init,
         config = require("plugins.slime").config,
@@ -410,6 +411,7 @@ require("lazy").setup({
             -- Snippet Engine & its associated nvim-cmp source
             {
                 "L3MON4D3/LuaSnip",
+
                 build = (function()
                     -- Build Step is needed for regex support in snippets.
                     -- This step is not supported in many windows environments.
@@ -423,12 +425,12 @@ require("lazy").setup({
                     -- `friendly-snippets` contains a variety of premade snippets.
                     --    See the README about individual language/framework/plugin snippets:
                     --    https://github.com/rafamadriz/friendly-snippets
-                    -- {
-                    --   'rafamadriz/friendly-snippets',
-                    --   config = function()
-                    --     require('luasnip.loaders.from_vscode').lazy_load()
-                    --   end,
-                    -- },
+                    {
+                        "rafamadriz/friendly-snippets",
+                        config = function()
+                            require("luasnip.loaders.from_vscode").lazy_load()
+                        end,
+                    },
                 },
             },
         },
@@ -455,7 +457,10 @@ require("lazy").setup({
     -------------------
 
     -- Tabular plugin (Vim plugin for aligning text with delimiters) :Tabular command
-    { "godlygeek/tabular", lazy = true },
+    {
+        "godlygeek/tabular",
+        event = "VeryLazy",
+    },
 
     -- color preview eg.
     {
@@ -617,6 +622,14 @@ require("lazy").setup({
 
             -- ... and there is more!
             --  Check out: https://github.com/echasnovski/mini.nvim
+        end,
+    },
+
+    { -- NOTE: timetracking
+        "ptdewey/pendulum-nvim",
+        event = "VeryLazy",
+        config = function()
+            require("pendulum").setup()
         end,
     },
 
