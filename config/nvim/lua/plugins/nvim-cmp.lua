@@ -33,6 +33,9 @@ return function()
         experimental = {
             ghost_text = false, -- this feature conflict with copilot.vim's preview.
         },
+        performance = {
+            max_view_entries = 30, -- This limits the number of entries shown in the window. not quite what I want, but itsa start
+        },
 
         -- For an understanding of why these mappings were
         -- chosen, you will need to read `:help ins-completion`
@@ -46,6 +49,7 @@ return function()
             ["<S-Tab>"] = cmp.mapping.select_prev_item(),
             ["<C-S-n>"] = cmp.mapping.select_prev_item(),
             ["<CR>"] = cmp.mapping.confirm({ select = true }),
+            ["<Right>"] = cmp.mapping.confirm({ select = true }),
             -- Scroll the documentation window [b]ack / [f]orward
             -- ["<C-b>"] = cmp.mapping.scroll_docs(-4),
             -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -100,12 +104,12 @@ return function()
             end
             item.menu_hl_group = "Comment"
 
-            if source == "buffer" then
-                item.menu_hl_group = nil
-                item.menu = nil
-            else
-                item.menu = "[" .. source .. "]"
-            end
+            -- if source == "buffer" then
+            --     item.menu_hl_group = nil
+            --     item.menu = nil
+            -- else
+            item.menu = "[" .. source .. "]"
+            -- end
 
             local frac_win_width = math.floor(vim.api.nvim_win_get_width(0) * 0.3)
             if vim.api.nvim_strwidth(item.abbr) > frac_win_width then
@@ -156,6 +160,29 @@ return function()
             { name = "git" },
             { name = "omni" },
             { name = "path" }, -- file system path
+        }),
+    })
+
+    -- commandline completions
+    cmp.setup.cmdline("/", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+            { name = "buffer" },
+        },
+    })
+
+    -- `:` cmdline setup.
+    cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+            { name = "path" },
+        }, {
+            {
+                name = "cmdline",
+                option = {
+                    ignore_cmds = { "Man", "!" },
+                },
+            },
         }),
     })
 end

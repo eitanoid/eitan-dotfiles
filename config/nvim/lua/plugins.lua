@@ -104,6 +104,16 @@ require("lazy").setup({
         event = "VeryLazy",
     },
 
+    -- illuminate matching keywords / variables
+
+    {
+        "RRethy/vim-illuminate",
+        config = function()
+            require("illuminate").configure(require("plugins.illuminate").opts)
+        end,
+        event = "VeryLazy",
+    },
+
     -- directory tree
     {
         "nvim-tree/nvim-tree.lua",
@@ -111,8 +121,8 @@ require("lazy").setup({
         dependencies = {
             "nvim-tree/nvim-web-devicons",
         },
-        opts = require("plugins.nvim-tree"),
-        keys = {},
+        opts = require("plugins.nvim-tree").opts,
+        -- keys = {},
     },
 
     -- tabs in neovim
@@ -183,15 +193,15 @@ require("lazy").setup({
                     require("ufo").closeAllFolds()
                 end,
             },
-            {
-                "K",
-                function()
-                    local winid = require("ufo").peekFoldedLinesUnderCursor()
-                    if not winid then
-                        vim.lsp.buf.hover()
-                    end
-                end,
-            },
+            -- {
+            --     "K",
+            --     function()
+            --         local winid = require("ufo").peekFoldedLinesUnderCursor()
+            --         if not winid then
+            --             vim.lsp.buf.hover()
+            --         end
+            --     end,
+            -- },
         }, --TODO: automatically folds all my tex stuff
         config = function()
             vim.o.foldcolumn = "1"
@@ -394,19 +404,21 @@ require("lazy").setup({
 
     { -- Autocompletion
         "hrsh7th/nvim-cmp",
-        event = "InsertEnter",
+        event = { "InsertEnter", "CmdlineEnter" },
         lazy = true,
         dependencies = {
             "onsails/lspkind.nvim", -- symbols
+
             -- completion sources
             "hrsh7th/cmp-omni", -- Neovim Omnifunc
             "hrsh7th/cmp-path", -- path competions
-            "saadparwaiz1/cmp_luasnip",
-            "petertriho/cmp-git", -- Git
+            "hrsh7th/cmp-cmdline", -- comandline cmp
+            "saadparwaiz1/cmp_luasnip", -- snippets
+            "petertriho/cmp-git", -- git
             "hrsh7th/cmp-nvim-lsp", -- lsp completions
-            "Snikimonkd/cmp-go-pkgs", --, ft = "go" }, -- golang packages
-            "micangl/cmp-vimtex", --, ft = "tex" }, -- completions support for vimtex
-            "kdheepak/cmp-latex-symbols", --, ft = "tex" }, -- LaTeX Letters
+            "Snikimonkd/cmp-go-pkgs", -- golang packages
+            "micangl/cmp-vimtex", -- completions support for vimtex
+            "kdheepak/cmp-latex-symbols", --, ft = "tex" }, -- LaTeX Letters unused atm
 
             -- Snippet Engine & its associated nvim-cmp source
             {

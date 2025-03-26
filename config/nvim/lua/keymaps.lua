@@ -360,14 +360,14 @@ vim.api.nvim_create_autocmd("User", { -- lazy load keybinds to save like 3ms in 
             mode = { "n" }, -- TODO: Not entirely working
             { "<leader>f", group = "[F]ile Tree" },
             { "<leader>ff", "<Cmd>NvimTreeToggle<CR>", desc = "Toggle file tree" },
-            { "<leader>fh", require("nvim-tree.api").tree.change_root_to_parent(), desc = "Change Root to Parent" },
-            { "<leader>fl", require("nvim-tree.api").tree.change_root_to_node(), desc = "Change Root to Node" },
-            { "<leader>fE", require("nvim-tree.api").tree.expand_all(), desc = "Expand All" },
-            { "<leader>fC", require("nvim-tree.api").tree.collapse_all(), desc = "Collapse All" },
-            { "<leader>fp", require("nvim-tree.api").fs.copy.absolute_path(), desc = "Copy Absolute Path" },
-            { "<leader>fP", require("nvim-tree.api").fs.copy.relative_path(), desc = "Copy Relative Path" },
-            { "<leader>fn", require("nvim-tree.api").fs.create(), desc = "New File / Directory" },
-            { "<leader>fr", require("nvim-tree.api").fs.rename(), desc = "Rename File" },
+            { "<leader>fh", require("nvim-tree.api").tree.change_root_to_parent, desc = "Change Root to Parent" },
+            { "<leader>fl", require("nvim-tree.api").tree.change_root_to_node, desc = "Change Root to Node" },
+            { "<leader>fE", require("nvim-tree.api").tree.expand_all, desc = "Expand All" },
+            { "<leader>fC", require("nvim-tree.api").tree.collapse_all, desc = "Collapse All" },
+            { "<leader>fp", require("nvim-tree.api").fs.copy.absolute_path, desc = "Copy Absolute Path" },
+            { "<leader>fP", require("nvim-tree.api").fs.copy.relative_path, desc = "Copy Relative Path" },
+            { "<leader>fn", require("nvim-tree.api").fs.create, desc = "New File / Directory" },
+            { "<leader>fr", require("nvim-tree.api").fs.rename, desc = "Rename File" },
         })
     end,
 })
