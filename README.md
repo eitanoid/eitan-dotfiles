@@ -120,6 +120,7 @@ The following are mainly to help my memory.
  | Prompt Create Matrix           | \begin{pmatrix} ...          | Normal | `<space>im` |
  | Prompt Create n-Cycle          | (a\_1 \\quad a\_2 ...)       | Normal | `<space>ic` |
  | Prompt Create List             | \begin{itemize} ...          | Normal | `<space>il` |
+ | Synctex Inverse Search         | CTRL+M1 on Zathura to search | N/A    | `CTRL+M1`   |
 
 For more default-keybinds: `:h vimtex-default-mappings`
 
