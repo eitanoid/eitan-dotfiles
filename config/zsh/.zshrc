@@ -16,13 +16,13 @@ ZSHF=$HOME/.config/zsh
 # enable vi mode in shell
 bindkey -v
 
-#Ranger preview syntax highlighting style
+# Ranger preview syntax highlighting style
 export HIGHLIGHT_STYLE=rootwater
 
-#Location of Screen Saver
+# Path to of Screen Saver
 SCREEN_SAVER=$HOME/git/pipes-sh/pipes.sh
 
-#History
+# History
 HISTFILE=${HOME}/.zsh_history
 export HISTSIZE=20000
 export SAVEHIST=20000
@@ -38,60 +38,68 @@ autoload -Uz compinit
 compinit
 
 
-#Plugins
+# Load plugins
 source $ZSHF/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source $ZSHF/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZSHF/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source $ZSHF/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source $ZSHF/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
-#zsh history-substring-search
+# zsh history-substring-search
 export HISTORY_SUBSTRING_SEARCH_PREFIXED=true
 bindkey -M vicmd 'K' history-substring-search-up
 bindkey -M vicmd 'J' history-substring-search-down
-bindkey '^N' history-substring-search-up
-bindkey '^P' history-substring-search-down
 
-# autocomplete 
+# completion menu 
 bindkey              '^I' menu-select # Tab
-bindkey "$terminfo[kcbt]" menu-select #Shift + Tab
+bindkey -M menuselect "^I" .accept-line #Tab
 bindkey -M menuselect "l" menu-complete
 bindkey -M menuselect "h" reverse-menu-complete
 bindkey -M menuselect "j" down-history 
 bindkey -M menuselect "k" up-history 
-bindkey -M menuselect "^I" .accept-line #Tab
 #enter to pick file but not continue down hierarchy
 
 #Autosuggest color - need this to work in tmux
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8" ##,bg=cyan,bold,underline"
 
+# zsh vi settings
+ZVM_VI_SURROUND_BINDKEY="s-prefix"
 
-#Vi mode related settings
-#
-################################################################
-# Change cursor shape for different vi modes. source : https://gist.github.com/LukeSmithxyz/e62f26e55ea8b0ed41a65912fbebbe52
-function zle-keymap-select {
-  if [[ ${KEYMAP} == vicmd ]] ||
-     [[ $1 = 'block' ]]; then
-    echo -ne '\e[1 q'
-  elif [[ ${KEYMAP} == main ]] ||
-       [[ ${KEYMAP} == viins ]] ||
-       [[ ${KEYMAP} = '' ]] ||
-       [[ $1 = 'beam' ]]; then
-    echo -ne '\e[5 q'
-  fi
-}
+# edit prompt in editor binding
 
-zle -N zle-keymap-select
-zle-line-init() {
-    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
-    echo -ne "\e[5 q"
+# open editor in current working directory and set filetype to bash
+ZVM_VI_EDITOR='nvim -c "lcd ." -c "set filetype=bash"'
+zvm_after_init_commands+=('zvm_bindkey visual "vv" zvm_vi_edit_command_line')
+zvm_after_init_commands+=('zvm_bindkey visual -r "v"') # press v 3 times to open editor
+
+function zle-line-init() { # insert mode automatically on new line
+  zle zvm_enter_insert_mode       
 }
 zle -N zle-line-init
-echo -ne '\e[5 q' # Use beam shape cursor on startup.
-preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
-################################################################
+#Vi mode related settings
+# Change cursor shape for different vi modes. source: https://gist.github.com/LukeSmithxyz/e62f26e55ea8b0ed41a65912fbebbe52
 
+# function zle-keymap-select {
+#   if [[ ${KEYMAP} == vicmd ]] ||
+#      [[ $1 = 'block' ]]; then
+#     echo -ne '\e[1 q'
+#   elif [[ ${KEYMAP} == main ]] ||
+#        [[ ${KEYMAP} == viins ]] ||
+#        [[ ${KEYMAP} = '' ]] ||
+#        [[ $1 = 'beam' ]]; then
+#     echo -ne '\e[5 q'
+#   fi
+# }
+#
+# zle -N zle-keymap-select
+# zle-line-init() {
+#     zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+#     echo -ne "\e[5 q"
+# }
+# zle -N zle-line-init
+# echo -ne '\e[5 q' # Use beam shape cursor on startup.
+# preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 
 ######################################################################################################
@@ -101,9 +109,6 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 function clangrun() { # like `go run` but for c.
 	clang "${1}" -o "${1}".out "${@:2}" &&  echo "compiled successfully" && ./"${1}.out"
 }
-
-######################################################################################################
-
 
 ######################################################################################################
 
