@@ -101,7 +101,9 @@ require("lazy").setup({
     {
         "nvim-lualine/lualine.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
+        enabled = true,
         event = "VeryLazy",
+        opts = {},
     },
 
     -- illuminate matching keywords / variables
@@ -296,13 +298,13 @@ require("lazy").setup({
     --- Functionality ---
     ---------------------
 
-    { -- todo later -- repeat keybinds and hint menus
-        "anuvyklack/hydra.nvim",
-        event = "VeryLazy",
-        config = function()
-            require("plugins.hydra.init")
-        end,
-    },
+    -- { -- todo later -- repeat keybinds and hint menus
+    --     "anuvyklack/hydra.nvim",
+    --     event = "VeryLazy",
+    --     config = function()
+    --         require("plugins.hydra.init")
+    --     end,
+    -- },
 
     { -- Fuzzy Finder (files, lsp, etc)
         "nvim-telescope/telescope.nvim",
@@ -518,6 +520,7 @@ require("lazy").setup({
 
             npairs.add_rules({
                 Rule("$", "$", "tex"),
+                -- :with_move(cond.before_regex($$)),
             })
         end,
     },
@@ -551,19 +554,6 @@ require("lazy").setup({
         --  - va)  - [V]isually select [A]round [)]paren
         --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
         --  - ci'  - [C]hange [I]nside [']quote
-    },
-
-    {
-        "echasnovski/mini.ai",
-        event = "VeryLazy",
-        -- Add/delete/replace surroundings (brackets, quotes, etc.)
-        --
-        -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-        -- - sd'   - [S]urround [D]elete [']quotes
-        -- - sr)'  - [S]urround [R]eplace [)] [']
-        config = function()
-            require("mini.ai").setup({ n_lines = 500 })
-        end,
     },
 
     {
@@ -616,6 +606,7 @@ require("lazy").setup({
     { -- Collection of various small independent plugins/modules
         "echasnovski/mini.statusline",
         event = "BufWinEnter",
+        enabled = false,
         config = function()
             -- Simple and easy statusline.
             --  You could remove this setup call if you don't like it,

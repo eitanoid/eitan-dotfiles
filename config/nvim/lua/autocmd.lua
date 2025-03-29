@@ -50,43 +50,17 @@ vim.api.nvim_create_autocmd("FileType", {
         "checkhealth",
         "lazy",
         "vim",
+        "qf",
+        "trouble",
+        "NvimTree",
+        "fugitive",
     },
-    command = [[
-          nnoremap <buffer><silent> q :close<CR>
-          nnoremap <buffer><silent> <ESC> :close<CR>
-          set nobuflisted
-      ]],
+    -- command = [[
+    --       nnoremap <buffer><silent> q :close<CR>
+    --       set nobuflisted
+    --   ]],
+    callback = function()
+        vim.api.nvim_buf_set_keymap(0, "n", "q", "<CMD>close<CR>", { silent = true })
+        vim.api.nvim_buf_set_var(0, "buflisted", false)
+    end,
 })
-
--- vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, { -- keymaps for nvim tree
---     pattern = {
---         "NvimTree",
---     },
---     callback = function()
---         local api = require("nvim-tree.api")
---         vim.api.nvim_buf_set_keymap(0, "n", "h", "", {
---             desc = "change root to parent",
---             callback = api.tree.change_root_to_parent,
---         })
---         vim.api.nvim_buf_set_keymap(0, "n", "l", "", {
---             desc = "change root to node",
---             callback = api.tree.change_root_to_node,
---         })
---         vim.api.nvim_buf_set_keymap(0, "n", "r", "", {
---             desc = "rename",
---             callback = api.fs.rename,
---         })
---         vim.api.nvim_buf_set_keymap(0, "n", "n", "", {
---             desc = "create new file",
---             callback = api.fs.create,
---         })
---         vim.api.nvim_buf_set_keymap(0, "n", "p", "", {
---             desc = "copy absolute path",
---             callback = api.fs.copy.absolute_path,
---         })
---         vim.api.nvim_buf_set_keymap(0, "n", "P", "", {
---             desc = "copy relative path",
---             callback = api.fs.copy.relative_path,
---         })
---     end,
--- })

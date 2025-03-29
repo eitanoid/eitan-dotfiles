@@ -75,6 +75,10 @@ M.opts.on_attach = function(bufnr)
         desc = "copy relative path",
         callback = api.fs.copy.relative_path,
     })
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<CR>", "", {
+        desc = "open",
+        callback = api.node.open.edit,
+    })
 end
 
 return M

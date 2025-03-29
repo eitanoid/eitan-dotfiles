@@ -34,7 +34,9 @@ return function()
             ghost_text = false, -- this feature conflict with copilot.vim's preview.
         },
         performance = {
-            max_view_entries = 30, -- This limits the number of entries shown in the window. not quite what I want, but itsa start
+            max_view_entries = 20, -- This limits the number of entries shown in the window. not quite what I want, but itsa start
+            throttle = 150, --ms throttling
+            debounce = 450,
         },
 
         -- For an understanding of why these mappings were
@@ -49,7 +51,6 @@ return function()
             ["<S-Tab>"] = cmp.mapping.select_prev_item(),
             ["<C-S-n>"] = cmp.mapping.select_prev_item(),
             ["<CR>"] = cmp.mapping.confirm({ select = true }),
-            ["<Right>"] = cmp.mapping.confirm({ select = true }),
             -- Scroll the documentation window [b]ack / [f]orward
             -- ["<C-b>"] = cmp.mapping.scroll_docs(-4),
             -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -99,6 +100,7 @@ return function()
         -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
         before = function(entry, item) -- type / symbol / source
             local source = entry.source.name
+
             if source == "nvim_lsp" then
                 source = "LSP"
             end
