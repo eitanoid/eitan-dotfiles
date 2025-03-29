@@ -57,3 +57,7 @@ echo "Synced Zathura"
 ##Stylua
 rsync -rav $(pwd)/.stylua.toml $HOME/
 echo "Synced Stylua"
+
+##LatexIndent
+rsync -rav $(pwd)/indentconfig.yaml $HOME/
+echo "Synced LatexIndent"
