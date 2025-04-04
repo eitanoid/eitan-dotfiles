@@ -7,4 +7,4 @@ set adjust-open "best-fit"
 # set highlight-color rgba(255,255,0,100)
 
 set synctex true
-set synctex-editor-command "vim -v --not-a-term -T dumb -c \"VimtexInverseSearch %{line}:%{column} '%{input}'\""
+set synctex-editor-command "nvim -v --not-a-term -T dumb -c \"VimtexInverseSearch %{line}:%{column} '%{input}'\""
