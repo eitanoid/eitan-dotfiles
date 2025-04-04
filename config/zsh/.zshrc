@@ -63,6 +63,9 @@ bindkey -M menuselect "k" up-history
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8" ##,bg=cyan,bold,underline"
 
 # zsh vi settings
+#
+# changes engine to fix "zvm_readkeys_handler" undefined-key on startup
+ZVM_READKEY_ENGINE=$ZVM_READKEY_ENGINE_ZLE
 ZVM_VI_SURROUND_BINDKEY="s-prefix"
 
 # edit prompt in editor binding
@@ -72,37 +75,34 @@ ZVM_VI_EDITOR='nvim -c "lcd ." -c "set filetype=bash"'
 zvm_after_init_commands+=('zvm_bindkey visual "vv" zvm_vi_edit_command_line')
 zvm_after_init_commands+=('zvm_bindkey visual -r "v"') # press v 3 times to open editor
 
-function zle-line-init() { # insert mode automatically on new line
-  zle zvm_enter_insert_mode       
-}
-zle -N zle-line-init
+ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT # start in insert mode on new line
 
-#Vi mode related settings
+
 # Change cursor shape for different vi modes. source: https://gist.github.com/LukeSmithxyz/e62f26e55ea8b0ed41a65912fbebbe52
 
-# function zle-keymap-select {
-#   if [[ ${KEYMAP} == vicmd ]] ||
-#      [[ $1 = 'block' ]]; then
-#     echo -ne '\e[1 q'
-#   elif [[ ${KEYMAP} == main ]] ||
-#        [[ ${KEYMAP} == viins ]] ||
-#        [[ ${KEYMAP} = '' ]] ||
-#        [[ $1 = 'beam' ]]; then
-#     echo -ne '\e[5 q'
-#   fi
-# }
-#
-# zle -N zle-keymap-select
-# zle-line-init() {
-#     zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
-#     echo -ne "\e[5 q"
-# }
-# zle -N zle-line-init
-# echo -ne '\e[5 q' # Use beam shape cursor on startup.
-# preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+ function zle-keymap-select {
+   if [[ ${KEYMAP} == vicmd ]] ||
+      [[ $1 = 'block' ]]; then
+     echo -ne '\e[1 q'
+   elif [[ ${KEYMAP} == main ]] ||
+        [[ ${KEYMAP} == viins ]] ||
+        [[ ${KEYMAP} = '' ]] ||
+        [[ $1 = 'beam' ]]; then
+     echo -ne '\e[5 q'
+   fi
+ }
+
+ zle -N zle-keymap-select
+ zle-line-init() {
+     zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+     echo -ne "\e[5 q"
+ }
+ zle -N zle-line-init
+ echo -ne '\e[5 q' # Use beam shape cursor on startup.
+ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 
-######################################################################################################
+###################
 
 #C dev stuff
 
@@ -110,13 +110,9 @@ function clangrun() { # like `go run` but for c.
 	clang "${1}" -o "${1}".out "${@:2}" &&  echo "compiled successfully" && ./"${1}.out"
 }
 
-######################################################################################################
-
 #Inactivty Screen Saver
 TMOUT=1000 #~20 mins
 trap "echo ;bash $SCREEN_SAVER" ALRM
-
-######################################################################################################
 
 #alias
 alias cd='z'
