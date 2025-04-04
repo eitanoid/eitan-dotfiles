@@ -91,7 +91,7 @@ require("lazy").setup({
         version = "v3.*.*",
         enabled = true,
         lazy = true, -- NOTE: NO NEED to Lazy load
-        event = "VeryLazy",
+        event = "SafeState",
 
         keys = require("plugins.neominimap").keys,
         init = require("plugins.neominimap").init,
@@ -514,13 +514,14 @@ require("lazy").setup({
         config = function()
             local npairs = require("nvim-autopairs")
             local Rule = require("nvim-autopairs.rule")
-            -- local cond = require("nvim-autopairs.conds")
 
             npairs.setup({})
 
             npairs.add_rules({
-                Rule("$", "$", "tex"),
-                -- :with_move(cond.before_regex($$)),
+                Rule("$", "$", "tex"):with_move(function(opts) -- move if next char is $
+                    -- print(vim.inspect(opts))
+                    return opts.char == "$"
+                end),
             })
         end,
     },

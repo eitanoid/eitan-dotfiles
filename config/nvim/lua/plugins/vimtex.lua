@@ -3,6 +3,7 @@ return function()
     vim.g.vimtex_view_method = "zathura"
     vim.g.vimtex_view_zathura_check_libsynctex = 1
     vim.g.vimtex_view_zathura_use_synctex = 1
+    vim.g.vimtex_quickfix_open_on_warning = false
     vim.g.tex_flavor = "latex"
     vim.g.vimtext_compiler_method = "latexmk"
     vim.g.vimtex_compiler_latexmk_engines = {
