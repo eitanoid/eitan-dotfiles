@@ -6,11 +6,11 @@ The dotfiles/ directory is located in `$HOME/git/dotfiles`.
 
 Ranger is used for the primary terminal file manager with:
 
-Kitty's terminal image rendering.
-
-`.md` files are previewed with [glow](https://github.com/charmbracelet/glow).
-
-dev icons in preview with [dev-icons](https://github.com/alexanderjeurissen/ranger_devicons).
+ |                  |                                                                    |
+ | :-               | :-                                                                 |
+ | Image display    | Kitty                                                              |
+ | Markdown Preview | [glow](https://github.com/charmbracelet/glow)                      |
+ | Dev Icons        | [dev-icons](https://github.com/alexanderjeurissen/ranger_devicons) |
 
 ## Neovim
 
@@ -20,10 +20,9 @@ Neovim is used as the go-to text editor. The configuration is built on top of th
 
 | Plugin                                                                              | Purpose                                  |
 | :-                                                                                  | :-                                       |
-| [Alpha](https://github.com/goolord/alpha-nvim)                        | Startup menu / greeter                   |
-| [Lualine](https://github.com/nvim-lualine/lualine.nvim)                             |                                          |
+| [Alpha](https://github.com/goolord/alpha-nvim)                        | Startup menu                   |
+| [Lualine](https://github.com/nvim-lualine/lualine.nvim)                             | Fancy statusline                                        |
 | [Nvim-Tree](https://github.com/nvim-tree/nvim-tree.lua)                             | File explorer                            |
-| [Render-Markdown](https://github.com/MeanderingProgrammer/render-markdown.nvim)     | Render markdown files in editor          |
 | [Tabular](https://github.com/godlygeek/tabular)                                     | :Tabularize /\[symbol\] to align text    |
 | [Comment](https://github.com/numToStr/Comment.nvim)                                 | Comment macro                            |
 | [Rainbow-Delimiters](https://github.com/HiPhish/rainbow-delimiters.nvim)            | Matching delimiters are colored the same |
@@ -34,6 +33,7 @@ Neovim is used as the go-to text editor. The configuration is built on top of th
 | [Todo-Comments](https://github.com/folke/todo-comments.nvim)                        | Highlight TODO in comments               |
 | [Nvim-Ufo](https://github.com/kevinhwang91/nvim-ufo)                                | Fold manager                             |
 | [Neominimap](https://github.com/plugins.neominimap)                                 | Code Minimap                             |
+| [Render-Markdown](https://github.com/MeanderingProgrammer/render-markdown.nvim)     | Render markdown files in editor          |
 | [Nvim-Colorizer](https://github.com/NvChad/nvim-colorizer.lua)                      | Color Text Inline                        |
 
 ### Git
@@ -51,20 +51,6 @@ The Kitty terminal emulator is used as the default terminal.
 The terminal color scheme is inspired by [Blood Moon](https://github.com/dguo/blood-moon)..
 The [Hack](https://github.com/source-foundry/Hack) typeface is the default monospaced font.
 
-## Zshell
-
-Zshell is installed with manually managed plugins:
-
-- [fast-syntax-highlighting](https://github.com/zdharma-continuum/fast-syntax-highlighting)
-- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
-- [zsh-autocomplete](https://github.com/marlonrichert/zsh-autocomplete)
-
-The Prompt is managed using [starship](starship.rc).
-
-The [pipes.sh](https://github.com/pipeseroni/pipes.sh) is set as the inactivity terminal screen saver (default after 300 seconds).
-
-# Keybinds
-
 ## General
 
  (Not Part of the dot files, but my personal binds)
@@ -80,14 +66,26 @@ The [pipes.sh](https://github.com/pipeseroni/pipes.sh) is set as the inactivity 
 
 ## Zshell
 
-Zshell with `vi` mode enabled.
+Zshell with `vi` mode enabled and the plugins:
 
- | Action                  | Mode        | Bind                 |
- | :------                 | :---------- | :-----------         |
- | Enter Normal Mode       | Insert      | `Esc`                |
- | Enter Insert Mode       | Normal      | `i`,`a`,`o`          |
- | Search Histroy Prefixed | Insert      | `CTRL+Q`, `CTRL+P`   |
- | Search Histtory Prefiex | Normal      | `SHIFT+J`, `SHIFT+K` |
+[zsh-Autocomplete](https://github.com/marlonrichert/zsh-autocomplete.git)
+[zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+[zsh-syntax-highlighting](https://github.com/zdharma-continuum/fast-syntax-highlighting)
+[reverse-history-substring-search](https://github.com/zsh-users/zsh-history-substring-search)
+[zsh-vi-mode](https://github.com/jeffreytse/zsh-vi-mode.git)
+
+The Prompt is managed using [starship](starship.rc).
+
+The [pipes.sh](https://github.com/pipeseroni/pipes.sh) is set as the inactivity terminal screen saver (default after 300 seconds).
+
+
+  | Action                  | Mode        | Bind                 |
+  | :------                 | :---------- | :-----------         |
+  | Enter Normal Mode       | Insert      | `Esc`                |
+  | Enter Insert Mode       | Normal      | `i`,`a`,`o`          |
+  | Search Histroy Prefixed | Insert      | `CTRL+Q`, `CTRL+P`   |
+  | Search Histtory Prefiex | Normal      | `SHIFT+J`, `SHIFT+K` |
+  | Edit in Text Editor     | Visual      | `vvv`                |
 
 ## Neovim Binds
 
@@ -153,5 +151,4 @@ For more default-keybinds: `:h vimtex-default-mappings`
 - Make actual installer
 - Stylua and other formatters
 - Hydra and the whichkey like menu
-- Lualine
 - neoorg - look into for note taking.
