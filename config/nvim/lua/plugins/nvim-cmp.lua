@@ -15,7 +15,7 @@ return function()
         preselect = cmp.PreselectMode.None,
         completion = {
             completeopt = "menu,menuone,noinsert",
-            keyword_length = 2,
+            keyword_length = 3,
         },
 
         window = {
@@ -35,8 +35,9 @@ return function()
         },
         performance = {
             max_view_entries = 20, -- This limits the number of entries shown in the window. not quite what I want, but itsa start
-            throttle = 150, --ms throttling
-            debounce = 450,
+            -- throttle = 200, --ms throttling
+            -- debounce = 450,
+            fetching_timeout = 2,
         },
 
         -- For an understanding of why these mappings were
@@ -45,12 +46,14 @@ return function()
         mapping = cmp.mapping.preset.insert({
             -- Select the [n]ext item
             ["<C-n>"] = cmp.mapping.select_next_item(),
-            ["<Tab>"] = cmp.mapping.select_next_item(),
+            -- ["<Tab>"] = cmp.mapping.select_next_item(),
             -- Select the [p]revious item
             ["<C-p>"] = cmp.mapping.select_prev_item(),
             ["<S-Tab>"] = cmp.mapping.select_prev_item(),
             ["<C-S-n>"] = cmp.mapping.select_prev_item(),
-            ["<CR>"] = cmp.mapping.confirm({ select = true }),
+            -- ["<CR>"] = cmp.mapping.confirm({ select = true }),
+            ["<Tab>"] = cmp.mapping.confirm({ select = true }),
+            ["<Right>"] = cmp.mapping.confirm({ select = true }),
             -- Scroll the documentation window [b]ack / [f]orward
             -- ["<C-b>"] = cmp.mapping.scroll_docs(-4),
             -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -91,7 +94,7 @@ return function()
             -- can also be a function to dynamically calculate max width such as
             -- menu = function() return math.floor(0.45 * vim.o.columns) end,
             menu = 20, -- leading text (labelDetails)
-            abbr = 20, -- actual suggestion item
+            abbr = 15, -- actual suggestion item
         },
         ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
         show_labelDetails = true, -- show labelDetails in menu. Disabled by default
@@ -148,9 +151,9 @@ return function()
             { name = "vimtex", group_index = 1, max_item_count = 8 },
             { name = "luasnip", group_index = 0 },
             { name = "omni" },
-            { name = "git" },
+            -- { name = "git" },
             -- { name = "latex_symbols", max_item_count = 8, group_index = 2, option = { strategy = 2 } },
-            { name = "path" }, -- file system path
+            -- { name = "path" }, -- file system path
         }),
     })
 
@@ -159,8 +162,8 @@ return function()
             { name = "nvim_lsp" },
             { name = "go_pkgs" },
             { name = "luasnip", group_index = 1 },
-            { name = "git" },
-            { name = "omni" },
+            -- { name = "git" },
+            -- { name = "omni" },
             { name = "path" }, -- file system path
         }),
     })
