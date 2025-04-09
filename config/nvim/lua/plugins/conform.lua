@@ -24,7 +24,12 @@ M.opts = {
         -- tex = { "latexindent" }, -- dont like latexindent
         go = { "goimports", " gofmt" },
         -- Conform can also run multiple formatters sequentially
-        python = { "isort", "black" },
+        python = {
+            isort = {
+                args = { "--ling-length", "200" },
+            },
+            "black",
+        },
         --
         bib = { "bibtex-tidy" },
         -- You can use 'stop_after_first' to run the first available formatter from the list

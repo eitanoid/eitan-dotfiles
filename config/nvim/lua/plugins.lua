@@ -407,6 +407,7 @@ require("lazy").setup({
     { -- Autocompletion
         "hrsh7th/nvim-cmp",
         event = { "InsertEnter", "CmdlineEnter" },
+        enabled = true,
         lazy = true,
         dependencies = {
             "onsails/lspkind.nvim", -- symbols
@@ -420,7 +421,7 @@ require("lazy").setup({
             "hrsh7th/cmp-nvim-lsp", -- lsp completions
             "Snikimonkd/cmp-go-pkgs", -- golang packages
             "micangl/cmp-vimtex", -- completions support for vimtex
-            "kdheepak/cmp-latex-symbols", --, ft = "tex" }, -- LaTeX Letters unused atm
+            -- "kdheepak/cmp-latex-symbols", --, ft = "tex" }, -- LaTeX Letters unused atm
 
             -- Snippet Engine & its associated nvim-cmp source
             {
@@ -508,6 +509,7 @@ require("lazy").setup({
     {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
+        enabled = true,
         opts = {
             enable_check_bracket_line = false,
         },

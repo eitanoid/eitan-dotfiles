@@ -9,7 +9,7 @@ M.init = function()
     ----@type Neominimap.UserConfig
     vim.g.neominimap = {
 
-        auto_enable = true,
+        auto_enable = false,
 
         log_level = vim.log.levels.OFF, ---@type Neominimap.Log.Levels
 
