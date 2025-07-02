@@ -37,7 +37,7 @@ vim.opt.foldcolumn = "1"
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.schedule(function()
-	vim.opt.clipboard = "unnamedplus"
+    vim.opt.clipboard = "unnamedplus"
 end)
 
 -- Enable break indent
@@ -69,11 +69,11 @@ vim.opt.splitbelow = true
 --  and `:help 'listchars'`
 vim.opt.list = true
 vim.opt.listchars = {
-	tab = "│ ",
-	trail = ".",
-	extends = "»",
-	precedes = "«",
-	nbsp = "°",
+    tab = "│ ",
+    trail = ".",
+    extends = "»",
+    precedes = "«",
+    nbsp = "°",
 }
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = "split"
@@ -83,3 +83,20 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 4
+
+-- enable GAP for treesitter support
+vim.filetype.add({
+    extension = {
+        g = "gap",
+        gi = "gap",
+        gd = "gap",
+        tst = "gaptst",
+    },
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "gap",
+    callback = function()
+        vim.o.commentstring = "#%s"
+    end,
+})
