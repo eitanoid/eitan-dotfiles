@@ -46,7 +46,7 @@ require("lazy").setup({
         -- if provider not loaded and enabled is true, it will try to use another provider
     },
 
-    {
+    { -- color scheme editor
         "rktjmp/lush.nvim",
         cmd = { "Lushify", "LushImport", "LushRunTutorial" },
     },
@@ -54,6 +54,7 @@ require("lazy").setup({
     -----------
     --- git ---
     -----------
+
     { -- Adds git related signs to the gutter, as well as utilities for managing changes
         "lewis6991/gitsigns.nvim",
         event = "VeryLazy",
@@ -248,6 +249,19 @@ require("lazy").setup({
         init = require("plugins.vimtex")(),
     },
 
+    {
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+            -- add options here
+            -- or leave it empty to use the default settings
+        },
+        keys = {
+            -- suggested keymap
+            { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
+        },
+    },
+
     --[[ 
 				Quarto Configuration:
 		]]
@@ -308,7 +322,8 @@ require("lazy").setup({
 
     { -- Fuzzy Finder (files, lsp, etc)
         "nvim-telescope/telescope.nvim",
-        event = "SafeState", -- was VimEnter
+        -- event = "VeryLazy", -- was VimEnter
+        cmd = "Telescope",
         branch = "0.1.x",
         dependencies = {
             "nvim-lua/plenary.nvim",

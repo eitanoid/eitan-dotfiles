@@ -91,11 +91,12 @@ The [pipes.sh](https://github.com/pipeseroni/pipes.sh) is set as the inactivity 
 
   | Action                  | Mode        | Bind                                                      |
   | :---------------------- | :---------- | :----------                                               |
-  | Open Which-Key Menu     | Normal      | `SPACE`                                                   |
-  | Toggle Bool Value       | Normal      | `CTRL+x / CTRL+a`                                         |
-  | Toggle Relative-Numbers | Normal      | ``CTRL+` ``                                               |
-  | Navigate Buffers        | Normal      | `ALT+l`, `ALT+h`, `ALT+SHIFT+l`, `ALT+SHIFT+h`, `SPACE+b` |
-  | Surrpound Bind          | Normal      | `s` eg. `sr`, `sd`, `sa` for replace, delete, add.        |
+  | Leader     | Normal      | `<space>`                                                   |
+  | Open Which-Key Menu     | Normal      | `<leader>`                                                   |
+  | Toggle Bool Value       | Normal      | `<ctrl>x / <ctrl>a`                                         |
+  | Toggle Relative-Numbers | Normal      | ``<ctrl>\```                                               |
+  | Navigate Buffers        | Normal      | `<alt>l`, `<alt>h`, `<alt><shift>l`, `<alt><shift>h`, `<leader>b` |
+  | Surround Bind          | Normal      | `s` eg. `sr`, `sd`, `sa` for replace, delete, add.        |
 
 
 ### LaTex In Noevim
@@ -108,6 +109,7 @@ The following are mainly to help my memory.
  | Action                         | Example                      | Mode   | Bind        |
  | :-                             | :-                           | :-     | :-          |
  | Which-Key Menu                 |                              | Normal | `l`         |
+ | Paste Image (img-clip)                 |                              | Normal | `<leader>p`         |
  | Change Surrounding Environment | {enumerate} -> {itemize}     | Normal | `cse`       |
  | Delete Surrounding Environment |                              | Normal | `dse`       |
  | Delete Surrounding Command     | \sqrt\[b\]{a} -> a )         | Normal | `dsc`       |

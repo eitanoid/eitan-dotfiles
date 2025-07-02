@@ -23,6 +23,10 @@
 
 ----------------------------------------------------------------
 
+-- navigation
+vim.keymap.set("n", "H", "^", { desc = "move to first symbol on the line" })
+vim.keymap.set("n", "L", "$", { desc = "move to last symbol on the line" })
+
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
