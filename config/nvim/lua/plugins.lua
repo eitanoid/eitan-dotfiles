@@ -104,7 +104,7 @@ require("lazy").setup({
         dependencies = { "nvim-tree/nvim-web-devicons" },
         enabled = true,
         event = "VeryLazy",
-        opts = {},
+        opts = require("plugins.lualine").setup,
     },
 
     -- illuminate matching keywords / variables

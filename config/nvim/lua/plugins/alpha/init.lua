@@ -1,6 +1,6 @@
 local M = {}
 
--- My personal alpha.nvim config. Featuring a color animated header, scrolling text elements. Reworked the code from:
+-- My personal alpha.nvim config. Featuring a color animated header and scrolling text elements. Reworked the code from:
 -- Animated alpha header from https://github.com/naestech/nvim/blob/main/lua/nae/plugins/alpha.lua
 -- Colored alpha header from https://github.com/FoxPlays24/neovem-config/blob/ccd6286c636b2e2978cf47e8dcb77fc9ef04a846/lua/config/alpha.lua
 

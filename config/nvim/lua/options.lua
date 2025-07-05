@@ -10,8 +10,11 @@ vim.diagnostic.config({ virtual_text = false })
 -- winbar displays directory
 vim.opt.winbar = "%=%m %f"
 
--- redundant because mode is in status line
-vim.opt.showmode = true
+-- Lualine stuff
+
+vim.o.shortmess = vim.o.shortmess .. "S" -- remove search counter, capped at 99 so doing it in lualine
+vim.opt.showmode = false -- don't show mode
+vim.o.showcmd = true -- show commands
 
 -- cursor options
 vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
