@@ -6,6 +6,76 @@ local M = {}
 --     theme = require("tokyonight.colors").setup()
 -- end)
 --
+
+local colors = { -- tokyonight moon theme (easier to just paste it here)
+    bg = "#222436",
+    bg_dark = "#1e2030",
+    bg_dark1 = "#191B29",
+    bg_highlight = "#2f334d",
+    blue = "#82aaff",
+    blue0 = "#3e68d7",
+    blue1 = "#65bcff",
+    blue2 = "#0db9d7",
+    blue5 = "#89ddff",
+    blue6 = "#b4f9f8",
+    blue7 = "#394b70",
+    comment = "#636da6",
+    cyan = "#86e1fc",
+    dark3 = "#545c7e",
+    dark5 = "#737aa2",
+    fg = "#c8d3f5",
+    fg_dark = "#828bb8",
+    fg_gutter = "#3b4261",
+    green = "#c3e88d",
+    green1 = "#4fd6be",
+    green2 = "#41a6b5",
+    magenta = "#c099ff",
+    magenta2 = "#ff007c",
+    orange = "#ff966c",
+    purple = "#fca7ea",
+    red = "#ff757f",
+    red1 = "#c53b53",
+    teal = "#4fd6be",
+    terminal_black = "#444a73",
+    yellow = "#ffc777",
+    git = {
+        add = "#b8db87",
+        change = "#7ca1f2",
+        delete = "#e26a75",
+    },
+}
+--stylua: ignore
+local mode_colors = {        -- color for each mode
+    n = colors.blue,         -- normal
+    no = colors.red,         -- normal operation pending
+    i = colors.green,        -- insert
+    v = colors.magenta,      -- visual
+    [""] = colors.magenta, -- visual block
+    V = colors.magenta,      -- visual line
+    c = colors.yellow,       -- command mode
+    s = colors.magenta,      -- select mode
+    S = colors.magenta,      -- select line mode 
+    [""] = colors.magenta, -- select block mode 
+    ic = colors.yellow,      -- insert completion (?)
+    R = colors.red,          -- replace mode
+    Rv = colors.red,         -- virtual replace mode (?)
+    cv = colors.red,
+    ce = colors.red,
+    r = colors.cyan,
+    rm = colors.cyan,
+    t = colors.teal,
+    ["r?"] = colors.cyan,
+    ["!"] = colors.red,
+}
+
+local mode_color_a = function()
+    return { bg = mode_colors[vim.fn.mode()], fg = colors.bg }
+end
+
+local mode_color_b = function()
+    return { bg = colors.fg_gutter, fg = mode_colors[vim.fn.mode()] }
+end
+
 local conditions = {
     ---@return boolean
     buffer_not_empty = function()
@@ -39,8 +109,8 @@ M.setup = {
         theme = "auto",
         always_divide_middle = false,
         globalstatus = true, -- one statusline in each neovim window rather than buffer
-        component_separators = " ",
-        section_separators = { left = " ", right = " " },
+        component_separators = "",
+        section_separators = { left = "", right = " " },
         icons_enabled = true,
         always_show_tabline = true,
         padding = { left = 0, right = 0 },
@@ -52,11 +122,11 @@ M.setup = {
     },
     -- clear default secitons
     sections = {
-        -- lualine_a = {},
-        -- lualine_b = {},
-        -- lualine_c = {},
-        -- lualine_y = {},
-        -- lualine_z = {},
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {},
+        lualine_y = {},
+        lualine_z = {},
         lualine_x = {},
         -- winbar = {},
     },
@@ -74,12 +144,36 @@ local focused = {}
 
 focused.left = {
 
+    { "mode", padding = { left = 1, right = 1 }, color = mode_color_a },
+    {
+        function()
+            return [[]]
+        end,
+    },
     { -- File size (also controls save indicator)
         "filesize",
         cond = conditions.buffer_not_empty,
-        padding = {},
+        padding = { left = 1, right = 0 },
+        color = mode_color_b,
     },
-    "filetype",
+    {
+        function()
+            return [[]]
+        end,
+        color = { fg = colors.fg_gutter },
+    },
+    { "filetype", padding = { right = 1 } },
+    {
+        function()
+            return [[]]
+        end,
+        color = { fg = colors.fg_gutter, bg = colors.bg },
+    },
+    {
+        "filename",
+        color = { fg = colors.fg_dark, bg = colors.bg_dark },
+        padding = { left = 1 },
+    },
 }
 
 focused.right = {
@@ -114,9 +208,27 @@ focused.right = {
     -- lualine_z = { "location" },
 }
 
+focused.winbar = {
+    lualine_x = { "filename" },
+    lualine_c = {
+        { -- Breadcrumbs
+            "navic",
+            color_correction = nil,
+            navic_opts = nil,
+        },
+        { -- If there is nothing after the navic module the backgound color doesn't work on it.
+            -- I don't know why, and I frankly don't care.
+            function()
+                return "%="
+            end,
+        },
+    },
+}
+
+-- M.setup.sections.lualine_a = { { "mode", padding = { left = 1, right = 1 }, color = mode_color_a } }
 M.setup.sections.lualine_b = focused.left
 M.setup.sections.lualine_x = focused.right
-
+M.setup.winbar = focused.winbar
 --     inactive_sections = {
 --         lualine_a = {},
 --         lualine_b = {},

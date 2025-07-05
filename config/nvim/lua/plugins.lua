@@ -467,6 +467,17 @@ require("lazy").setup({
         config = require("plugins.nvim-cmp"),
     },
 
+    { -- breadcrumbs (i.e project structure)
+        "SmiteshP/nvim-navic",
+        event = "LspAttach",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+            "MunifTanjim/nui.nvim",
+            "nvim-tree/nvim-web-devicons", -- NerdFont icons
+        },
+        opts = require("plugins.navic"),
+    },
+
     --------------------
     --- Color Scheme ---
     --------------------
