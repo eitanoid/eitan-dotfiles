@@ -489,7 +489,8 @@ require("lazy").setup({
     -- Tabular plugin (Vim plugin for aligning text with delimiters) :Tabular command
     {
         "godlygeek/tabular",
-        event = "VeryLazy",
+        -- event = "VeryLazy",
+        cmd = "Tabularize",
     },
 
     -- color preview eg.

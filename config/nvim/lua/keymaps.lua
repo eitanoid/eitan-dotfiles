@@ -363,6 +363,8 @@ vim.api.nvim_create_autocmd("User", { -- lazy load keybinds to save like 3ms in 
         wk.add({
             mode = { "n" }, -- TODO: Not entirely working
             { "<leader>f", group = "[F]ile Tree" },
+            { "<leader>f", group = "[F]ile Tree" },
+            { "\\", "<Cmd>NvimTreeToggle<CR>", desc = "Toggle file tree" },
             { "<leader>ff", "<Cmd>NvimTreeToggle<CR>", desc = "Toggle file tree" },
             { "<leader>fh", require("nvim-tree.api").tree.change_root_to_parent, desc = "Change Root to Parent" },
             { "<leader>fl", require("nvim-tree.api").tree.change_root_to_node, desc = "Change Root to Node" },
