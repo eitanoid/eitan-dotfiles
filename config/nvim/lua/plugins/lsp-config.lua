@@ -148,7 +148,8 @@ return function()
     local servers = {
 
         clangd = { -- https://www.andersevenrud.net/neovim.github.io/lsp/configurations/clangd/ useful for future config
-            cmd = { "clangd", "--background-index", "--clang-tidy", "--log=verbose" },
+            -- cmd = { "clangd", "--background-index", "--clang-tidy", "--log=verbose" },
+            cmd = { "clangd", "--background-index", "--clang-tidy", "--header-insertion=iwyu", "--completion-style=detailed", "--function-arg-placeholders", "--fallback-style=llvm" },
             filetypes = { "c", "cpp", "objc", "objcpp" },
             capabilities = {
                 textDocument = {

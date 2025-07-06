@@ -1,72 +1,9 @@
 -- curtosy of / inspired by https://github.com/TomJo2000/.dotfiles/tree/main/.config/nvim/lua/plugins/lualine
 local M = {}
--- local theme = {} -- doesn't work rn will fix eventually
--- vim.schedule(function()
---     require("tokyonight").load({ style = "moon" })
---     theme = require("tokyonight.colors").setup()
--- end)
---
 
-local colors = { -- tokyonight moon theme (easier to just paste it here)
-    bg = "#222436",
-    bg_dark = "#1e2030",
-    bg_dark1 = "#191B29",
-    bg_highlight = "#2f334d",
-    blue = "#82aaff",
-    blue0 = "#3e68d7",
-    blue1 = "#65bcff",
-    blue2 = "#0db9d7",
-    blue5 = "#89ddff",
-    blue6 = "#b4f9f8",
-    blue7 = "#394b70",
-    comment = "#636da6",
-    cyan = "#86e1fc",
-    dark3 = "#545c7e",
-    dark5 = "#737aa2",
-    fg = "#c8d3f5",
-    fg_dark = "#828bb8",
-    fg_gutter = "#3b4261",
-    green = "#c3e88d",
-    green1 = "#4fd6be",
-    green2 = "#41a6b5",
-    magenta = "#c099ff",
-    magenta2 = "#ff007c",
-    orange = "#ff966c",
-    purple = "#fca7ea",
-    red = "#ff757f",
-    red1 = "#c53b53",
-    teal = "#4fd6be",
-    terminal_black = "#444a73",
-    yellow = "#ffc777",
-    git = {
-        add = "#b8db87",
-        change = "#7ca1f2",
-        delete = "#e26a75",
-    },
-}
---stylua: ignore
-local mode_colors = {        -- color for each mode
-    n = colors.blue,         -- normal
-    no = colors.red,         -- normal operation pending
-    i = colors.green,        -- insert
-    v = colors.magenta,      -- visual
-    [""] = colors.magenta, -- visual block
-    V = colors.magenta,      -- visual line
-    c = colors.yellow,       -- command mode
-    s = colors.magenta,      -- select mode
-    S = colors.magenta,      -- select line mode 
-    [""] = colors.magenta, -- select block mode 
-    ic = colors.yellow,      -- insert completion (?)
-    R = colors.red,          -- replace mode
-    Rv = colors.red,         -- virtual replace mode (?)
-    cv = colors.red,
-    ce = colors.red,
-    r = colors.cyan,
-    rm = colors.cyan,
-    t = colors.teal,
-    ["r?"] = colors.cyan,
-    ["!"] = colors.red,
-}
+local colors = require("plugins.lualine.colors").colors
+local mode_colors = require("plugins.lualine.colors").mode_colors
+-- local theme = require("plugins.lualine.colors").theme
 
 local mode_color_a = function()
     return { bg = mode_colors[vim.fn.mode()], fg = colors.bg }
@@ -96,7 +33,7 @@ local conditions = {
 local search_count = function() -- count how many matches are to a search
     local count = vim.fn.searchcount({ maxcount = 0 })
     return count.incomplete > 0 and "?/?" -- unfinished search
-        or count.total > 0 and ("🔍%s/%s"):format(count.current, count.total) -- has results
+        or count.total > 0 and ("%s/%s"):format(count.current, count.total) -- has results
         or ""
 end
 
@@ -110,7 +47,7 @@ M.setup = {
         always_divide_middle = false,
         globalstatus = true, -- one statusline in each neovim window rather than buffer
         component_separators = "",
-        section_separators = { left = "", right = " " },
+        section_separators = { left = "", right = " " },
         icons_enabled = true,
         always_show_tabline = true,
         padding = { left = 0, right = 0 },
@@ -145,30 +82,16 @@ local focused = {}
 focused.left = {
 
     { "mode", padding = { left = 1, right = 1 }, color = mode_color_a },
-    {
-        function()
-            return [[]]
-        end,
-    },
+    '""',
     { -- File size (also controls save indicator)
         "filesize",
         cond = conditions.buffer_not_empty,
         padding = { left = 1, right = 0 },
         color = mode_color_b,
     },
-    {
-        function()
-            return [[]]
-        end,
-        color = { fg = colors.fg_gutter },
-    },
+    { '""', color = { fg = colors.fg_gutter } },
     { "filetype", padding = { right = 1 } },
-    {
-        function()
-            return [[]]
-        end,
-        color = { fg = colors.fg_gutter, bg = colors.bg },
-    },
+    { '""', color = { fg = colors.fg_gutter, bg = colors.bg } },
     {
         "filename",
         color = { fg = colors.fg_dark, bg = colors.bg_dark },
@@ -176,27 +99,65 @@ focused.left = {
     },
 }
 
+focused.middle = {
+    "%=", -- insert middle section
+    { -- Lsp server name.
+        function()
+            local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
+            local clients = vim.lsp.get_clients()
+
+            if next(clients) == nil then
+                return ""
+            end
+            for _, client in ipairs(clients) do
+                local filetypes = client.config["filetypes"]
+                if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+                    return ("%s"):format(client.name)
+                end
+            end
+            return ""
+        end,
+        color = { fg = colors.fg_dark, gui = "bold" },
+    },
+}
+
 focused.right = {
     {
         search_count,
         timeout = 500,
+        padding = { left = 0, right = 1 },
     },
-
-    "diagnostics",
-
     {
         get_unicode,
         timeout = 500,
         use_mode_colors = true,
+        padding = { left = 0, right = 1 },
+    },
+
+    { -- LSP diagnostics count
+        "diagnostics",
+        sources = { "nvim_diagnostic" },
+        sections = { "error", "warn", "info", "hint" },
+        -- symbols = { error = " ", warn = " ", info = " " },
+        symbols = { error = "E", warn = "W", info = "I", hint = "H" },
+        -- diagnostics_color = {
+        --     color_error = { fg = colors.red },
+        --     color_warn = { fg = colors.yellow },
+        --     color_info = { fg = colors.cyan },
+        -- },
+        padding = { right = 1 },
     },
 
     -- -- lualine_a = { "mode" },
     {
         "branch",
         color = { gui = "bold" },
+        padding = { right = 1, left = 0 },
     },
     {
         "diff",
+        symbols = { added = "+", modified = "~", removed = "-" },
+        padding = { left = 0, right = 0 },
     },
     -- "progress",
     -- "location",
@@ -207,6 +168,8 @@ focused.right = {
     -- lualine_y = { "progress" },
     -- lualine_z = { "location" },
 }
+M.setup.sections.lualine_y = { "progress" }
+M.setup.sections.lualine_z = { "location" }
 
 focused.winbar = {
     lualine_x = { "filename" },
@@ -216,17 +179,15 @@ focused.winbar = {
             color_correction = nil,
             navic_opts = nil,
         },
-        { -- If there is nothing after the navic module the backgound color doesn't work on it.
-            -- I don't know why, and I frankly don't care.
-            function()
-                return "%="
-            end,
-        },
+        -- If there is nothing after the navic module the backgound color doesn't work on it.
+        -- I don't know why, and I frankly don't care.
+        "%=",
     },
 }
 
 -- M.setup.sections.lualine_a = { { "mode", padding = { left = 1, right = 1 }, color = mode_color_a } }
 M.setup.sections.lualine_b = focused.left
+M.setup.sections.lualine_c = focused.middle
 M.setup.sections.lualine_x = focused.right
 M.setup.winbar = focused.winbar
 --     inactive_sections = {
