@@ -125,15 +125,16 @@ focused.right = {
     {
         search_count,
         timeout = 500,
-        padding = { left = 0, right = 1 },
+        padding = { left = 0, right = 0 },
     },
     {
         get_unicode,
         timeout = 500,
         use_mode_colors = true,
-        padding = { left = 0, right = 1 },
+        padding = { left = 1, right = 0 },
     },
-
+}
+M.setup.sections.lualine_y = {
     { -- LSP diagnostics count
         "diagnostics",
         sources = { "nvim_diagnostic" },
@@ -145,31 +146,29 @@ focused.right = {
         --     color_warn = { fg = colors.yellow },
         --     color_info = { fg = colors.cyan },
         -- },
-        padding = { right = 1 },
+        padding = { right = 0, left = 1 },
     },
-
     -- -- lualine_a = { "mode" },
     {
         "branch",
         color = { gui = "bold" },
-        padding = { right = 1, left = 0 },
+        padding = { right = 0, left = 1 },
     },
     {
         "diff",
+
         symbols = { added = "+", modified = "~", removed = "-" },
-        padding = { left = 0, right = 0 },
+        padding = { left = 1, right = 0 },
     },
-    -- "progress",
-    -- "location",
-    -- lualine_c = { "filename" },
-    -- lualine_x = {
-    --     get_unicode,
-    -- },
-    -- lualine_y = { "progress" },
-    -- lualine_z = { "location" },
 }
-M.setup.sections.lualine_y = { "progress" }
-M.setup.sections.lualine_z = { "location" }
+M.setup.sections.lualine_z = {
+    "progress",
+    function()
+        local cursor = vim.api.nvim_win_get_cursor(0)
+        cursor[2] = cursor[2] + 1 -- turn columns into 1 indexed
+        return (" %d:%d "):format(cursor[1], cursor[2])
+    end,
+}
 
 focused.winbar = {
     lualine_x = { "filename" },
