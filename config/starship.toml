@@ -1,13 +1,47 @@
+# current nicer prompt
+
+add_newline = true
 
 format = """
 $directory\
-$git_branch\
-$git_state\
-$git_status\
 $character"""
 
-[directory]
-style = "purple"
+# things I might wanna add to format
+# format = """($nix_shell$container$fill$git_metrics\n)\
+# $shlvl\
+# $shell\
+# $jobs\
+# $sudo\ """
+
+right_format = """
+$kubernetes\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$git_metrics\
+$c\
+$cpp\
+$dotnet\
+$golang\
+$haskell\
+$java\
+$julia\
+$lua\
+$nodejs\
+$python\
+$ruby\
+$rust\
+$swift\
+$memory_usage\
+$local_ip\
+$battery\
+$username\
+$time"""
+
+[fill]
+symbol = ' '
+
 
 [character]
 success_symbol = "[ඞ](green bold)"
@@ -15,21 +49,160 @@ error_symbol = "[ඞ](red bold)"
 vimcmd_symbol = "[ඞ](cyan bold)"
 
 
+[username]
+style_user = "bright-yellow bold italic"
+style_root = "purple bold italic"
+format = "[ $user]($style) "
+disabled = false
+show_always = false
+
+[directory]
+style = "purple"
+home_symbol = "~"
+use_os_path_sep = true
+truncate_to_repo = true
+format = '[$path]($style)[$read_only]($read_only_style) '
+# repo_root_style = 'bold'
+# repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) [△](bold bright-blue)'
+
+[localip]
+ssh_only = true
+format = " [$localipv4](dimmer white)"
+disabled = false
+
+[time]
+disabled = false
+format = "[ $time]($style)"
+use_12hr = false
+time_format = "%R"
+utc_time_offset = "local"
+style = "italic dimmed white"
+
+[battery]
+disabled = true
+format = "[ $charging_symbol$discharging_symbol $percentage $symbol]($style)"
+full_symbol = ""
+charging_symbol = "[↑](italic bold green)"
+discharging_symbol = "[↓](italic bold red)"
+
+[[battery.display]]
+threshold = 100
+# style = "italic bold red"
+
 [git_branch]
-format = "[$branch]($style)"
-style = "bright-black"
+format = " [$symbol$branch(:$remote_branch)]($style)"
+symbol = ""
+style = "bold yellow"
+truncation_symbol = "..."
+truncation_length = 11
+# ignore_branches = ["main", "master"]
+only_attached = false
+
+
+[git_metrics]
+format = ' ([+$added]($added_style))([-$deleted]($deleted_style))'
+added_style = 'italic dimmed green'
+deleted_style = 'italic dimmed red'
+ignore_submodules = true
+disabled = true
+
 
 [git_status]
-format = "[[($conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
+format = """ 
+[$modified](218)\
+$conflicted\
+[$staged](italic dimmed cyan)\
+$renamed\
+[$deleted](italic dimmed red)\
+[$untracked](italic dimmed blue)\
+[($ahead_behind$stashed)]($style)
+"""
 style = "cyan"
 conflicted = ""
-untracked = ""
-modified = "*"
-staged = ""
+untracked = "u${count}"
+modified = "*${count}"
+staged = "s${count}"
 renamed = ""
-deleted = ""
+deleted = "-${count}"
 stashed = "≡"
 
-[git_state]
-format = '\([$state( $progress_current/$progress_total)]($style)\) '
-style = "bright-black"
+
+[lua]
+format =  " [lua $version]($style)"
+version_format = "${raw}"
+symbol = ""
+style = "blue"
+
+[nodejs]
+style = "blue"
+version_format = "${raw}"
+format =  " [node $version]($style)"
+detect_files = ["package-lock.json", "yarn.lock"]
+detect_folders = ["node_modules"]
+detect_extensions = []
+
+[python]
+symbol = ""
+style = "blue"
+version_format = "${raw}"
+format =  " [python $version]($style)"
+
+
+[ruby]
+symbol = ""
+style = "blue"
+version_format = "${raw}"
+format =  " [ruby $version]($style)"
+
+[rust]
+symbol = ""
+style = "blue"
+version_format = "${raw}"
+format =  " [rust $version]($style)"
+
+[swift]
+symbol = ""
+style = "blue"
+version_format = "${raw}"
+format =  " [swift $version]($style)"
+
+[c]
+symbol = ""
+style = "blue"
+format =  " [C $version(-$name)]($style)"
+
+# [cpp]
+# symbol = ""
+# style = "blue"
+# format =  " [C++ $version(-$name)]($style)"
+
+[golang]
+symbol = ""
+style = "blue"
+format =  " [go $version]($style)"
+
+[haskell]
+symbol = ""
+style = "blue"
+format =  " [haskell $version]($style)"
+
+[java]
+symbol = ""
+style = "blue"
+format =  " [java $version]($style)"
+
+[julia]
+symbol = ""
+style = "blue"
+format =  " [julia $version]($style)"
+
+[memory_usage]
+format = " mem [${ram}( ${swap})]($style)"
+
+[nix_shell]
+style = 'bold italic dimmed blue'
+symbol = '✶'
+format = '[$symbol nix⎪$state⎪]($style) [$name](italic dimmed white)'
+impure_msg = '[⌽](bold dimmed red)'
+pure_msg = '[⌾](bold dimmed green)'
+unknown_msg = '[◌](bold dimmed ellow)'
