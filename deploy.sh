@@ -15,7 +15,7 @@ case $1 in
     zsh) 
         mkdir -p  $HOME/.config/zsh &&
         rsync -rav $dotfiles/config/zsh $HOME/.config &&
-        ln -s -T ~/.config/zsh/.zshrc ~/.zshrc &&
+        ln -snT ~/.config/zsh/.zshrc ~/.zshrc &&
         synced+=("Zsh");;
 
     starship | prompt) 
@@ -24,28 +24,28 @@ case $1 in
         synced+=("Starship");;
 
     alacritty)
-        mkdir -p $HOME/.config/alacritty
-        rsync -rav $dotfiles/config/alacritty $HOME/.config
+        mkdir -p $HOME/.config/alacritty &&
+        rsync -rav $dotfiles/config/alacritty $HOME/.config &&
         synced+=("Alacritty");;
 
     foot)
-        mkdir -p $HOME/.config/foot
-        rsync -rav $dotfiles/config/foot $HOME/.config
+        mkdir -p $HOME/.config/foot &&
+        rsync -rav $dotfiles/config/foot $HOME/.config &&
         synced+=("Foot");;
 
     kitty)
-        mkdir -p $HOME/.config/kitty
-        rsync -rav $dotfiles/config/kitty $HOME/.config
+        mkdir -p $HOME/.config/kitty &&
+        rsync -rav $dotfiles/config/kitty $HOME/.config &&
         synced+=("Kitty");;
 
     # dircolors / lscolors
     colors | dircolors)
-        rsync -rav $dotfiles/.dircolors $HOME
+        rsync -rav $dotfiles/.dircolors $HOME &&
         synced+=("Dircolors");;
 
     ranger)
-        mkdir -p $HOME/.config/ranger/plugins
-        rsync -rav $dotfiles/config/ranger $HOME/.config
+        mkdir -p $HOME/.config/ranger/plugins &&
+        rsync -rav $dotfiles/config/ranger $HOME/.config &&
         synced+=("Ranger");;
 
     nvim | neovim)
@@ -54,13 +54,14 @@ case $1 in
         synced+=("Neovim");;
 
     tmux)
-        rsync -rav $dotfiles/config/tmux/.tmux.conf $HOME/.tmux.conf
+        rsync -rav $dotfiles/config/tmux $HOME/.config &&
+        ln -snT ~/.config/tmux/.tmux.conf ~/.tmux.conf &&
         synced+=("Tmux");;
 
     #pdf viewer
     zathura)
-        mkdir -p $HOME/.config/zathura
-        rsync -rav $dotfiles/config/zathura $HOME/.config 
+        mkdir -p $HOME/.config/zathura &&
+        rsync -rav $dotfiles/config/zathura $HOME/.config  &&
         synced+=("Zathura");;
 
     stylua)
