@@ -144,11 +144,6 @@ For more default-keybinds: `:h vimtex-default-mappings`
 
 # Todo:
 
-- Set up wine for stuff like paint.net
 - switch off of Ranger to a different terminal file manager that is less slow and works better.
-- Zshell "which-key" menu just like neovim's which-key plugin
-- Look into Tmux
-- Make actual installer
 - Stylua and other formatters
-- Hydra and the whichkey like menu
-- neoorg - look into for note taking.
+- latex indent config
