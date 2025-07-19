@@ -171,7 +171,7 @@ M.setup.sections.lualine_z = {
 }
 
 focused.winbar = {
-    lualine_x = { "filename" },
+    lualine_x = { { "filename", path = 4 } },
     lualine_c = {
         { -- Breadcrumbs
             "navic",

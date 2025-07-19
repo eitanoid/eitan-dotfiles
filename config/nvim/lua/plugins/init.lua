@@ -660,10 +660,17 @@ require("lazy").setup({
 
     { -- NOTE: timetracking
         "ptdewey/pendulum-nvim",
+        enabled = false,
         event = "VeryLazy",
         config = function()
             require("pendulum").setup()
         end,
+    },
+
+    { -- vim and tmux compabibility
+        "christoomey/vim-tmux-navigator",
+        cmd = require("plugins.vim-tmux-navigator").cmd,
+        keys = require("plugins.vim-tmux-navigator").keys,
     },
 
     ------------------
