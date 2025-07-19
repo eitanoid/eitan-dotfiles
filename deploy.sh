@@ -1,63 +1,108 @@
+#!/usr/bin/env bash
 
-#copy zsh directory and keep .zshrc in $HOME
-mkdir -p  $HOME/.config/zsh
-rsync -rav $(pwd)/config/zsh $HOME/.config
-ln -s -T ~/.config/zsh/.zshrc ~/.zshrc
+dotfiles=$(pwd) # TODO: this should always be the location of this script
 
-echo "Synced Zsh"
+unique=( `printf "%q\n" "$@" | sort -u` ) # remove duplicate values
+synced=()
+failed=()
+# echo $@
+# echo ${synced[@]}
 
-##Starship Prompt
-rsync -rav $(pwd)/config/starship.toml $HOME/.config
-echo "Synced Starship"
+sync() {
+    echo -e "\nAttempting to sync $1"
+case $1 in
+    #copy zsh directory and keep .zshrc in $HOME
+    zsh) 
+        mkdir -p  $HOME/.config/zsh &&
+        rsync -rav $dotfiles/config/zsh $HOME/.config &&
+        ln -s -T ~/.config/zsh/.zshrc ~/.zshrc &&
+        synced+=("Zsh");;
 
-## Alacritty
-mkdir -p $HOME/.config/alacritty
-rsync -rav $(pwd)/config/alacritty $HOME/.config
-echo "Synced Alacritty"
+    starship | prompt) 
+        ##Starship Prompt
+        rsync -rav $dotfiles/config/starship.toml $HOME/.config &&
+        synced+=("Starship");;
 
-## Foot
-mkdir -p $HOME/.config/foot
-rsync -rav $(pwd)/config/foot $HOME/.config
-echo "Synced Foot"
+    alacritty)
+        mkdir -p $HOME/.config/alacritty
+        rsync -rav $dotfiles/config/alacritty $HOME/.config
+        synced+=("Alacritty");;
 
-## Kitty
-mkdir -p $HOME/.config/kitty
-rsync -rav $(pwd)/config/kitty $HOME/.config
-echo "Synced Kitty"
+    foot)
+        mkdir -p $HOME/.config/foot
+        rsync -rav $dotfiles/config/foot $HOME/.config
+        synced+=("Foot");;
 
+    kitty)
+        mkdir -p $HOME/.config/kitty
+        rsync -rav $dotfiles/config/kitty $HOME/.config
+        synced+=("Kitty");;
 
-## Colors
-rsync -rav $(pwd)/.dircolors $HOME
-echo "Synced Dircolors"
+    # dircolors / lscolors
+    colors | dircolors)
+        rsync -rav $dotfiles/.dircolors $HOME
+        synced+=("Dircolors");;
 
-##Ranger 
-mkdir -p $HOME/.config/ranger/plugins
-rsync -rav $(pwd)/config/ranger $HOME/.config
-echo "Synced Ranger"
+    ranger)
+        mkdir -p $HOME/.config/ranger/plugins
+        rsync -rav $dotfiles/config/ranger $HOME/.config
+        synced+=("Ranger");;
 
-##Nvim
-mkdir -p $HOME/.config/nvim
-rsync -rav $(pwd)/config/nvim $HOME/.config
-echo "Synced Neovim"
+    nvim | neovim)
+        mkdir -p $HOME/.config/nvim &&
+        rsync -rav $dotfiles/config/nvim $HOME/.config &&
+        synced+=("Neovim");;
 
-# tmux
-mkdir -p $HOME/.config/tmux
-rsync -rav $(pwd)/config/tmux $HOME/.config
-echo "Synced Tmux"
+    tmux)
+        rsync -rav $dotfiles/config/tmux/.tmux.conf $HOME/.tmux.conf
+        synced+=("Tmux");;
 
-##Nvim - latex formatter
-# rsync -rav $(pwd)/config/tex-fmt $HOME/.config
-# echo "Synced tex-fmt"
+    #pdf viewer
+    zathura)
+        mkdir -p $HOME/.config/zathura
+        rsync -rav $dotfiles/config/zathura $HOME/.config 
+        synced+=("Zathura");;
 
-##Zathura
-mkdir -p $HOME/.config/zathura
-rsync -rav $(pwd)/config/zathura $HOME/.config 
-echo "Synced Zathura"
+    stylua)
+        rsync -rav $dotfiles/.stylua.toml $HOME/ &&
+        synced+=("Stylua");;
 
-##Stylua
-rsync -rav $(pwd)/.stylua.toml $HOME/
-echo "Synced Stylua"
+    latexindent)
+        rsync -rav $dotfiles/indentconfig.yaml $HOME/ &&
+        synced+=("LatexIndent");;
 
-##LatexIndent
-rsync -rav $(pwd)/indentconfig.yaml $HOME/
-echo "Synced LatexIndent"
+    test) # fails
+        return 1 &&
+            echo "synced test";;
+
+    ##Nvim - latex formatter
+    # rsync -rav $dotfiles/config/tex-fmt $HOME/.config
+    # echo "Synced tex-fmt"
+
+    *)
+        echo "$1 is not an option";;
+esac
+}
+
+for key in ${unique[@]}; do
+    sync ${key}
+    if [[ $? = 1 ]] then
+        failed+=($key)
+        echo "failed"
+    fi
+done
+
+echo ""
+
+for task in ${synced[@]}; do
+    echo "Synced ${task}"
+done
+
+echo ""
+
+if [[ -n $"{failed[@]}" ]]; then
+    for task in ${failed[@]}; do
+        echo "Failed to sync ${task}"
+    done
+    exit 1
+fi
