@@ -61,8 +61,9 @@ case $1 in
         synced+=("Neovim");;
 
     tmux)
+        mkdir -p $HOME/.config/tmux &&
         rsync -rav $dotfiles/config/tmux $HOME/.config &&
-        ln -snT ~/.config/tmux/.tmux.conf ~/.tmux.conf &&
+        # ln -snT ~/.config/tmux/.tmux.conf ~/.tmux.conf &&
         synced+=("Tmux");;
 
     #pdf viewer
