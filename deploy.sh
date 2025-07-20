@@ -100,7 +100,7 @@ esac
 # deploy all targets
 for key in ${targets[@]}; do
     sync ${key}
-    if [[ $? = 1 ]] then
+    if [[ $? = 1 ]]; then
         failed+=($key)
         echo "failed"
     fi
