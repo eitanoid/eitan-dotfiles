@@ -15,6 +15,7 @@ M.opts = {
         update_root = false,
     },
     view = {
+        side = "right",
         width = function()
             return math.floor(0.25 * vim.o.columns)
         end,
