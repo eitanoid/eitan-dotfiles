@@ -135,6 +135,15 @@ For more default-keybinds: `:h vimtex-default-mappings`
 | Send code to terminal               | Normal | `CTRL+cc`             |
 | Add Python / R codeblock            | Normal | `ALT+p`, `ALT+r`      |
 
+# Tmux
+
+Tmux pane switching is compatible with neovim splits using (nvim-tmux-navigator)[].
+
+| Action      | Bind                    |
+| :---------- | :---------------------- |
+| Prefix Key  | `C+a`                   |
+| Change pane | `C+h` `C+j` `C+k` `C+l` |
+
 # Packages:
 
 - [bat](https://github.com/sharkdp/bat)

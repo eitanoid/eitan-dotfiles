@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 
+#TODO:
+# option to dry run
+
+
+# targets for deploy all keyword (the current programs I use regularly)
+all_targets=("kitty" "zsh" "starship" "nvim" "ranger" "tmux" "colors" "zathura" "stylua" "latexindent")
+
 dotfiles=$(pwd) # TODO: this should always be the location of this script
 
-unique=( `printf "%q\n" "$@" | sort -u` ) # remove duplicate values
+targets=( `printf "%q\n" "$@" | sort -u` ) # remove duplicate values
 synced=()
 failed=()
 # echo $@
@@ -85,7 +92,12 @@ case $1 in
 esac
 }
 
-for key in ${unique[@]}; do
+
+# if all is present in inputs, set all as the input
+[[ " ${targets[*]} " == *' all '* ]] && targets=${all_targets[@]} && echo "deploying all";
+
+# deploy all targets
+for key in ${targets[@]}; do
     sync ${key}
     if [[ $? = 1 ]] then
         failed+=($key)
@@ -95,6 +107,7 @@ done
 
 echo ""
 
+# summary output on results
 for task in ${synced[@]}; do
     echo "Synced ${task}"
 done
