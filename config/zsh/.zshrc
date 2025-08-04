@@ -109,9 +109,11 @@ function clangrun() { # like `go run` but for c.
 }
 
 #Inactivty Screen Saver
-TMOUT=1000 #~20 mins
+TMOUT=5000 #~100 mins
 trap "echo ;bash $SCREEN_SAVER" ALRM
 
+## completions
+export FPATH="$HOME/.config/zsh/completions/:$FPATH"
 
 alias calc='calcpy' # https://github.com/idanpa/calcpy
 alias calculator='calcpy'
