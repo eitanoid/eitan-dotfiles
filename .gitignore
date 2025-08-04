@@ -6,7 +6,11 @@ backup
 
 #do not commit git modules
 config/zsh/plugins/*
+config/zsh/completions/*
 config/alacritty/themes
+#
+config/tmux/plugins/*
+
 
 #do not commit lain
 coplands-os-logo.jpg
