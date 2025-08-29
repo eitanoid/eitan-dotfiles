@@ -168,9 +168,9 @@ return function()
             },
         },
 
-        rust_analyzer = {},
+        -- rust_analyzer = {},
 
-        hls = {}, -- haskell language server
+        -- hls = {}, -- haskell language server
 
         bashls = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -181,7 +181,7 @@ return function()
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
-        digestif = {}, -- latex
+        -- digestif = {}, -- latex
 
         texlab = {
             settings = {
@@ -212,7 +212,7 @@ return function()
 
         pyright = {}, -- python
 
-        r_language_server = {},
+        -- r_language_server = {},
 
         lua_ls = {
             -- cmd = {...},
@@ -243,7 +243,7 @@ return function()
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
         "stylua", -- Used to format Lua code
-        "digestif",
+        -- "digestif",
         "bibtex-tidy",
     })
     require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
