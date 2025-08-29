@@ -32,4 +32,11 @@ else
 	echo "skipping";
 fi
 
+read -p "Download Tmux TPM? (y/n)?" CONT
+if [ "$CONT" = "y" ]; then
+    git clone https://github.com/tmux-plugins/tpm $CONFIG/tmux/plugins/tpm
+else
+	echo "skipping";
+fi
+
 
