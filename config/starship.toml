@@ -42,7 +42,6 @@ $time"""
 [fill]
 symbol = ' '
 
-
 [character]
 success_symbol = "[ඞ](green bold)"
 error_symbol = "[ඞ](red bold)"
