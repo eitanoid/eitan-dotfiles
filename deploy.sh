@@ -79,7 +79,11 @@ case $1 in
     latexindent)
         rsync -rav $dotfiles/indentconfig.yaml $HOME/ &&
         synced+=("LatexIndent");;
-
+    git)
+        mkdir -p $HOME/.config/git &&
+        rsync -rav $dotfiles/config/git $HOME/.config &&
+        rsync -rav $dotfiles/config/delta.conf $HOME/.config &&
+        synced+=("gitconfig");;
     test) # fails
         return 1 &&
             echo "synced test";;

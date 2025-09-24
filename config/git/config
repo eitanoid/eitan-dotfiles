@@ -1,0 +1,20 @@
+[user]
+	name = Eitan
+	email = eitanoid.os@gmail.com
+[credential "https://github.com"]
+	helper = !/usr/bin/gh auth git-credential
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[merge]
+    conflictStyle = zdiff3
+
+[include]
+	# Delta config
+	path = ~/.config/delta.conf
+
+# vim: set ft=gitconfig noet ts=4 sw=4 ff=unix
