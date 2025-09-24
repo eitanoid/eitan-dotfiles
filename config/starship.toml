@@ -14,7 +14,6 @@ $character"""
 # $sudo\ """
 
 right_format = """
-$kubernetes\
 $git_branch\
 $git_commit\
 $git_state\
@@ -37,6 +36,7 @@ $memory_usage\
 $local_ip\
 $battery\
 $username\
+$kubernetes\
 $time"""
 
 [fill]
@@ -64,6 +64,19 @@ truncate_to_repo = true
 format = '[$path]($style)[$read_only]($read_only_style) '
 # repo_root_style = 'bold'
 # repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) [△](bold bright-blue)'
+
+[kubernetes]
+disabled=false
+symbol = ''
+format = '[ $symbol$context]($style)'
+style = 'cyan bold'
+context_aliases = {}
+user_aliases = {}
+detect_extensions = []
+detect_files = []
+detect_folders = []
+detect_env_vars = []
+contexts = []
 
 [localip]
 ssh_only = true

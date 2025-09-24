@@ -36,18 +36,17 @@ setopt hist_save_no_dups
 setopt hist_ignore_all_dups
 setopt hist_find_no_dups
 
-# Load plugins
-# source $ZSHF/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-# source $ZSHF/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-# source $ZSHF/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-# source $ZSHF/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-# source $ZSHF/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-
+# general plgins 
 zinit load zdharma-continuum/fast-syntax-highlighting
 zinit load zsh-users/zsh-autosuggestions
 zinit load marlonrichert/zsh-autocomplete
 zinit load zsh-users/zsh-history-substring-search 
 zinit load jeffreytse/zsh-vi-mode.git
+
+# shotcut and alias plugins
+zinit snippet OMZ::plugins/git/git.plugin.zsh
+zinit snippet OMZ::plugins/kubectx/kubectx.plugin.zsh
+zinit snippet OMZ::plugins/kubectl/kubectl.plugin.zsh
 
 # load completions
 autoload -Uz compinit && compinit
