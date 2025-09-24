@@ -129,8 +129,6 @@ alias calc='calcpy' # https://github.com/idanpa/calcpy
 alias calculator='calcpy'
 alias cd='z'
 
-source $HOME/.config/zsh/kubernetes.zsh
-
 eval "$(direnv hook zsh)"
 eval "$(dircolors $HOME/.dircolors)"
 eval "$(starship init zsh)"
