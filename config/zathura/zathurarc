@@ -8,3 +8,9 @@ set adjust-open "best-fit"
 
 set synctex true
 set synctex-editor-command "nvim -v --not-a-term -T dumb -c \"VimtexInverseSearch %{line}:%{column} '%{input}'\""
+
+map i recolor
+set adjust-open "best-fit"
+
+set recolor-darkcolor "#B0B002"
+set recolor-lightcolor "#090902"
