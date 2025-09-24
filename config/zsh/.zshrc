@@ -45,7 +45,7 @@ zinit load jeffreytse/zsh-vi-mode.git
 
 # shotcut and alias plugins
 zinit snippet OMZ::plugins/git/git.plugin.zsh
-zinit snippet OMZ::plugins/kubectx/kubectx.plugin.zsh
+# zinit snippet OMZ::plugins/kubectx/kubectx.plugin.zsh
 zinit snippet OMZ::plugins/kubectl/kubectl.plugin.zsh
 
 # load completions
