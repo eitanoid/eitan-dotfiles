@@ -39,4 +39,5 @@ else
 	echo "skipping";
 fi
 
-
+#
+# git curl nvim ranger tmux git-delta 
