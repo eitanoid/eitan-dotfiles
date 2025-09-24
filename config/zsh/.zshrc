@@ -1,3 +1,8 @@
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+
 #Exports 
 export ZSH=$HOME/.config/zsh/.zshrc
 #Path
@@ -32,11 +37,17 @@ setopt hist_ignore_all_dups
 setopt hist_find_no_dups
 
 # Load plugins
-source $ZSHF/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-source $ZSHF/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $ZSHF/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-source $ZSHF/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-source $ZSHF/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+# source $ZSHF/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+# source $ZSHF/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source $ZSHF/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+# source $ZSHF/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+# source $ZSHF/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
+zinit load zdharma-continuum/fast-syntax-highlighting
+zinit load zsh-users/zsh-autosuggestions
+zinit load marlonrichert/zsh-autocomplete
+zinit load zsh-users/zsh-history-substring-search 
+zinit load jeffreytse/zsh-vi-mode.git
 
 # load completions
 autoload -Uz compinit && compinit
