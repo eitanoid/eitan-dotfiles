@@ -37,16 +37,25 @@ setopt hist_ignore_all_dups
 setopt hist_find_no_dups
 
 # general plgins 
-zinit load zdharma-continuum/fast-syntax-highlighting
-zinit load zsh-users/zsh-autosuggestions
-zinit load marlonrichert/zsh-autocomplete
-zinit load zsh-users/zsh-history-substring-search 
-zinit load jeffreytse/zsh-vi-mode.git
+
+zinit light-mode for \
+    zsh-users/zsh-history-substring-search \
+    marlonrichert/zsh-autocomplete \
+    jeffreytse/zsh-vi-mode
+
+zinit wait lucid light-mode for \
+  atinit"zicompinit; zicdreplay" \
+      zdharma-continuum/fast-syntax-highlighting \
+  atload"_zsh_autosuggest_start" \
+      zsh-users/zsh-autosuggestions \
+  blockf atpull'zinit creinstall -q .' \
+      marlonrichert/zsh-autocomplete
 
 # shotcut and alias plugins
-zinit snippet OMZ::plugins/git/git.plugin.zsh
+zinit wait lucid light-mode for \
+    OMZ::plugins/git/git.plugin.zsh \
+    OMZ::plugins/kubectl/kubectl.plugin.zsh
 # zinit snippet OMZ::plugins/kubectx/kubectx.plugin.zsh
-zinit snippet OMZ::plugins/kubectl/kubectl.plugin.zsh
 
 # load completions
 autoload -Uz compinit && compinit
@@ -129,7 +138,11 @@ alias calc='calcpy' # https://github.com/idanpa/calcpy
 alias calculator='calcpy'
 alias cd='z'
 
+alias ls='ls --color=auto'
+alias ll='ls -l'
+alias la='ls -l -a'
+
 eval "$(direnv hook zsh)"
-eval "$(dircolors $HOME/.dircolors)"
+eval "$(dircolors -b $HOME/.dircolors)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
