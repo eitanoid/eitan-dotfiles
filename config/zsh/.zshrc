@@ -40,7 +40,7 @@ setopt hist_find_no_dups
 
 zinit light-mode for \
     zsh-users/zsh-history-substring-search \
-    marlonrichert/zsh-autocomplete \
+      marlonrichert/zsh-autocomplete \
     jeffreytse/zsh-vi-mode
 
 zinit wait lucid light-mode for \
@@ -48,17 +48,14 @@ zinit wait lucid light-mode for \
       zdharma-continuum/fast-syntax-highlighting \
   atload"_zsh_autosuggest_start" \
       zsh-users/zsh-autosuggestions \
-  blockf atpull'zinit creinstall -q .' \
-      marlonrichert/zsh-autocomplete
 
 # shotcut and alias plugins
 zinit wait lucid light-mode for \
     OMZ::plugins/git/git.plugin.zsh \
     OMZ::plugins/kubectl/kubectl.plugin.zsh
-# zinit snippet OMZ::plugins/kubectx/kubectx.plugin.zsh
 
-# load completions
-autoload -Uz compinit && compinit
+# # load completions
+# autoload -Uz compinit && compinit
 
 # completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # caseinsensitive
