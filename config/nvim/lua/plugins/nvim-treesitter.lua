@@ -18,6 +18,7 @@ M.opts = {
         "go",
         "python",
         "gap",
+        "tmux",
     },
 
     -- Autoinstall languages that are not installed
