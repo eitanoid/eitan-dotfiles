@@ -38,24 +38,22 @@ setopt hist_find_no_dups
 
 # general plgins 
 
-zinit light-mode for \
-    zsh-users/zsh-history-substring-search \
-      marlonrichert/zsh-autocomplete \
-    jeffreytse/zsh-vi-mode
 
-zinit wait lucid light-mode for \
-  atinit"zicompinit; zicdreplay" \
-      zdharma-continuum/fast-syntax-highlighting \
-  atload"_zsh_autosuggest_start" \
-      zsh-users/zsh-autosuggestions \
+
+zinit light-mode for \
+    zdharma-continuum/fast-syntax-highlighting \
+    zsh-users/zsh-autosuggestions \
+    marlonrichert/zsh-autocomplete \
+    zsh-users/zsh-history-substring-search  \
+    jeffreytse/zsh-vi-mode
 
 # shotcut and alias plugins
 zinit wait lucid light-mode for \
     OMZ::plugins/git/git.plugin.zsh \
     OMZ::plugins/kubectl/kubectl.plugin.zsh
 
-# # load completions
-# autoload -Uz compinit && compinit
+# load completions
+autoload -Uz compinit && compinit
 
 # completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # caseinsensitive
