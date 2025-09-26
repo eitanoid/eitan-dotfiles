@@ -5,6 +5,17 @@ local colors = require("plugins.lualine.colors").colors
 local mode_colors = require("plugins.lualine.colors").mode_colors
 -- local theme = require("plugins.lualine.colors").theme
 
+local function selectionCount()
+    local isVisualMode = vim.fn.mode():find("[Vv]")
+    if not isVisualMode then
+        return ""
+    end
+    local starts = vim.fn.line("v")
+    local ends = vim.fn.line(".")
+    local lines = starts <= ends and ends - starts + 1 or starts - ends + 1
+    return " " .. tostring(lines) .. ":" .. tostring(vim.fn.wordcount().visual_chars)
+end
+
 local mode_color_a = function()
     return { bg = mode_colors[vim.fn.mode()], fg = colors.bg }
 end
@@ -163,6 +174,7 @@ M.setup.sections.lualine_y = {
 }
 M.setup.sections.lualine_z = {
     "progress",
+    selectionCount,
     function()
         local cursor = vim.api.nvim_win_get_cursor(0)
         cursor[2] = cursor[2] + 1 -- turn columns into 1 indexed
@@ -189,51 +201,5 @@ M.setup.sections.lualine_b = focused.left
 M.setup.sections.lualine_c = focused.middle
 M.setup.sections.lualine_x = focused.right
 M.setup.winbar = focused.winbar
---     inactive_sections = {
---         lualine_a = {},
---         lualine_b = {},
---         lualine_c = { "filename" },
---         lualine_x = { "location" },
---         lualine_y = {},
---         lualine_z = {},
---     },
---     tabline = {},
---     inactive_winbar = {},
---     extensions = {},
---     winbar = {
---         lualine_c = {
---             { -- open buffers
---                 "buffers",
---                 icons_enabled = false,
---                 show_modified_status = false,
---                 fmt = function(str, context) -- icons always have a space by default, if we add them ourselves, we can change that.
---                     local icon, _ = require("nvim-web-devicons").get_icon(context.filetype)
---                     return ("%s%s"):format(icon, str)
---                 end,
---                 max_length = 0, -- Maximum width of buffers component,
---                 buffers_color = {
---                     -- active = { fg = "#acacff", bg = "#acacff" }, -- Color for active buffer.
---                 },
---                 filetype_names = {
---                     alpha = "Alpha",
---                     fzf = "FZF",
---                     TelescopePrompt = "Telescope",
---                 }, -- Shows specific buffer name for that filetype ( { `filetype` = `buffer_name`, ... } )
---                 padding = {},
---             },
---             { -- Breadcrumbs
---                 "navic",
---                 color_correction = nil,
---                 navic_opts = nil,
---             },
---             { -- If there is nothing after the navic module the backgound color doesn't work on it.
---                 -- I don't know why, and I frankly don't care.
---                 function()
---                     return "%="
---                 end,
---             },
---         },
---     },
--- }
 
 return M
