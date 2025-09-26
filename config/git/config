@@ -1,6 +1,7 @@
 [user]
 	name = Eitan
 	email = eitanoid.os@gmail.com
+
 [credential "https://github.com"]
 	helper = !/usr/bin/gh auth git-credential
 
@@ -13,8 +14,14 @@
 [merge]
     conflictStyle = zdiff3
 
+[commit]
+	verbose = true
+
+[help]
+	autocorrect = prompt
+
 [include]
 	# Delta config
 	path = ~/.config/delta.conf
 
-# vim: set ft=gitconfig noet ts=4 sw=4 ff=unix
+# vim: ft=gitconfig noet ts=4 sw=4 ff=unix
