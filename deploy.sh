@@ -5,7 +5,7 @@
 
 
 # targets for deploy all keyword (the current programs I use regularly)
-all_targets=("kitty" "zsh" "starship" "nvim" "ranger" "tmux" "colors" "zathura" "stylua" "latexindent")
+all_targets=("kitty" "zsh" "starship" "nvim" "ranger" "tmux" "colors" "zathura" "direnv" "nix" "stylua" "latexindent")
 
 dotfiles=$(pwd) # TODO: this should always be the location of this script
 
@@ -19,6 +19,10 @@ sync() {
     echo -e "\nAttempting to sync $1"
 case $1 in
     #copy zsh directory and keep .zshrc in $HOME
+    nix) 
+        mkdir -p  $HOME/.confignix &&
+        rsync -rav $dotfiles/config/nix $HOME/.config &&
+        synced+=("Nix");;
     zsh) 
         mkdir -p  $HOME/.config/zsh &&
         rsync -rav $dotfiles/config/zsh $HOME/.config &&
@@ -65,13 +69,14 @@ case $1 in
         rsync -rav $dotfiles/config/tmux $HOME/.config &&
         # ln -snT ~/.config/tmux/.tmux.conf ~/.tmux.conf &&
         synced+=("Tmux");;
-
-    #pdf viewer
     zathura)
         mkdir -p $HOME/.config/zathura &&
         rsync -rav $dotfiles/config/zathura $HOME/.config  &&
         synced+=("Zathura");;
-
+    direnv)
+        mkdir -p $HOME/.config/direnv &&
+        rsync -rav $dotfiles/config/direnv $HOME/.config  &&
+        synced+=("Direnv");;
     stylua)
         rsync -rav $dotfiles/.stylua.toml $HOME/ &&
         synced+=("Stylua");;

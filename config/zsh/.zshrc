@@ -3,8 +3,6 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
-#Exports 
-export ZSH=$HOME/.config/zsh/.zshrc
 #Path
 PATH="$HOME/.local/bin":$PATH
 PATH=$PATH:/usr/local/go/bin # go paths
@@ -14,9 +12,6 @@ export PATH=$PATH:$HOME/.cargo/bin # rust
 export EDITOR=nvim
 export VISUAL=nvim
 export MANPAGER='nvim -c Man! -o -'
-
-#This config file
-ZSHF=$HOME/.config/zsh
 
 # Ranger preview syntax highlighting style
 export HIGHLIGHT_STYLE=rootwater
@@ -141,3 +136,5 @@ eval "$(direnv hook zsh)"
 eval "$(dircolors -b $HOME/.dircolors)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
+
+# vim: ft=zsh
