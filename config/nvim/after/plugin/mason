@@ -1,0 +1,61 @@
+--- LSPs and related tooling to enable
+---@type { [string]: string }
+local servers = {
+    -- Bash
+    ["bash-language-server"] = "bash-language-server",
+    -- C/C++
+    ["clangd"] = "clangd",
+    -- GitHub Actions
+    ["actionlint"] = "actionlint",
+    ["gh-actions-language-server"] = "gh-actions-language-server",
+    -- Golang
+    ["gopls"] = "gopls",
+    -- HTML
+    ["html-lsp"] = "vscode-html-language-server",
+    -- JSON
+    ["json-lsp"] = "vscode-json-language-server",
+    -- Lua
+    ["lua-language-server"] = "lua-language-server",
+    ["stylua"] = "stylua",
+    -- Markdown
+    ["marksman"] = "marksman",
+    -- Python
+    ["pyright"] = "pyright",
+    --Latex
+    ["bibtex-tidy"] = "bibtex",
+    ["texlab"] = "texlab",
+    -- Systemd services
+    ["systemd-language-server"] = "systemd-language-server",
+    -- TOML
+    ["taplo"] = "taplo",
+    -- Spellchecking
+    ["codespell"] = "codespell",
+}
+
+-- require("mason-registry").refresh(function()
+--     --- List of `servers` that are not currently available
+--     ---@type string[]
+--     local need = vim.tbl_values(
+--         -- What LSPs that we want are not currently available?
+--         vim.tbl_map(function(pkg)
+--             -- vim.print(pkg, servers[pkg])
+--             return vim.fn.executable(servers[pkg]) == 0 and pkg or nil
+--         end, vim.tbl_keys(servers))
+--     )
+--
+--     if not vim.tbl_isempty(need) then
+--         vim.cmd.MasonInstall(need)
+--     end
+-- end)
+
+local mappings = require("mason-lspconfig").get_mappings().package_to_lspconfig
+---Mapping from enabled Mason packages to their `vim.lsp.config` namees
+---@type string[]
+local lspconfig_servers = vim.tbl_values(
+    -- get the set of lspconfig servers
+    vim.tbl_map(function(lsp)
+        return mappings[lsp]
+    end, vim.tbl_keys(servers))
+)
+
+vim.lsp.enable(lspconfig_servers)

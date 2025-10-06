@@ -154,31 +154,6 @@ require("lazy").setup({
         end,
     },
 
-    -- {
-    --     "romgrk/barbar.nvim",
-    --     event = "BufWinEnter",
-    --     dependencies = {
-    --         "lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
-    --         "nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
-    --     },
-    --     init = function()
-    --         vim.g.barbar_auto_setup = false
-    --     end,
-    --     opts = {
-    --         -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
-    --         -- animation = true,
-    --         -- insert_at_start = true,
-    --         -- …etc.
-    --         icons = {
-    --             -- Configure the base icons on the bufferline.
-    --             -- Valid options to display the buffer index and -number are `true`, 'superscript' and 'subscript'
-    --             buffer_index = false,
-    --             buffer_number = true,
-    --             button = "x",
-    --         },
-    --     },
-    -- },
-
     { -- enables folds
         "kevinhwang91/nvim-ufo",
         dependencies = { "kevinhwang91/promise-async" },
@@ -196,16 +171,7 @@ require("lazy").setup({
                     require("ufo").closeAllFolds()
                 end,
             },
-            -- {
-            --     "K",
-            --     function()
-            --         local winid = require("ufo").peekFoldedLinesUnderCursor()
-            --         if not winid then
-            --             vim.lsp.buf.hover()
-            --         end
-            --     end,
-            -- },
-        }, --TODO: automatically folds all my tex stuff
+        },
         config = function()
             vim.o.foldcolumn = "1"
             vim.o.foldlevel = 99
@@ -219,12 +185,22 @@ require("lazy").setup({
             }
             local language_servers = vim.lsp.get_clients() -- or list servers manually like {'gopls', 'clangd'}
             for _, ls in ipairs(language_servers) do
-                require("lspconfig")[ls].setup({
-                    capabilities = capabilities,
-                    -- you can add other fields for setting up lsp server in this table
-                })
+                vim.lsp.config[ls].capabilities = capabilities
+                -- require("lspconfig")[ls].setup({
+                --     capabilities = capabilities,
+                --     -- you can add other fields for setting up lsp server in this table
+                -- })
             end
             require("ufo").setup()
+        end,
+    },
+
+    {
+        "ggandor/leap.nvim",
+        event = "VeryLazy",
+        config = function()
+            vim.keymap.set({ "n", "x", "o" }, "f", "<Plug>(leap)")
+            vim.keymap.set("n", "F", "<Plug>(leap-from-window)")
         end,
     },
 
@@ -324,7 +300,7 @@ require("lazy").setup({
         "nvim-telescope/telescope.nvim",
         -- event = "VeryLazy", -- was VimEnter
         cmd = "Telescope",
-        branch = "0.1.x",
+        -- branch = "0.1.x",
         dependencies = {
             "nvim-lua/plenary.nvim",
             { -- If encountering errors, see telescope-fzf-native README for installation instructions
@@ -386,6 +362,7 @@ require("lazy").setup({
     {
         -- Main LSP Configuration
         "neovim/nvim-lspconfig",
+        enabled = true,
         event = { "BufReadPre", "BufNewFile" }, -- NOTE: remove if things break
         dependencies = {
             -- Automatically install LSPs and related tools to stdpath for Neovim
@@ -401,6 +378,32 @@ require("lazy").setup({
         },
         config = require("plugins.lsp-config"),
     },
+
+    -- { -- LSP management
+    --     "mason-org/mason.nvim",
+    --     lazy = true,
+    --     opts = {
+    --         install_root_dir = vim.fn.stdpath("state") .. "/lsp",
+    --         PATH = "append",
+    --     },
+    -- },
+    --
+    -- {
+    --     "mason-org/mason-lspconfig.nvim",
+    --     event = { "BufReadPre", "BufNewFile" },
+    --     dependencies = {
+    --         "mason-org/mason.nvim",
+    --         { -- LSP Configuration
+    --             "neovim/nvim-lspconfig",
+    --       -- stylua: ignore
+    --       dependencies = {
+    --         'folke/lazydev.nvim',   -- Function signatures for nvim's Lua API
+    --         'onsails/lspkind.nvim', -- Icons for LSP suggestions
+    --         'j-hui/fidget.nvim',    -- vim.notify replacement
+    --       },
+    --         },
+    --     },
+    -- },
 
     { -- Autoformat
         "stevearc/conform.nvim",
