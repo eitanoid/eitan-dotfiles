@@ -32,9 +32,6 @@ setopt hist_ignore_all_dups
 setopt hist_find_no_dups
 
 # general plgins 
-
-
-
 zinit light-mode for \
     zdharma-continuum/fast-syntax-highlighting \
     zsh-users/zsh-autosuggestions \
@@ -132,9 +129,14 @@ alias ls='ls --color=auto'
 alias ll='ls -l'
 alias la='ls -l -a'
 
+alias ta='tmux attach -t'
+alias tnew='tmux new -s'
+
 eval "$(direnv hook zsh)"
 eval "$(dircolors -b $HOME/.dircolors)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
+
+setopt autocd
 
 # vim: ft=zsh
