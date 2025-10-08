@@ -19,8 +19,6 @@ require("keymaps")
 
 require("autocmd")
 
-require("templates")
-
 -- to move later
 require("latex.init")
 
