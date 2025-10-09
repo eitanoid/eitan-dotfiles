@@ -22,6 +22,7 @@ bind-key -T copy-mode-vi Y send-keys -X copy-line \; display-message 'copied-lin
 # bind-key -T test-table y send-keys -X copy-line \; send-keys -X copy-selection-pipe ""
 
 bind-key -T copy-mode-vi DoubleClick1Pane send-keys -X select-line
+bind-key -T copy-mode-vi MouseUp1Pane send-keys -X select-word
 
 # splits
 unbind '"'
