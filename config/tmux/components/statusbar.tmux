@@ -11,7 +11,7 @@ set-option -g status-right "\
 #[fg=${inactive_tab} bg=${statusbar_bg}]▋\
 #[fg=${prefix_off_fg} bg=${prefix_off_bg}] %b %d %Y\
 #[fg=${prefix_off_bg} bg=${statusbar_bg}]▋\
-#[fg=${statusbar_bg} bg=${active_tab}] #{hostname} "
+#[fg=${statusbar_bg} bg=${active_tab}] #{host_short} "
 
 # active tab
 set-window-option -g window-status-current-format "\
