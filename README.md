@@ -8,27 +8,20 @@ docker run -w /tmp -it --rm alpine:edge sh -uelic 'addgroup -S eitan && adduser 
 ```
 
 ## Programs
-
-<details>
-<summary>List of programs I like to install</summary>
-
-- [direnv](https://direnv.net/)
-- [zoxide](https://github.com/ajeetdsouza/zoxide)
-- [fzf](https://github.com/junegunn/fzf)
-
-</details>
-
 <details>
 <summary>Zsh</summary>
 
 Zsh with `vi` mode enabled using the [zinit](https://github.com/zdharma-continuum/zinit) package manager and [starship](starship.rc) for prompt.
 
-[zsh-Autocomplete](https://github.com/marlonrichert/zsh-autocomplete.git)
-[zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
-[zsh-syntax-highlighting](https://github.com/zdharma-continuum/fast-syntax-highlighting)
-[reverse-history-substring-search](https://github.com/zsh-users/zsh-history-substring-search)
-[zsh-vi-mode](https://github.com/jeffreytse/zsh-vi-mode.git)
+## Plugins
 
+- [zsh-Autocomplete](https://github.com/marlonrichert/zsh-autocomplete.git)
+- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+- [zsh-syntax-highlighting](https://github.com/zdharma-continuum/fast-syntax-highlighting)
+- [reverse-history-substring-search](https://github.com/zsh-users/zsh-history-substring-search)
+- [zsh-vi-mode](https://github.com/jeffreytse/zsh-vi-mode.git)
+
+## Binds
 
 | Action                  | Mode   | Bind                 |
 | :---------------------- | :----- | :------------------- |
@@ -41,32 +34,62 @@ Zsh with `vi` mode enabled using the [zinit](https://github.com/zdharma-continuu
 
 </details>
 
-
 <details>
 
 <summary>Tmux</summary>
 
- | Action                    | Mode   | Bind                 |
- | :----------------------   | :----- | :------------------- |
- | Prefix                    | any    | `CTRL-A`             |
- | split-window (vertical)   | prefix | `-`                  |
- | split-window (horizontal) | prefix | `|`                  |
- | Copy mode                 | prefix | `[`                  |
- | Swap window left/right    | prefix | `<`, `>`             |
- | Visual Block              | Copy   | `CTRL-V`             |
- | Copy Line                 | Copy   | `SHIFT-Y`            |
- | Select Line               | Copy   | `SHIFT-V`            |
+## Plugins
+
+- [tmux-plugins/tpm](https://github.com/tmux-plugins/tpm)
+- [tmux-plugins/tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect)
+- [tmux-plugins/tmux-continuum](https://github.com/tmux-plugins/tmux-continuum)
+- [soyuka/tmux-current-pane-hostname](https://github.com/soyuka/tmux-current-pane-hostname)
+    
+- manually installed [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)
+
+
+## Binds
+
+| Action                    | Mode   | Bind                 |
+| :----------------------   | :----- | :------------------- |
+| Prefix                    | any    | `CTRL-A`             |
+| split-window (vertical)   | prefix | `-`                  |
+| split-window (horizontal) | prefix | `|`                  |
+| Copy mode                 | prefix | `[`                  |
+| Swap window left/right    | prefix | `<`, `>`             |
+| Visual Block              | Copy   | `CTRL-V`             |
+| Copy Line                 | Copy   | `SHIFT-Y`            |
+| Select Line               | Copy   | `SHIFT-V`            |
 
 </details>
 
-## General Binds
+<details>
 
-(Not Part of the dot files, but my personal binds)
+<details>
+
+<summary>List of programs I like to install</summary>
+
+- [direnv](https://direnv.net/)
+- [zoxide](https://github.com/ajeetdsouza/zoxide)
+- [fzf](https://github.com/junegunn/fzf)
+
+pdf viewer
+- [zathura](https://pwmt.org/projects/zathura)
+
+</details>
+
+<details>
+
+<summary>General Binds</summary>
+
+Not Part of the dot files, but my personal binds that I Want to keep track of.
+
 
 | Action                     | Bind            |
 | :------------------------- | :-------------- |
-| Open Application Launcher      | `ALT-SPACE`       |
-| Open Terminal (Kitty)      | `SUPER-T`       |
+| Open Application Launcher  | `ALT-SPACE`     |
+| Full-Screen APP            | `CTRL-ALT-F`    |
 | Campure Rectangular Region | `SUPER-SHIFT-S` |
 | Change Imput Language      | `ALT-SHIFT`     |
 
+</details>
