@@ -46,7 +46,17 @@ Zsh with `vi` mode enabled using the [zinit](https://github.com/zdharma-continuu
 
 <summary>Tmux</summary>
 
-- `Y` to copy line in copy-mode
+ | Action                    | Mode   | Bind                 |
+ | :----------------------   | :----- | :------------------- |
+ | Prefix                    | any    | `CTRL-A`             |
+ | split-window (vertical)   | prefix | `-`                  |
+ | split-window (horizontal) | prefix | `|`                  |
+ | Copy mode                 | prefix | `[`                  |
+ | Swap window left/right    | prefix | `<`, `>`             |
+ | Visual Block              | Copy   | `CTRL-V`             |
+ | Copy Line                 | Copy   | `SHIFT-Y`            |
+ | Select Line               | Copy   | `SHIFT-V`            |
+
 </details>
 
 ## General Binds
