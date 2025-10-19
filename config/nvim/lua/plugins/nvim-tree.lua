@@ -15,6 +15,8 @@ M.opts = {
         update_root = false,
     },
     view = {
+        number = true,
+        relativenumber = true,
         side = "right",
         width = function()
             return math.floor(0.25 * vim.o.columns)
@@ -60,25 +62,37 @@ M.opts.on_attach = function(bufnr)
         desc = "change root to node",
         callback = api.tree.change_root_to_node,
     })
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "r", "", {
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "a", "", {
         desc = "rename",
         callback = api.fs.rename,
     })
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "n", "", {
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "c", "", {
         desc = "create new file",
         callback = api.fs.create,
     })
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "p", "", {
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "Y", "", {
         desc = "copy absolute path",
         callback = api.fs.copy.absolute_path,
     })
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "P", "", {
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "y", "", {
         desc = "copy relative path",
         callback = api.fs.copy.relative_path,
     })
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<CR>", "", {
         desc = "open",
         callback = api.node.open.edit,
+    })
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<CR>", "", {
+        desc = "open",
+        callback = api.node.open.edit,
+    })
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "e", "", {
+        desc = "open",
+        callback = api.tree.expand_all,
+    })
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "E", "", {
+        desc = "open",
+        callback = api.tree.collapse_all,
     })
 end
 
