@@ -512,7 +512,7 @@ require("lazy").setup({
         "NvChad/nvim-colorizer.lua",
         event = "BufReadPre",
         opts = { -- set to setup table
-            user_default_options = { names = true },
+            user_default_options = { names = false },
             buftypes = {
                 "*",
                 "!prompt",
