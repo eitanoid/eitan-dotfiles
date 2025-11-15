@@ -24,12 +24,13 @@ export HISTSIZE=5000
 export SAVEHIST=$HISTSIZE
 HISTFILE=${HOME}/.zsh_history
 HISTDUP=erase
-setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
-setopt hist_save_no_dups
-setopt hist_ignore_all_dups
-setopt hist_find_no_dups
+setopt appendhistory sharehistory hist_ignore_space hist_save_no_dups hist_ignore_all_dups hist_find_no_dups
+setopt interactive_comments  # commends in interactivemode
+setopt auto_menu menu_complete
+setopt auto_param_slash # trailing / after directory cmp
+setopt no_case_glob no_case_match # case insensitive cmp
+setopt autocd 
+unsetopt prompt_sp # don't clean empty lines
 
 # general plgins 
 zinit light-mode for \
@@ -129,14 +130,14 @@ alias ls='ls --color=auto'
 alias ll='ls -l'
 alias la='ls -l -a'
 
+alias t='tmux'
 alias ta='tmux attach -t'
 alias tnew='tmux new -s'
+
 
 eval "$(direnv hook zsh)"
 eval "$(dircolors -b $HOME/.dircolors)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
-
-setopt autocd
 
 # vim: ft=zsh
