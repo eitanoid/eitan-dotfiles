@@ -1,37 +1,21 @@
 local M = {}
+-- We still keep a list of what we want
+local languages = { "printf", "bash", "c", "lua", "markdown", "markdown_inline", "vim", "vimdoc", "go", "python", "gap",
+    "tmux", "gitcommit" }
 
-M.opts = {
-    ignore_install = { "latex" },
-    ensure_installed = {
-        "printf",
-        "bash",
-        "c",
-        "diff",
-        "html",
-        "lua",
-        "luadoc",
-        "markdown",
-        "markdown_inline",
-        "query",
-        "vim",
-        "vimdoc",
-        "go",
-        "python",
-        "gap",
-        "tmux",
-    },
+M.languages = languages
 
-    -- Autoinstall languages that are not installed
-    auto_install = true,
-    highlight = {
-        enable = true,
-        -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-        --  If you are experiencing weird indenting issues, add the language to
-        --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        disable = { "latex", "tmux" },
-        additional_vim_regex_highlighting = { "ruby", "markdown" },
-    },
-    indent = { enable = true, disable = { "ruby" } },
-}
+M.setup = function()
+    require 'nvim-treesitter'.install(languages)
+
+    vim.api.nvim_create_autocmd('FileType', {
+        pattern = languages,
+        callback = function()
+            vim.treesitter.start()
+            -- You can also enable indentation here
+            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+    })
+end
 
 return M
