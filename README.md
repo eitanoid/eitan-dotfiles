@@ -65,8 +65,6 @@ Zsh with `vi` mode enabled using the [zinit](https://github.com/zdharma-continuu
 
 <details>
 
-<details>
-
 <summary>List of programs I like to install</summary>
 
 - [direnv](https://direnv.net/)

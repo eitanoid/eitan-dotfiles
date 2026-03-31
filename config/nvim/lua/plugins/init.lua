@@ -27,7 +27,7 @@ require("lazy").setup({
     -- Keybind manager
     {
         "folke/which-key.nvim",
-        event = "VeryLazy", -- Sets the loading event to 'VimEnter'
+        event = "VeryLazy",                         -- Sets the loading event to 'VimEnter'
         opts = require("plugins.which-key").opts,
         sort = require("plugins.which-key").sorter, -- TODO: not working, read someone else's which-key documentation
     },
@@ -71,7 +71,7 @@ require("lazy").setup({
 
     { "tpope/vim-fugitive", event = "VeryLazy" },
 
-    { "tpope/vim-rhubarb", event = "VeryLazy" },
+    { "tpope/vim-rhubarb",  event = "VeryLazy" },
     --
     { -- proper merge editor
         --- @see documentation at https://github.com/sindrets/diffview.nvim
@@ -81,7 +81,7 @@ require("lazy").setup({
     },
 
     -- Detect tabstop and shiftwidth automatically, including stuff like modeline
-    { "tpope/vim-sleuth", event = "BufEnter" },
+    { "tpope/vim-sleuth",     event = "BufEnter" },
 
     ---------------------------------
     --- Editor Behaviour Features ---
@@ -196,7 +196,7 @@ require("lazy").setup({
     },
 
     {
-        "ggandor/leap.nvim",
+        url = "https://codeberg.org/andyg/leap.nvim",
         event = "VeryLazy",
         config = function()
             vim.keymap.set({ "n", "x", "o" }, "f", "<Plug>(leap)")
@@ -238,7 +238,7 @@ require("lazy").setup({
         },
     },
 
-    --[[ 
+    --[[
 				Quarto Configuration:
 		]]
 
@@ -287,14 +287,6 @@ require("lazy").setup({
     ---------------------
     --- Functionality ---
     ---------------------
-
-    -- { -- todo later -- repeat keybinds and hint menus
-    --     "anuvyklack/hydra.nvim",
-    --     event = "VeryLazy",
-    --     config = function()
-    --         require("plugins.hydra.init")
-    --     end,
-    -- },
 
     { -- Fuzzy Finder (files, lsp, etc)
         "nvim-telescope/telescope.nvim",
@@ -371,39 +363,13 @@ require("lazy").setup({
             "WhoIsSethDaniel/mason-tool-installer.nvim",
 
             -- Useful status updates for LSP.
-            { "j-hui/fidget.nvim", opts = {}, lazy = true },
+            { "j-hui/fidget.nvim",       opts = {},    lazy = true },
 
             -- Allows extra capabilities provided by nvim-cmp
             "hrsh7th/cmp-nvim-lsp",
         },
         config = require("plugins.lsp-config"),
     },
-
-    -- { -- LSP management
-    --     "mason-org/mason.nvim",
-    --     lazy = true,
-    --     opts = {
-    --         install_root_dir = vim.fn.stdpath("state") .. "/lsp",
-    --         PATH = "append",
-    --     },
-    -- },
-    --
-    -- {
-    --     "mason-org/mason-lspconfig.nvim",
-    --     event = { "BufReadPre", "BufNewFile" },
-    --     dependencies = {
-    --         "mason-org/mason.nvim",
-    --         { -- LSP Configuration
-    --             "neovim/nvim-lspconfig",
-    --       -- stylua: ignore
-    --       dependencies = {
-    --         'folke/lazydev.nvim',   -- Function signatures for nvim's Lua API
-    --         'onsails/lspkind.nvim', -- Icons for LSP suggestions
-    --         'j-hui/fidget.nvim',    -- vim.notify replacement
-    --       },
-    --         },
-    --     },
-    -- },
 
     { -- Autoformat
         "stevearc/conform.nvim",
@@ -431,14 +397,14 @@ require("lazy").setup({
             "onsails/lspkind.nvim", -- symbols
 
             -- completion sources
-            "hrsh7th/cmp-omni", -- Neovim Omnifunc
-            "hrsh7th/cmp-path", -- path competions
-            "hrsh7th/cmp-cmdline", -- comandline cmp
+            "hrsh7th/cmp-omni",         -- Neovim Omnifunc
+            "hrsh7th/cmp-path",         -- path competions
+            "hrsh7th/cmp-cmdline",      -- comandline cmp
             "saadparwaiz1/cmp_luasnip", -- snippets
-            "petertriho/cmp-git", -- git
-            "hrsh7th/cmp-nvim-lsp", -- lsp completions
-            "Snikimonkd/cmp-go-pkgs", -- golang packages
-            "micangl/cmp-vimtex", -- completions support for vimtex
+            "petertriho/cmp-git",       -- git
+            "hrsh7th/cmp-nvim-lsp",     -- lsp completions
+            -- "Snikimonkd/cmp-go-pkgs",   -- golang packages
+            "micangl/cmp-vimtex",       -- completions support for vimtex
             -- "kdheepak/cmp-latex-symbols", --, ft = "tex" }, -- LaTeX Letters unused atm
 
             -- Snippet Engine & its associated nvim-cmp source
@@ -512,7 +478,7 @@ require("lazy").setup({
         "NvChad/nvim-colorizer.lua",
         event = "BufReadPre",
         opts = { -- set to setup table
-            user_default_options = { names = true },
+            user_default_options = { names = false },
             buftypes = {
                 "*",
                 "!prompt",
@@ -608,15 +574,15 @@ require("lazy").setup({
 
                 -- Module mappings. Use `''` (empty string) to disable one.
                 mappings = {
-                    add = "sa", -- Add surrounding in Normal and Visual modes
-                    delete = "sd", -- Delete surrounding
-                    find = "sf", -- Find surrounding (to the right)
-                    find_left = "sF", -- Find surrounding (to the left)
-                    highlight = "sh", -- Highlight surrounding
-                    replace = "sr", -- Replace surrounding
+                    add = "sa",            -- Add surrounding in Normal and Visual modes
+                    delete = "sd",         -- Delete surrounding
+                    find = "sf",           -- Find surrounding (to the right)
+                    find_left = "sF",      -- Find surrounding (to the left)
+                    highlight = "sh",      -- Highlight surrounding
+                    replace = "sr",        -- Replace surrounding
                     update_n_lines = "sn", -- Update `n_lines`
-                    suffix_last = "l", -- Suffix to search with "prev" method
-                    suffix_next = "n", -- Suffix to search with "next" method
+                    suffix_last = "l",     -- Suffix to search with "prev" method
+                    suffix_next = "n",     -- Suffix to search with "next" method
                 },
 
                 -- Number of lines within which surrounding is searched
@@ -641,32 +607,7 @@ require("lazy").setup({
         end,
     },
 
-    { -- Collection of various small independent plugins/modules
-        "echasnovski/mini.statusline",
-        event = "BufWinEnter",
-        enabled = false,
-        config = function()
-            -- Simple and easy statusline.
-            --  You could remove this setup call if you don't like it,
-            --  and try some other statusline plugin
-            local statusline = require("mini.statusline")
-            -- set use_icons to true if you have a Nerd Font
-            statusline.setup({ use_icons = vim.g.have_nerd_font })
-
-            -- You can configure sections in the statusline by overriding their
-            -- default behavior. For example, here we set the section for
-            -- cursor location to LINE:COLUMN
-            ---@diagnostic disable-next-line: duplicate-set-field
-            statusline.section_location = function()
-                return "%2l:%-2v"
-            end
-
-            -- ... and there is more!
-            --  Check out: https://github.com/echasnovski/mini.nvim
-        end,
-    },
-
-    { -- NOTE: timetracking
+    { -- timetracking
         "ptdewey/pendulum-nvim",
         enabled = false,
         event = "VeryLazy",
@@ -686,11 +627,13 @@ require("lazy").setup({
     ------------------
     { -- Highlight, edit, and navigate code
         "nvim-treesitter/nvim-treesitter",
+        branch = "main",
         event = "BufRead", -- NOTE: remove if this breaks stuff
         build = ":TSUpdate",
-        main = "nvim-treesitter.configs", -- Sets main module to use for opts
         -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-        opts = require("plugins.nvim-treesitter").opts,
+        config = function()
+            require("plugins.nvim-treesitter").setup()
+        end
         -- There are additional nvim-treesitter modules that you can use to interact
         -- with nvim-treesitter. You should go explore a few and see what interests you:
         --
@@ -698,33 +641,6 @@ require("lazy").setup({
         --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
         --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     },
-
-    -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
-    -- init.lua. If you want these files, they are in the repository, so you can just download them and
-    -- place them in the correct locations.
-
-    -- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for Kickstart
-    --
-    --  Here are some example plugins that I've included in the Kickstart repository.
-    --  Uncomment any of the lines below to enable them (you will need to restart nvim).
-    --
-    -- require 'kickstart.plugins.debug',
-    -- require 'kickstart.plugins.indent_line',
-    -- require 'kickstart.plugins.lint',
-    -- require 'kickstart.plugins.autopairs',
-    -- require 'kickstart.plugins.neo-tree',
-    -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
-
-    -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-    --    This is the easiest way to modularize your config.
-    --
-    --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-    -- { import = "plugins" },
-    --
-    -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
-    -- Or use telescope!
-    -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
-    -- you can continue same window with `<space>sr` which resumes last telescope search
 }, {
     ui = {
         -- If you are using a Nerd Font: set icons to an empty table which will use the
