@@ -27,7 +27,7 @@ require("lazy").setup({
     -- Keybind manager
     {
         "folke/which-key.nvim",
-        event = "VeryLazy", -- Sets the loading event to 'VimEnter'
+        event = "VeryLazy",                         -- Sets the loading event to 'VimEnter'
         opts = require("plugins.which-key").opts,
         sort = require("plugins.which-key").sorter, -- TODO: not working, read someone else's which-key documentation
     },
@@ -71,7 +71,7 @@ require("lazy").setup({
 
     { "tpope/vim-fugitive", event = "VeryLazy" },
 
-    { "tpope/vim-rhubarb", event = "VeryLazy" },
+    { "tpope/vim-rhubarb",  event = "VeryLazy" },
     --
     { -- proper merge editor
         --- @see documentation at https://github.com/sindrets/diffview.nvim
@@ -81,7 +81,7 @@ require("lazy").setup({
     },
 
     -- Detect tabstop and shiftwidth automatically, including stuff like modeline
-    { "tpope/vim-sleuth", event = "BufEnter" },
+    { "tpope/vim-sleuth",     event = "BufEnter" },
 
     ---------------------------------
     --- Editor Behaviour Features ---
@@ -196,7 +196,7 @@ require("lazy").setup({
     },
 
     {
-        "ggandor/leap.nvim",
+        url = "https://codeberg.org/andyg/leap.nvim",
         event = "VeryLazy",
         config = function()
             vim.keymap.set({ "n", "x", "o" }, "f", "<Plug>(leap)")
@@ -238,7 +238,7 @@ require("lazy").setup({
         },
     },
 
-    --[[ 
+    --[[
 				Quarto Configuration:
 		]]
 
@@ -287,14 +287,6 @@ require("lazy").setup({
     ---------------------
     --- Functionality ---
     ---------------------
-
-    -- { -- todo later -- repeat keybinds and hint menus
-    --     "anuvyklack/hydra.nvim",
-    --     event = "VeryLazy",
-    --     config = function()
-    --         require("plugins.hydra.init")
-    --     end,
-    -- },
 
     { -- Fuzzy Finder (files, lsp, etc)
         "nvim-telescope/telescope.nvim",
@@ -371,39 +363,13 @@ require("lazy").setup({
             "WhoIsSethDaniel/mason-tool-installer.nvim",
 
             -- Useful status updates for LSP.
-            { "j-hui/fidget.nvim", opts = {}, lazy = true },
+            { "j-hui/fidget.nvim",       opts = {},    lazy = true },
 
             -- Allows extra capabilities provided by nvim-cmp
             "hrsh7th/cmp-nvim-lsp",
         },
         config = require("plugins.lsp-config"),
     },
-
-    -- { -- LSP management
-    --     "mason-org/mason.nvim",
-    --     lazy = true,
-    --     opts = {
-    --         install_root_dir = vim.fn.stdpath("state") .. "/lsp",
-    --         PATH = "append",
-    --     },
-    -- },
-    --
-    -- {
-    --     "mason-org/mason-lspconfig.nvim",
-    --     event = { "BufReadPre", "BufNewFile" },
-    --     dependencies = {
-    --         "mason-org/mason.nvim",
-    --         { -- LSP Configuration
-    --             "neovim/nvim-lspconfig",
-    --       -- stylua: ignore
-    --       dependencies = {
-    --         'folke/lazydev.nvim',   -- Function signatures for nvim's Lua API
-    --         'onsails/lspkind.nvim', -- Icons for LSP suggestions
-    --         'j-hui/fidget.nvim',    -- vim.notify replacement
-    --       },
-    --         },
-    --     },
-    -- },
 
     { -- Autoformat
         "stevearc/conform.nvim",
@@ -608,15 +574,15 @@ require("lazy").setup({
 
                 -- Module mappings. Use `''` (empty string) to disable one.
                 mappings = {
-                    add = "sa", -- Add surrounding in Normal and Visual modes
-                    delete = "sd", -- Delete surrounding
-                    find = "sf", -- Find surrounding (to the right)
-                    find_left = "sF", -- Find surrounding (to the left)
-                    highlight = "sh", -- Highlight surrounding
-                    replace = "sr", -- Replace surrounding
+                    add = "sa",            -- Add surrounding in Normal and Visual modes
+                    delete = "sd",         -- Delete surrounding
+                    find = "sf",           -- Find surrounding (to the right)
+                    find_left = "sF",      -- Find surrounding (to the left)
+                    highlight = "sh",      -- Highlight surrounding
+                    replace = "sr",        -- Replace surrounding
                     update_n_lines = "sn", -- Update `n_lines`
-                    suffix_last = "l", -- Suffix to search with "prev" method
-                    suffix_next = "n", -- Suffix to search with "next" method
+                    suffix_last = "l",     -- Suffix to search with "prev" method
+                    suffix_next = "n",     -- Suffix to search with "next" method
                 },
 
                 -- Number of lines within which surrounding is searched
