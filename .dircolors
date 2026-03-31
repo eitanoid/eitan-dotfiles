@@ -81,6 +81,7 @@ EXEC 00;36
 # documents and text files
 .pdf 00;33
 .djvu 00;33
+.md 00;33
 
 # .gitignore
 .gitignore 1;33
@@ -213,5 +214,3 @@ EXEC 00;36
 .html 00;32
 .js 00;32
 .htmx 00;32
-
-
