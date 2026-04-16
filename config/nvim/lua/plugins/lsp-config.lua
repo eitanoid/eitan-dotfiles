@@ -5,7 +5,8 @@ return function()
         "yamlls",
         "jsonls",
         "gopls",
-        "pyright"
+        "pyright",
+        "nil-ls" -- nix
         -- "bibtex-tidy",
     }
     require("mason-lspconfig").setup({
