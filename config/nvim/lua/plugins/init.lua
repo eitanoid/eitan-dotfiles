@@ -27,9 +27,9 @@ require("lazy").setup({
   -- Keybind manager
   {
     "folke/which-key.nvim",
-    event = "VeryLazy",                             -- Sets the loading event to 'VimEnter'
+    event = "VeryLazy",                         -- Sets the loading event to 'VimEnter'
     opts = require("plugins.which-key").opts,
-    sort = require("plugins.which-key").sorter,     -- TODO: not working, read someone else's which-key documentation
+    sort = require("plugins.which-key").sorter, -- TODO: not working, read someone else's which-key documentation
   },
 
   ------------------
@@ -46,7 +46,7 @@ require("lazy").setup({
     -- if provider not loaded and enabled is true, it will try to use another provider
   },
 
-  {   -- color scheme editor
+  { -- color scheme editor
     "rktjmp/lush.nvim",
     cmd = { "Lushify", "LushImport", "LushRunTutorial" },
   },
@@ -55,7 +55,7 @@ require("lazy").setup({
   --- git ---
   -----------
 
-  {   -- Adds git related signs to the gutter, as well as utilities for managing changes
+  { -- Adds git related signs to the gutter, as well as utilities for managing changes
     "lewis6991/gitsigns.nvim",
     event = "VeryLazy",
     opts = {
@@ -73,7 +73,7 @@ require("lazy").setup({
 
   { "tpope/vim-rhubarb",  event = "VeryLazy" },
   --
-  {   -- proper merge editor
+  { -- proper merge editor
     --- @see documentation at https://github.com/sindrets/diffview.nvim
     "sindrets/diffview.nvim",
     event = "VeryLazy",
@@ -86,17 +86,6 @@ require("lazy").setup({
   ---------------------------------
   --- Editor Behaviour Features ---
   ---------------------------------
-
-  {
-    "Isrothy/neominimap.nvim",
-    version = "v3.*.*",
-    enabled = true,
-    lazy = true,     -- NOTE: NO NEED to Lazy load
-    event = "SafeState",
-
-    keys = require("plugins.neominimap").keys,
-    init = require("plugins.neominimap").init,
-  },
 
   -- lualine statusline
   {
@@ -120,7 +109,7 @@ require("lazy").setup({
   -- directory tree
   {
     "nvim-tree/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFindFile" },     -- only load when the commands are ran
+    cmd = { "NvimTreeToggle", "NvimTreeFindFile" }, -- only load when the commands are ran
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
@@ -154,7 +143,7 @@ require("lazy").setup({
     end,
   },
 
-  {   -- enables folds
+  { -- enables folds
     "kevinhwang91/nvim-ufo",
     dependencies = { "kevinhwang91/promise-async" },
     event = "BufRead",
@@ -183,7 +172,7 @@ require("lazy").setup({
         dynamicRegistration = false,
         lineFoldingOnly = true,
       }
-      local language_servers = vim.lsp.get_clients()       -- or list servers manually like {'gopls', 'clangd'}
+      local language_servers = vim.lsp.get_clients() -- or list servers manually like {'gopls', 'clangd'}
       for _, ls in ipairs(language_servers) do
         vim.lsp.config[ls].capabilities = capabilities
         -- require("lspconfig")[ls].setup({
@@ -204,7 +193,7 @@ require("lazy").setup({
     end,
   },
 
-  {   -- nicer looking Markdown
+  { -- nicer looking Markdown
     "MeanderingProgrammer/render-markdown.nvim",
     ft = { "markdown", "html" },
     dependencies = {
@@ -213,27 +202,22 @@ require("lazy").setup({
     },
   },
 
+  require("plugins.obsidian"),
   -----------------------------
   --- Work i.e TeX Ajdacent ---
   -----------------------------
 
-  {   -- latex plugins
+  { -- latex plugins
     "lervag/vimtex",
     ft = { "latex", "tex", "bib" },
-    lazy = false,     -- we don't want to lazy load VimTeX
-    -- tag = "v2.15", -- uncomment to pin to a specific release
+    lazy = false,
     init = require("plugins.vimtex")(),
   },
 
   {
     "HakonHarnes/img-clip.nvim",
     event = "VeryLazy",
-    opts = {
-      -- add options here
-      -- or leave it empty to use the default settings
-    },
     keys = {
-      -- suggested keymap
       { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
     },
   },
@@ -242,7 +226,7 @@ require("lazy").setup({
 				Quarto Configuration:
 		]]
 
-  {   -- requires plugins in lua/plugins/treesitter.lua and lua/plugins/lsp.lua
+  { -- requires plugins in lua/plugins/treesitter.lua and lua/plugins/lsp.lua
     -- for complete functionality (language features)
     "quarto-dev/quarto-nvim",
     ft = { "quarto" },
@@ -256,46 +240,18 @@ require("lazy").setup({
     },
   },
 
-  -- directly open ipynb files as quarto docuements and convert back behind the scenes
-  {
-    "GCBallesteros/jupytext.nvim",
-    opts = {
-      custom_language_formatting = {
-        python = {
-          extension = "qmd",
-          style = "quarto",
-          force_ft = "quarto",
-        },
-        r = {
-          extension = "qmd",
-          style = "quarto",
-          force_ft = "quarto",
-        },
-      },
-    },
-  },
-
-  -- Send to terminal / code runner
-  {
-    "jpalardy/vim-slime",
-    event = "VeryLazy",
-    dev = false,
-    init = require("plugins.slime").init,
-    config = require("plugins.slime").config,
-  },
-
   ---------------------
   --- Functionality ---
   ---------------------
 
-  {   -- Fuzzy Finder (files, lsp, etc)
+  { -- Fuzzy Finder (files, lsp, etc)
     "nvim-telescope/telescope.nvim",
     -- event = "VeryLazy", -- was VimEnter
     cmd = "Telescope",
     -- branch = "0.1.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      {       -- If encountering errors, see telescope-fzf-native README for installation instructions
+      { -- If encountering errors, see telescope-fzf-native README for installation instructions
         "nvim-telescope/telescope-fzf-native.nvim",
 
         -- `build` is used to run some command when the plugin is installed/updated.
@@ -319,7 +275,7 @@ require("lazy").setup({
   {
     "rachartier/tiny-inline-diagnostic.nvim",
     -- event = "LspAttach", -- Or `LspAttach`
-    priority = 1000,     -- needs to be loaded in first
+    priority = 1000, -- needs to be loaded in first
     config = function()
       require("plugins.tiny-inline-diagnostic").setup()
     end,
@@ -355,23 +311,22 @@ require("lazy").setup({
     -- Main LSP Configuration
     "neovim/nvim-lspconfig",
     enabled = true,
-    event = { "BufReadPre", "BufNewFile" },     -- NOTE: remove if things break
+    event = { "BufReadPre", "BufNewFile" }, -- NOTE: remove if things break
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
-      { "williamboman/mason.nvim", config = true },       -- NOTE: Must be loaded before dependants
+      { "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
       "williamboman/mason-lspconfig.nvim",
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
 
       -- Useful status updates for LSP.
       { "j-hui/fidget.nvim",       opts = {},    lazy = true },
 
       -- Allows extra capabilities provided by nvim-cmp
-      "hrsh7th/cmp-nvim-lsp",
+      -- "hrsh7th/cmp-nvim-lsp",
     },
     config = require("plugins.lsp-config"),
   },
 
-  {   -- Autoformat
+  { -- Autoformat
     "stevearc/conform.nvim",
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },
@@ -388,23 +343,23 @@ require("lazy").setup({
     opts = require("plugins.conform").opts,
   },
 
-  {   -- Autocompletion
+  { -- Autocompletion
     "hrsh7th/nvim-cmp",
     event = { "InsertEnter", "CmdlineEnter" },
     enabled = true,
     lazy = true,
     dependencies = {
-      "onsails/lspkind.nvim",       -- symbols
+      "onsails/lspkind.nvim", -- symbols
 
       -- completion sources
-      "hrsh7th/cmp-omni",               -- Neovim Omnifunc
-      "hrsh7th/cmp-path",               -- path competions
-      "hrsh7th/cmp-cmdline",            -- comandline cmp
-      "saadparwaiz1/cmp_luasnip",       -- snippets
-      "petertriho/cmp-git",             -- git
-      "hrsh7th/cmp-nvim-lsp",           -- lsp completions
+      "hrsh7th/cmp-omni",         -- Neovim Omnifunc
+      "hrsh7th/cmp-path",         -- path competions
+      "hrsh7th/cmp-cmdline",      -- comandline cmp
+      "saadparwaiz1/cmp_luasnip", -- snippets
+      "petertriho/cmp-git",       -- git
+      "hrsh7th/cmp-nvim-lsp",     -- lsp completions
       -- "Snikimonkd/cmp-go-pkgs",   -- golang packages
-      "micangl/cmp-vimtex",             -- completions support for vimtex
+      "micangl/cmp-vimtex",       -- completions support for vimtex
       -- "kdheepak/cmp-latex-symbols", --, ft = "tex" }, -- LaTeX Letters unused atm
 
       -- Snippet Engine & its associated nvim-cmp source
@@ -436,13 +391,13 @@ require("lazy").setup({
     config = require("plugins.nvim-cmp"),
   },
 
-  {   -- breadcrumbs (i.e project structure)
+  { -- breadcrumbs (i.e project structure)
     "SmiteshP/nvim-navic",
     event = "LspAttach",
     dependencies = {
       "neovim/nvim-lspconfig",
       "MunifTanjim/nui.nvim",
-      "nvim-tree/nvim-web-devicons",       -- NerdFont icons
+      "nvim-tree/nvim-web-devicons", -- NerdFont icons
     },
     opts = require("plugins.navic"),
   },
@@ -453,7 +408,7 @@ require("lazy").setup({
 
   {
     "folke/tokyonight.nvim",
-    priority = 1000,     -- Make sure to load this before all the other start plugins.
+    priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
       vim.cmd.colorscheme("tokyonight-moon")
       -- vim.cmd.colorscheme("onedark")
@@ -466,18 +421,15 @@ require("lazy").setup({
   --- misc plugins---
   -------------------
 
-  -- Tabular plugin (Vim plugin for aligning text with delimiters) :Tabular command
-  {
+  { -- Tabular plugin (Vim plugin for aligning text with delimiters) :Tabular command
     "godlygeek/tabular",
-    -- event = "VeryLazy",
     cmd = "Tabularize",
   },
 
-  -- color preview eg.
-  {
+  { -- color preview eg. red
     "NvChad/nvim-colorizer.lua",
     event = "BufReadPre",
-    opts = {     -- set to setup table
+    opts = { -- set to setup table
       user_default_options = { names = false },
       buftypes = {
         "*",
@@ -492,7 +444,7 @@ require("lazy").setup({
   {
     "numToStr/Comment.nvim",
     event = "VeryLazy",
-    opts = {},     -- use defaults
+    opts = {}, -- use defaults
   },
   --
   -- self explanatory, raindow brackets etc. requires treesitter parsers.
@@ -516,15 +468,14 @@ require("lazy").setup({
       npairs.setup({})
 
       npairs.add_rules({
-        Rule("$", "$", "tex"):with_move(function(opts)         -- move if next char is $
-          -- print(vim.inspect(opts))
+        Rule("$", "$", "tex"):with_move(function(opts) -- move if next char is $
           return opts.char == "$"
         end),
       })
     end,
   },
 
-  {   -- indent guides
+  { -- indent guides
     "lukas-reineke/indent-blankline.nvim",
     event = "VeryLazy",
     main = "ibl",
@@ -548,7 +499,6 @@ require("lazy").setup({
       require("mini.ai").setup({ n_lines = 500 })
     end,
     -- Better Around/Inside textobjects
-    --
     -- Examples:
     --  - va)  - [V]isually select [A]round [)]paren
     --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
@@ -560,33 +510,22 @@ require("lazy").setup({
     event = "VeryLazy",
     config = function()
       require("mini.surround").setup({
-        -- Add custom surroundings to be used on top of builtin ones. For more
-        -- information with examples, see `:h MiniSurround.config`.
         custom_surroundings = {
           ["("] = { output = { left = "(", right = ")" } },
           ["{"] = { output = { left = "{", right = "}" } },
           ["["] = { output = { left = "[", right = "]" } },
           ["c"] = { output = { left = "`", right = "`" } },
         },
-
         -- Duration (in ms) of highlight when calling `MiniSurround.highlight()`
         highlight_duration = 500,
 
         -- Module mappings. Use `''` (empty string) to disable one.
         mappings = {
-          add = "sa",                      -- Add surrounding in Normal and Visual modes
-          delete = "sd",                   -- Delete surrounding
-          find = "sf",                     -- Find surrounding (to the right)
-          find_left = "sF",                -- Find surrounding (to the left)
-          highlight = "sh",                -- Highlight surrounding
-          replace = "sr",                  -- Replace surrounding
-          update_n_lines = "sn",           -- Update `n_lines`
-          suffix_last = "l",               -- Suffix to search with "prev" method
-          suffix_next = "n",               -- Suffix to search with "next" method
+          add = "sa",
+          delete = "sd",
+          replace = "sr",
         },
-
-        -- Number of lines within which surrounding is searched
-        n_lines = 20,
+        n_lines = 20, -- search n lines
 
         -- Whether to respect selection type:
         -- - Place surroundings on separate lines in linewise mode.
@@ -607,7 +546,7 @@ require("lazy").setup({
     end,
   },
 
-  {   -- timetracking
+  { -- timetracking
     "ptdewey/pendulum-nvim",
     enabled = false,
     event = "VeryLazy",
@@ -616,35 +555,23 @@ require("lazy").setup({
     end,
   },
 
-  {   -- vim and tmux compabibility
+  { -- vim and tmux compabibility
     "christoomey/vim-tmux-navigator",
     cmd = require("plugins.vim-tmux-navigator").cmd,
     keys = require("plugins.vim-tmux-navigator").keys,
   },
 
-  ------------------
-  --- treesitter ---
-  ------------------
-  {   -- Highlight, edit, and navigate code
+  {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
-    event = "BufRead",     -- NOTE: remove if this breaks stuff
+    event = "BufRead", -- NOTE: remove if this breaks stuff
     build = ":TSUpdate",
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     config = function()
       require("plugins.nvim-treesitter").setup()
     end
-    -- There are additional nvim-treesitter modules that you can use to interact
-    -- with nvim-treesitter. You should go explore a few and see what interests you:
-    --
-    --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-    --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-    --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
 }, {
   ui = {
-    -- If you are using a Nerd Font: set icons to an empty table which will use the
-    -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
     icons = vim.g.have_nerd_font and {} or {
       cmd = "⌘",
       config = "🛠",
@@ -662,6 +589,4 @@ require("lazy").setup({
     },
   },
 })
-
--- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sw=2 et:
