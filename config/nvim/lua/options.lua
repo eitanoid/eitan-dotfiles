@@ -1,75 +1,38 @@
--- copied from init.lua
-
--- Make line numbers default
-vim.opt.number = true
+vim.opt.number = true                                           -- Make line numbers default
 vim.opt.relativenumber = true
-
--- tiny diagnostic display only
-vim.diagnostic.config({ virtual_text = false })
-
--- winbar displays directory
-vim.opt.winbar = "%=%m %f"
-
+vim.diagnostic.config({ virtual_text = false })                 -- tiny diagnostic display only
+vim.opt.winbar = "%=%m %f"                                      -- winbar displays directory
 -- Lualine stuff
+vim.o.shortmess = vim.o.shortmess .. "S"                        -- remove search counter since done in lualine
+vim.opt.showmode = false                                        -- don't show mode
 
-vim.o.shortmess = vim.o.shortmess .. "S" -- remove search counter, capped at 99 so doing it in lualine
-vim.opt.showmode = false -- don't show mode
-vim.o.showcmd = true -- show commands
+vim.o.showcmd = true                                            -- show commands
+vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20" -- cursor
+vim.opt.mouse = "a"                                             -- enable mouse
 
--- cursor options
-vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
-
--- Enable mouse mode, can be useful for resizing splits for example!
-vim.opt.mouse = "a"
-
--- 1 tab is 4 spaces instead of default 8
-local tabsize = 4
+local tabsize = 4                                               -- 1 tab is 4 spaces instead of default 8
 vim.opt.expandtab = true
 vim.opt.tabstop = tabsize
-vim.opt.shiftwidth = tabsize -- use tabstop option
+vim.opt.shiftwidth = tabsize  -- use tabstop option
+vim.opt.wrap = false          -- disable text wrapping
 
--- text options
-vim.opt.wrap = false
-
--- fold
-vim.opt.foldmethod = "manual"
+vim.opt.foldmethod = "manual" -- fold stuff
 vim.opt.foldcolumn = "1"
 
--- Sync clipboard between OS and Neovim.
---  Schedule the setting after `UiEnter` because it can increase startup-time.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
-vim.schedule(function()
-    vim.opt.clipboard = "unnamedplus"
-end)
+vim.opt.clipboard = "unnamedplus" -- use system clipboard
+vim.opt.breakindent = true        -- wrapped lines stay indented
+vim.opt.undofile = true           -- persistant undo file
+vim.opt.ignorecase = true         -- case insensitive search
+vim.opt.smartcase = true          -- case insensitive unless containing uppercase
 
--- Enable break indent
-vim.opt.breakindent = true
-
--- Save undo history
-vim.opt.undofile = true
-
--- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-
--- Keep signcolumn on by default
-vim.opt.signcolumn = "yes"
-
--- Decrease update time
-vim.opt.updatetime = 250
-
--- Decrease mapped sequence wait time
--- Displays which-key popup sooner
-vim.opt.timeoutlen = 400
+vim.opt.updatetime = 250          -- decrease update time
+vim.opt.timeoutlen = 400          -- decrease mapped sequence wait time
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
--- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
+vim.opt.signcolumn = "yes"
 vim.opt.list = true
 vim.opt.listchars = {
     tab = "│ ",
@@ -78,28 +41,7 @@ vim.opt.listchars = {
     precedes = "«",
     nbsp = "°",
 }
--- Preview substitutions live, as you type!
-vim.opt.inccommand = "split"
 
--- Show which line your cursor is on
-vim.opt.cursorline = true
-
--- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 4
-
--- enable GAP for treesitter support
-vim.filetype.add({
-    extension = {
-        g = "gap",
-        gi = "gap",
-        gd = "gap",
-        tst = "gaptst",
-    },
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "gap",
-    callback = function()
-        vim.o.commentstring = "#%s"
-    end,
-})
+vim.opt.inccommand = "split" -- preview :s in real-time
+vim.opt.cursorline = true    -- highlight current row
+vim.opt.scrolloff = 4        -- keep 4 lines from edge of the screen

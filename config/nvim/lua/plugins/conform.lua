@@ -1,7 +1,6 @@
+---@module 'conform'
 local M = {}
-
 M.opts = {
-
     notify_on_error = false,
     format_on_save = function(bufnr)
         -- Disable "format_on_save lsp_fallback" for languages that don't
@@ -21,9 +20,7 @@ M.opts = {
     end,
     formatters_by_ft = {
         lua = { "stylua" },
-        -- tex = { "latexindent" }, -- dont like latexindent
         go = { "goimports", " gofmt" },
-        -- Conform can also run multiple formatters sequentially
         python = {
             isort = {
                 args = { "--ling-length", "200" },
@@ -32,8 +29,6 @@ M.opts = {
         },
         --
         bib = { "bibtex-tidy" },
-        -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
         markdown = { "prettier" },
         nix = { "nixfmt" },
     },

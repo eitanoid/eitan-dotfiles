@@ -1,5 +1,6 @@
----@see navic-customise
-return {
+---@module 'nvim-navic'
+---@type Options
+local M = {
   -- stylua: ignore
   icons = {
     File        = '󰈙 ', Module        = ' ', Namespace = '󰌗 ', Package  = ' ',
@@ -12,7 +13,7 @@ return {
   },
     lsp = {
         auto_attach = true,
-        preference = nil,
+        preference = { "obsidian-ls", "markdown_oxide" }, -- prefer obsidian over markdown
     },
     highlight = true,
     separator = " ",
@@ -25,3 +26,4 @@ return {
         return text
     end,
 }
+return M
