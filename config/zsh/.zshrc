@@ -16,9 +16,6 @@ export MANPAGER='nvim -c Man! -o -'
 # Ranger preview syntax highlighting style
 export HIGHLIGHT_STYLE=rootwater
 
-# Path to of Screen Saver
-SCREEN_SAVER=$HOME/git/pipes-sh/pipes.sh
-
 # History
 export HISTSIZE=5000
 export SAVEHIST=$HISTSIZE
@@ -52,15 +49,14 @@ autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # caseinsensitive
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
-
 # enable async mode for autosuggestions
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_STRATEGY=(history)
 ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # limit suggestions to 50 chars
+
 # Keybinds
 bindkey -v
-
 export HISTORY_SUBSTRING_SEARCH_PREFIXED=true
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
@@ -72,9 +68,6 @@ bindkey -M menuselect "l" menu-complete
 bindkey -M menuselect "h" reverse-menu-complete
 bindkey -M menuselect "j" down-history 
 bindkey -M menuselect "k" up-history 
-
-
-# zsh vi
 
 # changes engine to fix "zvm_readkeys_handler" undefined-key on startup
 ZVM_READKEY_ENGINE=$ZVM_READKEY_ENGINE_ZLE
@@ -109,16 +102,6 @@ ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT # start in insert mode on new line
  echo -ne '\e[5 q' # Use beam shape cursor on startup.
  preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
-
-# C jank
-function clangrun() { # like `go run` but for c.
-	clang "${1}" -o "${1}".out "${@:2}" &&  echo "compiled successfully" && ./"${1}.out"
-}
-
-#Inactivty Screen Saver
-TMOUT=5000 #~100 mins
-trap "echo ;bash $SCREEN_SAVER" ALRM
-
 ## completions
 export FPATH="$HOME/.config/zsh/completions/:$FPATH"
 
@@ -134,10 +117,10 @@ alias t='tmux'
 alias ta='tmux attach -t'
 alias tnew='tmux new -s'
 
-
 eval "$(direnv hook zsh)"
 eval "$(dircolors -b $HOME/.dircolors)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
+zvm_after_init_commands+=('eval "$(fzf --zsh)"')
 # vim: ft=zsh
