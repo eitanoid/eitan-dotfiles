@@ -9,7 +9,6 @@ require("options")
 require("plugins")
 require("keymaps")
 require("autocmd")
-require("lsp")
 
 -- to move later
 require("latex.init")
